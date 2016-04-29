@@ -1,0 +1,47 @@
+Parsing :
+- Espaces
+- Tabulations
+- Magic quotes
+- Quotes et simple quotes
+- Parenthèses
+- Séparateurs : ";" "&&" "||"
+- Pipes
+- Rédirection ">" ">>" "<" "<<" "i>&j" ">&j"
+
+Builtins :
+- env
+- setenv [Name] [Value]
+- unsetenv [Name...]
+- history
+- "!!" "!-n" "!n" "!command" "!command:s/string/replace"
+- which [Name...]
+- cd [directory]
+- echo
+- exit [n]
+- jobs & fg [job_id]
+
+Options :
+- Création de regex avec les *
+- Prompt personnalisable (user /)
+- Modificateur avec ~
+- Variables locales et modificateur $
+- Déplacement flèche gauche / droite
+- Fleche haute / bas -> historique
+- Tab -> auto indentation
+
+Configuration :
+- Langue (FR/EN)
+- Nombre de rédirection droite / gauche
+- Pipe après redirection ou non
+- Nombre de pipe maximum
+
+.42shrc
+- Alias
+- Environnement
+
+Supplément chantilly :
+- Manuel man & web
+- Adaptation du 42sh en php
+
+
+http://hautrive.free.fr/linux/page-shell-linux.html
