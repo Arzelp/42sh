@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 16:39:30 2016 Frederic ODDOU
-** Last update Thu Apr 28 16:50:48 2016 oddou_f
+** Last update Sat Apr 30 11:47:28 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -20,8 +20,12 @@ void			utils_pipe_delete_list(t_pipe		*pipe)
     {
       tmp = pipe;
       pipe = pipe->next;
+      if (tmp->av != NULL)
+	free(tmp->av);
+      if (tmp->path != NULL)
+	free(tmp->path);
       if (tmp->commands != NULL)
-	utils_commands_delete_list(pipe->commands);
+	utils_commands_delete_list(tmp->commands);
       free(tmp);
     }
 }
@@ -35,6 +39,10 @@ void			utils_pipe_delete_elem(t_list		*list,
     list->pipe = pipe->next;
   if (pipe->next != NULL)
     pipe->next->prev = pipe->prev;
+  if (pipe->av != NULL)
+    free(pipe->av);
+  if (pipe->path != NULL)
+    free(pipe->path);
   if (pipe->commands != NULL)
     utils_commands_delete_list(pipe->commands);
   free(pipe);
@@ -50,6 +58,9 @@ t_pipe			*utils_pipe_add_right(t_pipe		*pipe,
   new->prev = pipe;
   new->next = NULL;
   new->commands = commands;
+  new->av = NULL;
+  new->ac = 0;
+  new->path = NULL;
   if (pipe != NULL)
     {
       if (pipe->next != NULL)

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Thu Apr 28 16:50:29 2016 oddou_f
+** Last update Sat Apr 30 11:02:54 2016 oddou_f
 */
 
 #ifndef UTILS_H_
@@ -45,5 +45,10 @@ void			utils_pipe_delete_elem(t_list		*list,
 					       t_pipe		*pipe);
 void			utils_pipe_delete_list(t_pipe		*pipe);
 t_pipe			*utils_pipe_go_back(t_pipe		*pipe);
+
+/*
+** Convertie les commandes en tab
+*/
+bool			utils_commands_to_tab(t_pipe		*pipe);
 
 #endif

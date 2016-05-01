@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 10:57:32 2016 Frederic ODDOU
-** Last update Sat Apr 16 10:57:32 2016 Frederic ODDOU
+** Last update Sun May 01 15:44:43 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -23,7 +23,6 @@ void		shell_signaux()
       signal(SIGTSTP, SIG_IGN);
       signal(SIGTTIN, SIG_IGN);
       signal(SIGTTOU, SIG_IGN);
-      signal(SIGCHLD, SIG_IGN);
       signal(SIGTERM, SIG_IGN);
     }
 }
@@ -34,8 +33,8 @@ int		main(int ac, char **av, char **ae)
 
   shell_signaux();
   if (shell_init(&shell, ac, av, ae) == false)
-    return (1);
+    return (EXIT_FAILURE);
   shell_get_commands(&shell);
-  shell_close(&shell, 0);
-  return (0);
+  shell_close(&shell, EXIT_SUCCESS);
+  return (EXIT_SUCCESS);
 }

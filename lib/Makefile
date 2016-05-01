@@ -8,21 +8,23 @@
 ## Last update Sat Apr 16 11:22:30 2016 Frederic ODDOU
 ##
 
-ECHO		=	/bin/echo -e
-DEFAULT	=	"\033[00m"
-GREEN		=	"\033[0;32m"
-TEAL		=	"\033[1;36m"
-RED			=	"\033[0;31m"
-BLUE		=	"\033[0;34m"
+ECHO	= /bin/echo -e
+DEFAULT	= "\033[00m"
+GREEN	= "\033[0;32m"
+TEAL	= "\033[1;36m"
+RED	= "\033[0;31m"
+BLUE	= "\033[0;34m"
 
 DIRINC	= ../include/
 
-SRC			=  get_next_line.c \
+SRC	=  get_next_line.c \
 	my_tab_cpy.c \
 	my_tab_len.c \
 	my_tab_realloc.c \
 	my_tab_delete_elem.c \
-	my_tab_free.c
+	my_tab_free.c \
+	my_count_char.c \
+	my_str_to_wordtab.c
 
 CC			= gcc
 

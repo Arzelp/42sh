@@ -5,11 +5,67 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Fri Apr 29 16:46:03 2016 oddou_f
+** Last update Sun May  1 19:33:59 2016 root
 */
 
 #include <stdlib.h>
+#include <signal.h>
+#include "builtin.h"
+#include "sig_mess.h"
 #include "parser.h"
+
+t_sig_mess		g_sig_mess[] =
+  {
+    {SIGHUP, "Hangup"},
+    {SIGINT, "Interrupt"},
+    {SIGQUIT, "Quit"},
+    {SIGILL, "Illegal instruction"},
+    {SIGTRAP, "Trace trap"},
+    {SIGABRT, "Abort"},
+    {SIGIOT, "IOT trap"},
+    {SIGBUS, "BUS error"},
+    {SIGFPE, "Floating exception"},
+    {SIGKILL, "Kill"},
+    {SIGUSR1, "User-defined signal 1"},
+    {SIGSEGV, "Segmentation fault"},
+    {SIGUSR2, "User-defined signal 2"},
+    {SIGPIPE, "Broken pipe"},
+    {SIGALRM, "Alarm clock"},
+    {SIGTERM, "Termination"},
+    {SIGSTKFLT, "Stack fault"},
+    {SIGCHLD, "Child status has changed"},
+    {SIGCONT, "Continue"},
+    {SIGSTOP, "Stop"},
+    {SIGTSTP, "Keyboard stop"},
+    {SIGTTIN, "Background read from tty"},
+    {SIGTTOU, "Background write to tty"},
+    {SIGURG, "Urgent condition on socket"},
+    {SIGXCPU, "CPU limit exceeded"},
+    {SIGXFSZ, "File size limit exceeded"},
+    {SIGVTALRM, "Virtual alarm clock"},
+    {SIGPROF, "Profiling alarm clock"},
+    {SIGWINCH, "Window size change"},
+    {SIGIO, "I/O now possible"},
+    {SIGPWR, "Power failure restart"},
+    {SIGSYS, "Bad system call"},
+    {0, NULL}
+  };
+
+t_builtin		g_builtin[] =
+  {
+    {"cd", NULL},
+    {"exit", NULL},
+    {"which", NULL},
+    {"env", NULL},
+    {"setenv", NULL},
+    {"unsetenv", NULL},
+    {"alias", NULL},
+    {"echo", NULL},
+    {"history", NULL},
+    {"jobs", NULL},
+    {"fg", NULL},
+    {NULL, NULL},
+  };
 
 t_parser		g_parser_delimit[] =
   {

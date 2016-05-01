@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:52:22 2016 Frederic ODDOU
-** Last update Thu Apr 28 16:35:09 2016 oddou_f
+** Last update Fri Apr 29 22:53:59 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -21,7 +21,9 @@ void			utils_list_delete_list(t_list		*list)
       tmp = list;
       list = list->next;
       if (tmp->commands != NULL)
-	utils_commands_delete_list(list->commands);
+	utils_commands_delete_list(tmp->commands);
+      if (tmp->pipe != NULL)
+	utils_pipe_delete_list(tmp->pipe);
       free(tmp);
     }
 }

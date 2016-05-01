@@ -5,11 +5,12 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:01 2016 Frederic ODDOU
-** Last update Thu Apr 28 12:52:06 2016 oddou_f
+** Last update Sun May 01 19:31:16 2016 oddou_f
 */
 
 #include <stdlib.h>
 #include "my.h"
+#include "builtin.h"
 #include "shell.h"
 
 bool		shell_init(t_shell		*shell,
@@ -23,5 +24,10 @@ bool		shell_init(t_shell		*shell,
     return (false);
   shell->commands = NULL;
   shell->list = NULL;
+  shell->locales = NULL;
+  shell->last_return = 0;
+  shell->path = my_str_to_wordtab(b_getenv(shell->ae, "PATH"), ':');
+  if (shell->path == NULL)
+    return (false);
   return (true);
 }
