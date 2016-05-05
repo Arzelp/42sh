@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 14:38:03 2016 Frederic ODDOU
-** Last update Fri Apr 29 15:38:18 2016 oddou_f
+** Last update Thu May 05 13:25:10 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -81,6 +81,12 @@ bool			parser_pipe(t_shell			*shell)
 	  return (false);
 	}
       parser_get_pipe(tmp);
+      if (parser_redi(tmp) == false)
+	{
+	  utils_list_delete_list(shell->list);
+	  shell->list = NULL;
+	  return (false);
+	}
       tmp = tmp->next;
     }
   tmp = shell->list;

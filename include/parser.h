@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 14:44:52 2016 Frederic ODDOU
-** Last update Fri Apr 29 15:17:20 2016 oddou_f
+** Last update Thu May 05 13:24:58 2016 oddou_f
 */
 
 #ifndef PARSER_H_
@@ -17,6 +17,9 @@
 
 # define ERR_NULL	"Invalid null command."
 # define ERR_UNMATCH	"Unmatched %s.\n"
+# define ERR_AMBIOUT	"Ambiguous output redirect."
+# define ERR_AMBIIN	"Ambiguous input redirect."
+# define ERR_MISSNAME	"Missing name for redirect."
 # define GET_TYPE(n)	(g_parser_delimit[n].type)
 # define GET_ID(n)	(g_parser_delimit[n].id)
 # define IF_SEP(n)	(GET_TYPE(n) == D_SEPARATOR) ? true : false
@@ -37,6 +40,7 @@ bool			parser_control(t_shell			*shell,
 bool			parser_check_separator(t_shell		*shell);
 void			parser_list(t_shell			*shell);
 bool			parser_pipe(t_shell			*shell);
+bool			parser_redi(t_list			*list);
 
 extern t_parser		g_parser_delimit[];
 

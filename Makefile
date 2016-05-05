@@ -31,10 +31,12 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_SHELL)shell_commands_free.c \
 	$(DIR_SHELL)shell_get_path.c \
 	$(DIR_SHELL)shell_exec.c \
+	$(DIR_SHELL)shell_signaux.c \
 	$(DIR_PARSER)parser_commands.c \
 	$(DIR_PARSER)parser_control.c \
 	$(DIR_PARSER)parser_list.c \
 	$(DIR_PARSER)parser_pipe.c \
+	$(DIR_PARSER)parser_redi.c \
 	$(DIR_PARSER)parser_check_separator.c \
 	$(DIR_UTILS)utils_commands.c \
 	$(DIR_UTILS)utils_commands_to_tab.c \
@@ -44,6 +46,12 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_BUILTIN)b_getenv.c \
 	$(DIR_BUILTIN)b_exec.c \
 	$(DIR_BUILTIN)b_is_builtin.c \
+	$(DIR_BUILTIN)b_env.c \
+	$(DIR_BUILTIN)b_setenv.c \
+	$(DIR_BUILTIN)b_unsetenv.c \
+	$(DIR_BUILTIN)b_which.c \
+	$(DIR_BUILTIN)b_exit.c \
+	$(DIR_BUILTIN)b_cd.c \
 	$(DIR_SRC)vars.c
 
 OBJ			= $(SRC:.c=.o)

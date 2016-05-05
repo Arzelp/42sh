@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Sun May  1 19:33:59 2016 root
+** Last update Thu May 05 15:34:54 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -53,12 +53,12 @@ t_sig_mess		g_sig_mess[] =
 
 t_builtin		g_builtin[] =
   {
-    {"cd", NULL},
-    {"exit", NULL},
-    {"which", NULL},
-    {"env", NULL},
-    {"setenv", NULL},
-    {"unsetenv", NULL},
+    {"cd", b_cd},
+    {"exit", b_exit},
+    {"which", b_which},
+    {"env", b_env},
+    {"setenv", b_setenv},
+    {"unsetenv", b_unsetenv},
     {"alias", NULL},
     {"echo", NULL},
     {"history", NULL},

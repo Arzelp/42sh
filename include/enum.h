@@ -5,11 +5,19 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:01:53 2016 Frederic ODDOU
-** Last update Sun May 01 18:17:22 2016 oddou_f
+** Last update Wed May 04 21:47:22 2016 oddou_f
 */
 
 #ifndef ENUM_H_
 # define ENUM_H_
+
+typedef enum		e_parser_redirect
+  {
+    RED_RIGHT		= 0,
+    RED_TWO_RIGHT	= 1,
+    RED_LEFT		= 2,
+    RED_TWO_LEFT	= 3
+  }			t_parser_redirect;
 
 typedef enum		e_id_delimit
   {

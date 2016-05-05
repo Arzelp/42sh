@@ -24,6 +24,7 @@ SRC	=  get_next_line.c \
 	my_tab_delete_elem.c \
 	my_tab_free.c \
 	my_count_char.c \
+	my_atoi.c \
 	my_str_to_wordtab.c
 
 CC			= gcc
@@ -35,7 +36,7 @@ LIB			=
 FLAG		=	-Wall \
 	-Wextra \
 	-Werror \
-	-I ../include/
+	-I ../include/ -g
 
 NAME	= libmy.a
 

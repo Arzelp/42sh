@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 16:46:21 2016 Frederic ODDOU
-** Last update Sat Apr 23 16:46:21 2016 Frederic ODDOU
+** Last update Thu May 05 14:39:37 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -13,27 +13,24 @@
 #include <stdbool.h>
 #include "my.h"
 
-bool		my_tab_delete_elem(char	**tab,
-				   char	*str)
+char		**my_tab_delete_elem(char	**tab,
+				     char	*str)
 {
   int		i;
-  int		j;
   int		len;
 
   i = 0;
-  j = 0;
   if ((len = my_tab_len(tab)) == -1)
     return (NULL);
+  while (tab[i] != NULL && tab[i] != str)
+    i++;
   while (tab[i] != NULL)
     {
-      if (tab[i] != str)
-	j++;
-      tab[i] = tab[j];
+      tab[i] = tab[i + 1];
       i++;
     }
   tab[i] = NULL;
   free(str);
-  if (realloc(tab, sizeof(char *) * len) == NULL)
-    return (false);
-  return (true);
+  tab = realloc(tab, sizeof(char *) * len);
+  return (tab);
 }

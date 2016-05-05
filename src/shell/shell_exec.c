@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sun May  1 18:41:58 2016 Frederic ODDOU
-** Last update Sun May 01 19:34:24 2016 oddou_f
+** Last update Mon May 02 00:42:01 2016 oddou_f
 */
 
 #include <unistd.h>
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <limits.h>
 #include "shell.h"
 #include "sig_mess.h"
@@ -21,15 +22,17 @@
 static void		shell_exec_fils(t_shell		*shell,
 					t_pipe		*pipe)
 {
+  shell_signal(false);
   execve(pipe->path, pipe->av, shell->ae);
   shell_close(shell, EXIT_FAILURE);
 }
 
-static void		shell_exec_pere(t_shell		*shell)
+static void		shell_exec_pere(t_shell		*shell,
+					pid_t		pid)
 {
   int			status;
 
-  wait(&status);
+  waitpid(pid, &status, WUNTRACED);
   if (WIFSIGNALED(status))
     {
       sig_display(status);
@@ -38,7 +41,10 @@ static void		shell_exec_pere(t_shell		*shell)
   else if (WIFEXITED(status))
     shell->last_return = WEXITSTATUS(status);
   else if (WIFSTOPPED(status))
-    shell->last_return = WSTOPSIG(status);
+    {
+      shell->last_return = WSTOPSIG(status);
+      printf("Suspended\n");
+    }
 }
 
 bool			shell_exec(t_shell		*shell,
@@ -54,6 +60,6 @@ bool			shell_exec(t_shell		*shell,
   else if (pid == 0)
     shell_exec_fils(shell, pipe);
   else
-    shell_exec_pere(shell);
+    shell_exec_pere(shell, pid);
   return ((shell->last_return != EXIT_SUCCESS) ? false : true);
 }

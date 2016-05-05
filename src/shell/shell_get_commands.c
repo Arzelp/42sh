@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:38:22 2016 Frederic ODDOU
-** Last update Sun May 01 19:27:26 2016 oddou_f
+** Last update Thu May 05 14:59:00 2016 oddou_f
 */
 
 #include <unistd.h>
@@ -41,7 +41,7 @@ bool			shell_treat_pipe(t_shell	*shell,
 	{
 	  if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
 	    b_exec(shell, pipe);
-	  else if (shell_get_path(shell, pipe) == true)
+	  else if ((pipe->path = shell_get_path(shell, pipe->av[0])) != NULL)
 	    shell_exec(shell, pipe);
 	  else
 	    {

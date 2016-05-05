@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:05 2016 Frederic ODDOU
-** Last update Sat Apr 30 21:18:56 2016 oddou_f
+** Last update Thu May 05 15:23:25 2016 oddou_f
 */
 
 #ifndef MY_H_
@@ -20,13 +20,14 @@ char		*get_next_line(const int	fd);
 int		my_tab_len(char			**tab);
 char		**my_tab_cpy(char		**tab);
 bool		my_tab_free(char		**tab);
-bool		my_tab_realloc(char		**tab,
-			       char		*str);
-bool		my_tab_delete_elem(char		**tab,
-				   char		*str);
+char		**my_tab_realloc(char		**tab,
+				 char		*str);
+char		**my_tab_delete_elem(char	**tab,
+				     char	*str);
 unsigned int	my_count_char(char		*str,
 			      char		c);
 char		**my_str_to_wordtab(char	*str,
 				    char	c);
+int		my_atoi(char			*str);
 
 #endif

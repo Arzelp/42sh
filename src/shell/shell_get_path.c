@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 12:43:01 2016 Frederic ODDOU
-** Last update Sat Apr 30 12:51:19 2016 oddou_f
+** Last update Thu May 05 14:59:17 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -13,50 +13,52 @@
 #include <unistd.h>
 #include "shell.h"
 
-static bool		shell_find_program(t_shell	*shell,
-					   t_pipe	*pipe)
+static char		*shell_find_program(t_shell	*shell,
+					   char		*name)
 {
   int			i;
   int			len;
+  char			*str;
 
   i = 0;
-  len = strlen(pipe->av[0]);
-  if ((pipe->path = malloc(sizeof(char) * (len + 2))) == NULL)
-    return (false);
+  len = strlen(name);
+  if ((str = malloc(sizeof(char) * (len + 2))) == NULL)
+    return (NULL);
   while (shell->path[i] != NULL)
     {
-      len = strlen(pipe->av[0]) + strlen(shell->path[i]) + 2;
-      if ((pipe->path = realloc(pipe->path, sizeof(char) * len)) == NULL)
-	return (false);
-      if (memset(pipe->path, '\0', len) == NULL)
-	return (false);
-      if ((pipe->path = strcat(pipe->path, shell->path[i])) == NULL ||
-	  (pipe->path = strcat(pipe->path, "/")) == NULL ||
-	  (pipe->path = strcat(pipe->path, pipe->av[0])) == NULL)
-	return (false);
-      if (access(pipe->path, X_OK) == 0)
-	return (true);
+      len = strlen(name) + strlen(shell->path[i]) + 2;
+      if ((str = realloc(str, sizeof(char) * len)) == NULL)
+	return (NULL);
+      if (memset(str, '\0', len) == NULL)
+	return (NULL);
+      if ((str = strcat(str, shell->path[i])) == NULL ||
+	  (str = strcat(str, "/")) == NULL ||
+	  (str = strcat(str, name)) == NULL)
+	return (NULL);
+      if (access(str, X_OK) == 0)
+	return (str);
       i++;
     }
-  return (false);
+  free(str);
+  return (NULL);
 }
 
-bool			shell_get_path(t_shell		*shell,
-				       t_pipe		*pipe)
+char			*shell_get_path(t_shell		*shell,
+					char		*name)
 {
+  char			*str;
 
-  if (strncmp(pipe->av[0], "./", 2) && strncmp(pipe->av[0], "/", 1))
+  if (name == NULL)
+    return (NULL);
+  if (strncmp(name, "./", 2) && strncmp(name, "/", 1))
     {
-      if (shell_find_program(shell, pipe) == true)
-	return (true);
+      if ((str = shell_find_program(shell, name)) != NULL)
+	return (str);
     }
   else
     {
-      if ((pipe->path = strdup(pipe->av[0])) != NULL)
-	{
-	  if (access(pipe->path, X_OK) == 0)
-	    return (true);
-	}
+      if (access(name, X_OK) == 0)
+	return (strdup(name));
     }
-  return (false);
+  return (NULL);
 }

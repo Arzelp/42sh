@@ -5,10 +5,13 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:01 2016 Frederic ODDOU
-** Last update Sun May 01 19:31:16 2016 oddou_f
+** Last update Thu May 05 22:11:03 2016 oddou_f
 */
 
 #include <stdlib.h>
+#include <sys/types.h>
+#include <string.h>
+#include <unistd.h>
 #include "my.h"
 #include "builtin.h"
 #include "shell.h"
@@ -18,6 +21,8 @@ bool		shell_init(t_shell		*shell,
 			   char			**av,
 			   char			**ae)
 {
+  char		oldpwd[4096];
+
   (void)ac;
   (void)av;
   if ((shell->ae = my_tab_cpy(ae)) == NULL)
@@ -29,5 +34,11 @@ bool		shell_init(t_shell		*shell,
   shell->path = my_str_to_wordtab(b_getenv(shell->ae, "PATH"), ':');
   if (shell->path == NULL)
     return (false);
+  shell->pid.pid = getpid();
+  if ((shell->pid.pgid = getpgid(shell->pid.pid)) == -1)
+    return (false);
+  if (getcwd(oldpwd, 4096) == NULL)
+    strcpy(oldpwd, "/");
+  shell->oldpwd = strdup(oldpwd);
   return (true);
 }

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Sat Apr 30 11:02:54 2016 oddou_f
+** Last update Thu May 05 13:27:35 2016 oddou_f
 */
 
 #ifndef UTILS_H_
@@ -39,6 +39,8 @@ t_list			*utils_list_go_back(t_list		*list);
 /*
 ** Gestion des pipes (Ajout / Suppression / Vide / Back)
 */
+void			utils_pipe_delete_command(t_pipe	*pipe,
+						  t_commands	*commands);
 t_pipe			*utils_pipe_add_right(t_pipe		*pipe,
 					      t_commands	*commands);
 void			utils_pipe_delete_elem(t_list		*list,
