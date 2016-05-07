@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 15:27:56 2016 Frederic ODDOU
-** Last update Thu May 05 22:14:02 2016 oddou_f
+** Last update Fri May 06 11:53:35 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -27,7 +27,7 @@ static int		b_cd_goto(char			*directory,
     strcpy(oldpwd, "/");
   if (chdir(directory) == -1)
     {
-      printf("%s: Aucun fichier ou dossier de ce type.\n", directory);
+      printf(NO_FOLDER, directory);
       return (EXIT_FAILURE);
     }
   free(shell->oldpwd);
@@ -51,7 +51,7 @@ int			b_cd(int			ac,
 {
   if (ac > 2)
     {
-      printf("cd: Too many arguments.\n");
+      printf(TOO_ARG, av[0]);
       return (EXIT_FAILURE);
     }
   else if (ac == 1)

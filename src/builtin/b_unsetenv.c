@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 14:28:19 2016 Frederic ODDOU
-** Last update Thu May 05 15:43:07 2016 oddou_f
+** Last update Fri May 06 11:56:15 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -24,7 +24,7 @@ int			b_unsetenv(int			ac,
 
   if (ac < 2)
     {
-      printf("unsetenv: Too few arguments.\n");
+      printf(FEW_ARG, av[0]);
       return (EXIT_FAILURE);
     }
   i = 1;

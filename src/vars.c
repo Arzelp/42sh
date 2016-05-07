@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Thu May 05 15:34:54 2016 oddou_f
+** Last update Fri May 06 12:00:34 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -64,6 +64,7 @@ t_builtin		g_builtin[] =
     {"history", NULL},
     {"jobs", NULL},
     {"fg", NULL},
+    {"builtins", b_builtins},
     {NULL, NULL},
   };
 

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:38:22 2016 Frederic ODDOU
-** Last update Thu May 05 14:59:00 2016 oddou_f
+** Last update Sat May 07 22:21:15 2016 oddou_f
 */
 
 #include <unistd.h>
@@ -67,8 +67,10 @@ bool			shell_treat_list(t_shell	*shell)
     {
       if (list->treat == true)
 	{
+	  shell->list_fd = shell_pipe_open(shell, list->pipe);
 	  if (shell_treat_pipe(shell, list) == false)
 	    return (false);
+	  shell_pipe_close(shell, list->pipe);
 	}
       list = list->next;
     }
@@ -79,16 +81,22 @@ bool			shell_get_commands(t_shell	*shell)
 {
   char			*str;
 
-  printf("?> ");
-  fflush(stdout);
+  if (isatty(STDIN_FILENO))
+    {
+      printf("?> ");
+      fflush(stdout);
+    }
   while ((str = get_next_line(STDIN_FILENO)) != NULL)
     {
       parser_control(shell, str);
       free(str);
       shell_treat_list(shell);
       shell_commands_free(shell);
-      printf("?> ");
-      fflush(stdout);
+      if (isatty(STDIN_FILENO))
+	{
+	  printf("?> ");
+	  fflush(stdout);
+	}
     }
   return (true);
 }

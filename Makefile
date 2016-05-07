@@ -31,6 +31,7 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_SHELL)shell_commands_free.c \
 	$(DIR_SHELL)shell_get_path.c \
 	$(DIR_SHELL)shell_exec.c \
+	$(DIR_SHELL)shell_pipe.c \
 	$(DIR_SHELL)shell_signaux.c \
 	$(DIR_PARSER)parser_commands.c \
 	$(DIR_PARSER)parser_control.c \
@@ -52,6 +53,7 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_BUILTIN)b_which.c \
 	$(DIR_BUILTIN)b_exit.c \
 	$(DIR_BUILTIN)b_cd.c \
+	$(DIR_BUILTIN)b_builtins.c \
 	$(DIR_SRC)vars.c
 
 OBJ			= $(SRC:.c=.o)
@@ -63,7 +65,7 @@ RM			= rm -f
 CFLAGS	+= -Wextra \
 	-Wall \
 	-Werror \
-	-I$(DIR_INC) -g -O3
+	-I$(DIR_INC) -g
 
 LDFLAGS	= -L ./lib/ \
 	-l my

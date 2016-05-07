@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 22:30:55 2016 Frederic ODDOU
-** Last update Thu May 05 13:32:49 2016 oddou_f
+** Last update Fri May 06 00:04:54 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -20,7 +20,10 @@ short			b_is_builtin(char		*name)
   while (g_builtin[i].name != NULL)
     {
       if (strcmp(g_builtin[i].name, name) == 0)
-	return (i);
+	{
+	  if (g_builtin[i].func != NULL)
+	    return (i);
+	}
       i++;
     }
   return (NOT_BUILTIN);

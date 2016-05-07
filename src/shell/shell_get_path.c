@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 12:43:01 2016 Frederic ODDOU
-** Last update Thu May 05 14:59:17 2016 oddou_f
+** Last update Thu May 05 23:38:49 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -52,6 +52,8 @@ char			*shell_get_path(t_shell		*shell,
     return (NULL);
   if (strncmp(name, "./", 2) && strncmp(name, "/", 1))
     {
+      if (shell->path == NULL)
+	return (NULL);
       if ((str = shell_find_program(shell, name)) != NULL)
 	return (str);
     }

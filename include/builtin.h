@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Apr 29 23:44:07 2016 Frederic ODDOU
-** Last update Thu May 05 16:44:47 2016 oddou_f
+** Last update Fri May 06 11:59:34 2016 oddou_f
 */
 
 #ifndef BUILTIN_
@@ -16,6 +16,12 @@
 # define NOT_BUILTIN	-1
 # define NOT_ID		-1
 # define ERROR_FATAL	-1
+
+# define TOO_ARG	"%s: Too many arguments.\n"
+# define FEW_ARG	"%s: Too few arguments.\n"
+# define NO_FOLDER	"%s: Aucun fichier ou dossier de ce type.\n"
+# define SYNTAX_EXP	"%s: Expression Syntax.\n"
+# define IS_BUILTIN	"%s: shell built-in command.\n"
 
 typedef struct		s_builtin
 {
@@ -52,6 +58,9 @@ int			b_exit(int			ac,
 int			b_cd(int			ac,
 			     char			**av,
 			     t_shell			*shell);
+int			b_builtins(int			ac,
+				   char			**av,
+				   t_shell		*shell);
 
 extern t_builtin	g_builtin[];
 

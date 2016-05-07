@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Apr 29 23:10:38 2016 Frederic ODDOU
-** Last update Fri Apr 29 23:38:53 2016 oddou_f
+** Last update Thu May 05 23:48:06 2016 oddou_f
 */
 
 #include <string.h>
@@ -43,8 +43,7 @@ char			**my_str_to_wordtab(char		*str,
 
   if (str == NULL)
     return (NULL);
-  if ((count = my_count_char(str, c)) <= 0)
-    return (NULL);
+  count = my_count_char(str, c);
   if ((tab = malloc(sizeof(char *) * (count + 2))) == NULL)
     return (NULL);
   return (my_str_to_wordtab_fill(tab, str, c));

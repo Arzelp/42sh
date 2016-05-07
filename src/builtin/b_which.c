@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 14:44:42 2016 Frederic ODDOU
-** Last update Thu May 05 15:00:01 2016 oddou_f
+** Last update Fri May 06 11:57:22 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -22,14 +22,14 @@ int			b_which(int			ac,
 
   if (ac < 2)
     {
-      printf("which: Too few arguments.\n");
+      printf(FEW_ARG, av[0]);
       return (EXIT_FAILURE);
     }
   i = 1;
   while (av[i] != NULL)
     {
       if (b_is_builtin(av[i]) != NOT_BUILTIN)
-	printf("%s: shell built-in command.\n", av[i]);
+	printf(IS_BUILTIN, av[i]);
       else if ((str = shell_get_path(shell, av[i])) != NULL)
 	{
 	  printf("%s\n", str);

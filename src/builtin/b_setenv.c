@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 13:46:15 2016 Frederic ODDOU
-** Last update Thu May 05 16:52:52 2016 oddou_f
+** Last update Fri May 06 11:55:41 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -68,7 +68,7 @@ int			b_setenv(int			ac,
     return (b_env(ac, av, shell));
   else if (ac >= 4)
     {
-      printf("setenv: Too many arguments.\n");
+      printf(TOO_ARG, av[0]);
       return (EXIT_FAILURE);
     }
   len = strlen(av[1]) + ((av[2] != NULL) ? strlen(av[2]) : 0) + 2;

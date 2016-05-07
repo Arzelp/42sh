@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 12:13:38 2016 Frederic ODDOU
-** Last update Thu May 05 22:46:11 2016 oddou_f
+** Last update Fri May 06 00:00:16 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -89,6 +89,11 @@ static bool		parser_redi_find(t_pipe		*pipe,
 	}
       else
 	commands = commands->next;
+    }
+  if (pipe->commands == NULL)
+    {
+      printf("%s\n", ERR_NULL);
+      return (false);
     }
   return (true);
 }

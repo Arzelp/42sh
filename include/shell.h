@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Thu May 05 16:28:12 2016 oddou_f
+** Last update Fri May 06 12:43:42 2016 oddou_f
 */
 
 #ifndef SHELL_H_
@@ -28,6 +28,7 @@ typedef struct		s_pipe
   int			ac;
   char			**av;
   char			*path;
+  int			fd[2];
   char			*redi[4];
   struct s_pipe		*next;
   struct s_pipe		*prev;
@@ -67,6 +68,7 @@ typedef struct		s_shell
   char			**path;
   t_commands		*commands;
   t_list		*list;
+  int			*list_fd;
 }			t_shell;
 
 bool			shell_init(t_shell			*shell,
@@ -82,5 +84,9 @@ char			*shell_get_path(t_shell			*shell,
 					char			*name);
 bool			shell_exec(t_shell			*shell,
 				   t_pipe			*pipe);
+void			shell_pipe_close(t_shell		*shell,
+					 t_pipe			*mypipe);
+int			*shell_pipe_open(t_shell		*shell,
+					 t_pipe			*mypipe);
 
 #endif
