@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri May  6 12:29:25 2016 Frederic ODDOU
-** Last update Sat May 07 22:16:32 2016 oddou_f
+** Last update Sun May 08 22:57:05 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -13,62 +13,37 @@
 #include <stdio.h>
 #include "shell.h"
 
-static int	shell_pipe_count(t_pipe		*mypipe)
+void			shell_pipe_close_fd(t_pipe		*pipe)
 {
-  int		count;
-
-  count = 0;
-  while (mypipe != NULL)
-    {
-      count++;
-      mypipe = mypipe->next;
-    }
-  return (count);
+  if (pipe->fd[FD_IN] != -1)
+    close(pipe->fd[FD_IN]);
+  if (pipe->fd[FD_OUT] != -1)
+    close(pipe->fd[FD_OUT]);
 }
 
-void		shell_pipe_close(t_shell	*shell,
-				 t_pipe		*mypipe)
+void			shell_pipe_close_next(t_pipe		*pipe)
 {
-  int		count;
-  int		i;
-
-  i = 0;
-  count = shell_pipe_count(mypipe);
-  while (i < (count - 1) * 2)
+  while (pipe != NULL)
     {
-      close(shell->list_fd[i]);
-      i++;
+      shell_pipe_close_fd(pipe);
+      pipe = pipe->next;
     }
-  free(shell->list_fd);
-  shell->list_fd = NULL;
 }
 
-int		*shell_pipe_open(t_shell	*shell,
-				 t_pipe		*mypipe)
+void			shell_pipe_open(t_shell			*shell,
+					t_pipe			*mypipe)
 {
-  int		fd[2];
-  int		*list_fd;
-  int		count;
-  int		i;
+  int			fd[2];
 
-  if ((count = shell_pipe_count(mypipe)) == 0 ||
-      (list_fd = malloc(sizeof(int) * ((count - 1) * 2))) == NULL)
-    return (NULL);
-  i = 0;
   while (mypipe != NULL && mypipe->next != NULL)
     {
       if ((pipe(fd)) == -1)
 	{
-	  free(list_fd);
 	  fprintf(stderr, "Error : fork function failled.\n");
 	  shell_close(shell, EXIT_FAILURE);
 	}
       mypipe->next->fd[FD_IN] = fd[0];
       mypipe->fd[FD_OUT] = fd[1];
-      list_fd[i] = fd[0];
-      list_fd[i + 1] = fd[1];
-      i += 2;
       mypipe = mypipe->next;
     }
-  return (list_fd);
 }

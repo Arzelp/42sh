@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 12:13:38 2016 Frederic ODDOU
-** Last update Fri May 06 00:00:16 2016 oddou_f
+** Last update Mon May 09 00:09:46 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -33,12 +33,12 @@ static bool		parser_redi_add_right(t_pipe		*pipe,
 {
   if (pipe->next || pipe->redi[RED_RIGHT] || pipe->redi[RED_TWO_RIGHT])
     {
-      printf("%s\n", ERR_AMBIOUT);
+      fprintf(stdout, "%s\n", ERR_AMBIOUT);
       return (false);
     }
   if (commands->next == NULL || commands->next->str == NULL)
     {
-      printf("%s\n", ERR_MISSNAME);
+      fprintf(stdout, "%s\n", ERR_MISSNAME);
       return (false);
     }
   if (commands->index_delim == ID_DOUBLE_RIGHT)
@@ -53,12 +53,12 @@ static bool		parser_redi_add_left(t_pipe		*pipe,
 {
   if (pipe->redi[RED_LEFT] || pipe->redi[RED_TWO_LEFT])
     {
-      printf("%s\n", ERR_AMBIIN);
+      fprintf(stdout, "%s\n", ERR_AMBIIN);
       return (false);
     }
   if (commands->next == NULL || commands->next->str == NULL)
     {
-      printf("%s\n", ERR_MISSNAME);
+      fprintf(stdout, "%s\n", ERR_MISSNAME);
       return (false);
     }
   if (commands->index_delim == ID_DOUBLE_LEFT)
@@ -92,7 +92,7 @@ static bool		parser_redi_find(t_pipe		*pipe,
     }
   if (pipe->commands == NULL)
     {
-      printf("%s\n", ERR_NULL);
+      fprintf(stdout, "%s\n", ERR_NULL);
       return (false);
     }
   return (true);

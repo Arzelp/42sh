@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 22:48:24 2016 Frederic ODDOU
-** Last update Fri Apr 29 15:34:30 2016 oddou_f
+** Last update Mon May 09 00:10:24 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -36,7 +36,7 @@ static bool		parser_delete_excess(t_shell		*shell)
 	      (GET_ID(tmp->index_delim) == ID_SEP &&
 	       GET_ID(tmp->next->index_delim) == ID_OR))
 	    {
-	      printf("%s\n", ERR_NULL);
+	      fprintf(stdout, "%s\n", ERR_NULL);
 	      return (false);
 	    }
 	  else
@@ -64,7 +64,7 @@ static bool		parser_check_limit(t_shell		*shell)
     {
       if (tmp->index_delim != ID_WITHOUT && GET_ID(tmp->index_delim) == ID_OR)
 	{
-	  printf("%s\n", ERR_NULL);
+	  fprintf(stdout, "%s\n", ERR_NULL);
 	  return (false);
 	}
       while (tmp != NULL && tmp->next != NULL)
@@ -75,7 +75,7 @@ static bool		parser_check_limit(t_shell		*shell)
 	      GET_TYPE(tmp->index_delim) == D_SEPARATOR &&
 	      GET_ID(tmp->index_delim) != ID_SEP)
 	    {
-	      printf("%s\n", ERR_NULL);
+	      fprintf(stdout, "%s\n", ERR_NULL);
 	      return (false);
 	    }
 	}

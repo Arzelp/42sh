@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Fri May 06 12:43:42 2016 oddou_f
+** Last update Sun May 08 23:31:40 2016 oddou_f
 */
 
 #ifndef SHELL_H_
@@ -24,6 +24,7 @@ typedef struct		s_commands
 
 typedef struct		s_pipe
 {
+  pid_t			pid;
   t_commands		*commands;
   int			ac;
   char			**av;
@@ -60,6 +61,7 @@ typedef struct		s_pid
 
 typedef struct		s_shell
 {
+  bool			write;
   int			last_return;
   t_pid			pid;
   char			*oldpwd;
@@ -68,7 +70,6 @@ typedef struct		s_shell
   char			**path;
   t_commands		*commands;
   t_list		*list;
-  int			*list_fd;
 }			t_shell;
 
 bool			shell_init(t_shell			*shell,
@@ -84,9 +85,24 @@ char			*shell_get_path(t_shell			*shell,
 					char			*name);
 bool			shell_exec(t_shell			*shell,
 				   t_pipe			*pipe);
-void			shell_pipe_close(t_shell		*shell,
-					 t_pipe			*mypipe);
-int			*shell_pipe_open(t_shell		*shell,
-					 t_pipe			*mypipe);
+
+
+void			shell_list_desactive(t_list		*list,
+					     short		id_sep);
+bool			shell_list_treat(t_shell		*shell);
+void			shell_treat_pipe_exec(t_shell		*shell,
+					      t_list		*list,
+					      t_pipe		*pipe);
+void			shell_treat_pipe_wait(t_shell		*shell,
+					      t_pipe		*pipe);
+void			shell_prompt(t_shell			*shell);
+
+/*
+** shell_pipe.c
+*/
+void			shell_pipe_close_fd(t_pipe		*pipe);
+void			shell_pipe_close_next(t_pipe		*pipe);
+void			shell_pipe_open(t_shell			*shell,
+					t_pipe			*mypipe);
 
 #endif

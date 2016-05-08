@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 14:28:19 2016 Frederic ODDOU
-** Last update Fri May 06 11:56:15 2016 oddou_f
+** Last update Sun May 08 23:38:54 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -15,18 +15,12 @@
 #include "builtin.h"
 #include "my.h"
 
-int			b_unsetenv(int			ac,
-				   char			**av,
-				   t_shell		*shell)
+static int		b_unsetenv_treat(char			**av,
+					 t_shell		*shell)
 {
   int			i;
   char			*str;
 
-  if (ac < 2)
-    {
-      printf(FEW_ARG, av[0]);
-      return (EXIT_FAILURE);
-    }
   i = 1;
   while (av[i] != NULL)
     {
@@ -43,4 +37,17 @@ int			b_unsetenv(int			ac,
       i++;
     }
   return (EXIT_SUCCESS);
+}
+
+int			b_unsetenv(int				ac,
+				   char				**av,
+				   t_shell			*shell)
+{
+  if (ac < 2)
+    {
+      if (shell->write)
+	fprintf(stdout, FEW_ARG, av[0]);
+      return (EXIT_FAILURE);
+    }
+  return (b_unsetenv_treat(av, shell));
 }

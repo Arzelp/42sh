@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 13:40:11 2016 Frederic ODDOU
-** Last update Thu May 05 14:03:09 2016 oddou_f
+** Last update Sun May 08 23:45:25 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -19,6 +19,8 @@ int			b_env(int			ac,
 {
   int			i;
 
+  if (!shell->write)
+    return (EXIT_SUCCESS);
   i = 0;
   if (shell->ae != NULL)
     {

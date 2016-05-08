@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 10:32:16 2016 Frederic ODDOU
-** Last update Fri Apr 29 16:27:40 2016 oddou_f
+** Last update Mon May 09 00:10:07 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -83,7 +83,7 @@ static bool		parser_not_without(t_shell		*shell,
 	}
       else
 	{
-	  printf(ERR_UNMATCH, g_parser_delimit[id_delimit].end);
+	  fprintf(stdout, ERR_UNMATCH, g_parser_delimit[id_delimit].end);
 	  return (false);
 	}
     }

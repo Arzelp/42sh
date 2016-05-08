@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:01 2016 Frederic ODDOU
-** Last update Fri May 06 12:41:50 2016 oddou_f
+** Last update Sun May 08 23:32:54 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -31,6 +31,7 @@ bool		shell_init(t_shell		*shell,
   shell->list = NULL;
   shell->locales = NULL;
   shell->last_return = 0;
+  shell->write = false;
   shell->path = my_str_to_wordtab(b_getenv(shell->ae, "PATH"), ':');
   shell->pid.pid = getpid();
   if ((shell->pid.pgid = getpgid(shell->pid.pid)) == -1)
@@ -38,6 +39,5 @@ bool		shell_init(t_shell		*shell,
   if (getcwd(oldpwd, 4096) == NULL)
     strcpy(oldpwd, "/");
   shell->oldpwd = strdup(oldpwd);
-  shell->list_fd = NULL;
   return (true);
 }

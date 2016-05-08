@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 13:46:15 2016 Frederic ODDOU
-** Last update Fri May 06 11:55:41 2016 oddou_f
+** Last update Sun May 08 23:43:07 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -58,19 +58,26 @@ static int		b_setenv_find(int		len,
   return (EXIT_SUCCESS);
 }
 
-int			b_setenv(int			ac,
-				 char			**av,
-				 t_shell		*shell)
+static int		b_setenv_treat(char			**av,
+				       t_shell			*shell)
 {
   int			len;
 
+  len = strlen(av[1]) + ((av[2] != NULL) ? strlen(av[2]) : 0) + 2;
+  return (b_setenv_find(len, av, shell));
+}
+
+int			b_setenv(int				ac,
+				 char				**av,
+				 t_shell			*shell)
+{
   if (ac == 1)
     return (b_env(ac, av, shell));
   else if (ac >= 4)
     {
-      printf(TOO_ARG, av[0]);
+      if (shell->write)
+	fprintf(stdout, TOO_ARG, av[0]);
       return (EXIT_FAILURE);
     }
-  len = strlen(av[1]) + ((av[2] != NULL) ? strlen(av[2]) : 0) + 2;
-  return (b_setenv_find(len, av, shell));
+  return (b_setenv_treat(av, shell));
 }

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 14:38:03 2016 Frederic ODDOU
-** Last update Thu May 05 13:25:10 2016 oddou_f
+** Last update Mon May 09 00:09:52 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -33,7 +33,7 @@ static bool		parser_check_pipe(t_commands		*commands)
 	      (tmp->next != NULL && tmp->next->index_delim != ID_WITHOUT &&
 	       IF_PIPE(tmp->next->index_delim)))
 	    {
-	      printf("%s\n", ERR_NULL);
+	      fprintf(stdout, "%s\n", ERR_NULL);
 	      return (false);
 	    }
 	}

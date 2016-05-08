@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 15:27:56 2016 Frederic ODDOU
-** Last update Fri May 06 11:53:35 2016 oddou_f
+** Last update Sun May 08 23:46:15 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -27,7 +27,8 @@ static int		b_cd_goto(char			*directory,
     strcpy(oldpwd, "/");
   if (chdir(directory) == -1)
     {
-      printf(NO_FOLDER, directory);
+      if (shell->write)
+	fprintf(stdout, NO_FOLDER, directory);
       return (EXIT_FAILURE);
     }
   free(shell->oldpwd);
@@ -51,7 +52,8 @@ int			b_cd(int			ac,
 {
   if (ac > 2)
     {
-      printf(TOO_ARG, av[0]);
+      if (shell->write)
+	fprintf(stdout, TOO_ARG, av[0]);
       return (EXIT_FAILURE);
     }
   else if (ac == 1)
