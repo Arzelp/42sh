@@ -5,12 +5,13 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 10:18:46 2016 Frederic ODDOU
-** Last update Mon May 09 10:37:47 2016 oddou_f
+** Last update Tue May 10 00:02:30 2016 oddou_f
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <string.h>
 #include <limits.h>
 #include <unistd.h>
 #include "shell.h"
@@ -36,24 +37,53 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
   shell_close(shell, shell->last_return);
 }
 
+void			shell_treat_parenthese(t_shell		*shell,
+					       t_pipe		*pipe)
+{
+  if ((pipe->pid = fork()) == -1)
+    {
+      fprintf(stderr, ERROR_FUNCTION, "fork");
+      shell_close(shell, EXIT_FAILURE);
+    }
+  else if (pipe->pid == 0)
+    {
+      if (pipe->fd[FD_IN] != -1)
+	shell->fd[FD_IN] = pipe->fd[FD_IN];
+      if (pipe->fd[FD_OUT] != -1)
+	shell->fd[FD_OUT] = pipe->fd[FD_OUT];
+      shell_step(shell, strdup(pipe->commands->str));
+      exit(shell->last_return);
+    }
+  else
+    {
+      wait(NULL);
+    }
+}
+
 void			shell_treat_pipe_exec(t_shell		*shell,
 					      t_list		*list,
 					      t_pipe		*pipe)
 {
-  if (utils_commands_to_tab(pipe) == true)
+  if (pipe && pipe->commands)
     {
-      if ((pipe->pid = fork()) == -1)
+      if (pipe->commands->index_delim != ID_PARENTHESE &&
+	  utils_commands_to_tab(shell, pipe) == true)
 	{
-	  fprintf(stderr, ERROR_FUNCTION, "fork");
-	  shell_close(shell, EXIT_FAILURE);
+	  if ((pipe->pid = fork()) == -1)
+	    {
+	      fprintf(stderr, ERROR_FUNCTION, "fork");
+	      shell_close(shell, EXIT_FAILURE);
+	    }
+	  else if (pipe->pid == 0)
+	    {
+	      shell_dup(shell, list, pipe);
+	      shell_treat_pipe_commands(shell, pipe);
+	    }
+	  else if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
+	    shell->last_return = b_exec(shell, pipe);
 	}
-      else if (pipe->pid == 0)
-	{
-	  shell_dup(shell, list, pipe);
-	  shell_treat_pipe_commands(shell, pipe);
-	}
-      else if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
-	shell->last_return = b_exec(shell, pipe);
+      else if (pipe->commands->index_delim == ID_PARENTHESE)
+	shell_treat_parenthese(shell, pipe);
     }
   shell_pipe_close_fd(pipe);
   if (pipe->next)

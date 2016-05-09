@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Mon May 09 10:37:17 2016 oddou_f
+** Last update Mon May 09 23:56:03 2016 oddou_f
 */
 
 #ifndef SHELL_H_
@@ -65,6 +65,7 @@ typedef struct		s_pid
 typedef struct		s_shell
 {
   bool			write;
+  int			fd[2];
   int			last_return;
   t_pid			pid;
   char			*oldpwd;
@@ -98,6 +99,9 @@ void			shell_redirection(t_shell 		*shell,
 void			shell_dup(t_shell			*shell,
 				  t_list			*list,
 				  t_pipe			*pipe);
+
+void			shell_step(t_shell			*shell,
+				   char				*str);
 
 /*
 ** shell_treat_pipe.c

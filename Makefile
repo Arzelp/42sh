@@ -38,6 +38,7 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_SHELL)shell_redirection.c \
 	$(DIR_SHELL)shell_signaux.c \
 	$(DIR_PARSER)parser_commands.c \
+	$(DIR_PARSER)parser_commands_backslash.c \
 	$(DIR_PARSER)parser_control.c \
 	$(DIR_PARSER)parser_list.c \
 	$(DIR_PARSER)parser_pipe.c \
@@ -48,6 +49,7 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_UTILS)utils_list.c \
 	$(DIR_UTILS)utils_pipe.c \
 	$(DIR_UTILS)utils_signal.c \
+	$(DIR_UTILS)utils_get_var.c \
 	$(DIR_BUILTIN)b_getenv.c \
 	$(DIR_BUILTIN)b_exec.c \
 	$(DIR_BUILTIN)b_is_builtin.c \

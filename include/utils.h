@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Thu May 05 13:27:35 2016 oddou_f
+** Last update Mon May 09 22:10:00 2016 oddou_f
 */
 
 #ifndef UTILS_H_
@@ -51,6 +51,13 @@ t_pipe			*utils_pipe_go_back(t_pipe		*pipe);
 /*
 ** Convertie les commandes en tab
 */
-bool			utils_commands_to_tab(t_pipe		*pipe);
+bool			utils_commands_to_tab(t_shell		*shell,
+					      t_pipe		*pipe);
+
+/*
+** Obtention de la variable environnement ou locale
+*/
+char			*utils_get_var(t_shell			*shell,
+				       t_commands		*commands);
 
 #endif

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 10:32:16 2016 Frederic ODDOU
-** Last update Mon May 09 00:10:07 2016 oddou_f
+** Last update Mon May 09 21:12:32 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -25,6 +25,8 @@ static short		parser_type_delimit(char		*str,
   short			id_delimit;
 
   id_delimit = 0;
+  if (*n > 0 && str[*n - 1] == '\\')
+    return (ID_WITHOUT);
   while (GET_TYPE(id_delimit) != ID_WITHOUT)
     {
       if (!strncmp(&str[*n], g_parser_delimit[id_delimit].delimit,
@@ -46,7 +48,8 @@ static bool		parser_find_end(char			*str,
 {
   while (str[*i] != '\0')
     {
-      if (!strncmp(&str[*i], end, strlen(end)))
+      if (!(*i > 0 && str[*i - 1] == '\\') &&
+	  !strncmp(&str[*i], end, strlen(end)))
 	return (true);
       *i += 1;
     }
@@ -116,5 +119,6 @@ bool			parser_commands(t_shell			*shell,
 	}
     }
   shell->commands = utils_commands_go_back(shell->commands);
+  parser_commands_backslash(shell->commands);
   return (true);
 }

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 14:38:03 2016 Frederic ODDOU
-** Last update Mon May 09 00:09:52 2016 oddou_f
+** Last update Mon May 09 23:29:10 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -67,6 +67,33 @@ static void		parser_get_pipe(t_list			*list)
   list->pipe = utils_pipe_go_back(list->pipe);
 }
 
+/*
+** Si il y a des parenthèses avec des commandes dans le même pipes on rejete
+*/
+static bool		parser_pipe_parenthese(t_pipe		*pipe)
+{
+  t_commands		*tmp;
+
+  while (pipe != NULL)
+    {
+      tmp = pipe->commands;
+      while (tmp != NULL)
+	{
+	  if (tmp->index_delim == ID_PARENTHESE)
+	    {
+	      if (tmp->next || tmp->prev)
+		{
+		  fprintf(stderr, ERR_PARENTHESE);
+		  return (false);
+		}
+	    }
+	  tmp = tmp->next;
+	}
+      pipe = pipe->next;
+    }
+  return (true);
+}
+
 bool			parser_pipe(t_shell			*shell)
 {
   t_list		*tmp;
@@ -81,7 +108,8 @@ bool			parser_pipe(t_shell			*shell)
 	  return (false);
 	}
       parser_get_pipe(tmp);
-      if (parser_redi(tmp) == false)
+      if (parser_pipe_parenthese(tmp->pipe) == false ||
+	  parser_redi(tmp) == false)
 	{
 	  utils_list_delete_list(shell->list);
 	  shell->list = NULL;

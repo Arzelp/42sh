@@ -5,12 +5,13 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 10:43:24 2016 Frederic ODDOU
-** Last update Sat Apr 30 11:08:31 2016 oddou_f
+** Last update Mon May 09 22:11:27 2016 oddou_f
 */
 
 #include <stdlib.h>
 #include <stdbool.h>
 #include "shell.h"
+#include "utils.h"
 
 static unsigned int	utils_commands_count(t_commands		*commands)
 {
@@ -25,7 +26,8 @@ static unsigned int	utils_commands_count(t_commands		*commands)
   return (nb);
 }
 
-bool			utils_commands_to_tab(t_pipe		*pipe)
+bool			utils_commands_to_tab(t_shell		*shell,
+					      t_pipe		*pipe)
 {
   int			i;
   t_commands		*tmp;
@@ -40,7 +42,7 @@ bool			utils_commands_to_tab(t_pipe		*pipe)
   i = 0;
   while (i < pipe->ac)
     {
-      pipe->av[i] = tmp->str;
+      pipe->av[i] = utils_get_var(shell, tmp);
       tmp = tmp->next;
       i++;
     }

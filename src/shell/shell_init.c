@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:01 2016 Frederic ODDOU
-** Last update Sun May 08 23:32:54 2016 oddou_f
+** Last update Mon May 09 23:56:26 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -31,6 +31,8 @@ bool		shell_init(t_shell		*shell,
   shell->list = NULL;
   shell->locales = NULL;
   shell->last_return = 0;
+  shell->fd[FD_IN] = STDIN_FILENO;
+  shell->fd[FD_OUT] = STDOUT_FILENO;
   shell->write = false;
   shell->path = my_str_to_wordtab(b_getenv(shell->ae, "PATH"), ':');
   shell->pid.pid = getpid();
