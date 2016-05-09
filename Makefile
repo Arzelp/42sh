@@ -30,10 +30,12 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_SHELL)shell_get_commands.c \
 	$(DIR_SHELL)shell_commands_free.c \
 	$(DIR_SHELL)shell_get_path.c \
-	$(DIR_SHELL)shell_exec.c \
 	$(DIR_SHELL)shell_pipe.c \
+	$(DIR_SHELL)shell_dup.c \
+	$(DIR_SHELL)shell_treat_pipe.c \
 	$(DIR_SHELL)shell_prompt.c \
 	$(DIR_SHELL)shell_list.c \
+	$(DIR_SHELL)shell_redirection.c \
 	$(DIR_SHELL)shell_signaux.c \
 	$(DIR_PARSER)parser_commands.c \
 	$(DIR_PARSER)parser_control.c \

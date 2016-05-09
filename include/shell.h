@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Sun May 08 23:31:40 2016 oddou_f
+** Last update Mon May 09 10:37:17 2016 oddou_f
 */
 
 #ifndef SHELL_H_
@@ -13,6 +13,9 @@
 
 # include <stdbool.h>
 # include "enum.h"
+
+# define ERROR_FUNCTION	"Error: %s function failled.\n"
+# define ERROR_NOTFOUND	"%s: Command not found.\n"
 
 typedef struct		s_commands
 {
@@ -83,19 +86,27 @@ bool			shell_get_commands(t_shell		*shell);
 void			shell_commands_free(t_shell		*shell);
 char			*shell_get_path(t_shell			*shell,
 					char			*name);
-bool			shell_exec(t_shell			*shell,
-				   t_pipe			*pipe);
 
 
-void			shell_list_desactive(t_list		*list,
-					     short		id_sep);
 bool			shell_list_treat(t_shell		*shell);
+void			shell_prompt(t_shell			*shell);
+
+void			shell_redirection(t_shell 		*shell,
+					  t_pipe 		*pipe,
+					  int			*fd);
+
+void			shell_dup(t_shell			*shell,
+				  t_list			*list,
+				  t_pipe			*pipe);
+
+/*
+** shell_treat_pipe.c
+*/
+void			shell_treat_pipe_wait(t_shell		*shell,
+					      t_pipe		*pipe);
 void			shell_treat_pipe_exec(t_shell		*shell,
 					      t_list		*list,
 					      t_pipe		*pipe);
-void			shell_treat_pipe_wait(t_shell		*shell,
-					      t_pipe		*pipe);
-void			shell_prompt(t_shell			*shell);
 
 /*
 ** shell_pipe.c

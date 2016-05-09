@@ -5,13 +5,13 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sun May  8 15:17:14 2016 Frederic ODDOU
-** Last update Sun May 08 23:20:07 2016 oddou_f
+** Last update Mon May 09 10:35:35 2016 oddou_f
 */
 
 #include <stdlib.h>
 #include "shell.h"
 
-void			shell_list_desactive(t_list	*list,
+static void		shell_list_desactive(t_list	*list,
 					     short	id_sep)
 {
   while (list != NULL && list->type_separator == id_sep)
