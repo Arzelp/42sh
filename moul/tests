@@ -152,21 +152,6 @@ TESTS=
   echo "ls"
 [17-END]
 
-[18]
-NAME="zombie"
-SETUP="echo -e '#!/bin/sh\nps  T -o command | cut -f1 -d\  | grep sh | wc -l' > ./zb ; chmod 755 zb"
-CLEAN="rm zb"
-TESTS=
-  echo ""
-  echo "./zb"
-  echo "ls"
-  echo "plop"
-  echo " "
-  echo -e "\t"
-  echo "./zb"
-[18-END]
-
-
 [19]
 NAME="space and tab"
 SETUP=""
@@ -289,7 +274,7 @@ SETUP=""
 CLEAN="rm result result2"
 TESTS=
   echo "echo ls | /bin/tcsh > result"
-  echo "echo ls | ./mysh > result2"
+  echo "echo ls | ./42sh > result2"
   echo "cat result"
   echo "cat result2"
 [31-END]

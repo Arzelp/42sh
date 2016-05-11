@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri May  6 12:29:25 2016 Frederic ODDOU
-** Last update Mon May 09 10:31:46 2016 oddou_f
+** Last update Wed May 11 19:42:02 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -39,7 +39,7 @@ void			shell_pipe_open(t_shell			*shell,
     {
       if ((pipe(fd)) == -1)
 	{
-	  fprintf(stderr, ERROR_FUNCTION, "fork");
+	  fprintf(stderr, ERROR_FUNCTION, "pipe");
 	  shell_close(shell, EXIT_FAILURE);
 	}
       mypipe->next->fd[FD_IN] = fd[0];

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 21:32:58 2016 Frederic ODDOU
-** Last update Mon May 09 22:11:21 2016 oddou_f
+** Last update Wed May 11 14:03:53 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -14,6 +14,7 @@
 #include "shell.h"
 #include "builtin.h"
 #include "parser.h"
+#include "utils.h"
 
 static char		*utils_get_var_find(t_shell		*shell,
 					    t_commands		*commands)
@@ -57,5 +58,7 @@ char			*utils_get_var(t_shell			*shell,
 	return (utils_get_var_return(shell, commands));
       return (utils_get_var_find(shell, commands));
     }
+  if (!strncmp(commands->str, "~", 1))
+    return (utils_get_homepath(commands));
   return (commands->str);
 }

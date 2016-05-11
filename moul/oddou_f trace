@@ -1,0 +1,104 @@
+Basic Exec : 
+ls : OK
+/ls : OK
+./ls : OK
+/bin/ls -la : OK
+mkdir tmp | cd tmp | /bin/ls -la : OK
+Spaces : OK 
+Spaces and Tabulations : OK 
+Command not found : OK
+
+Builtins : 
+cd directory : OK
+Hard cd : OK 
+exit : OK 
+simple setenv : OK 
+simple unsetenv : OK 
+setenv | unsetenv : OK 
+
+PATH management : 
+PATH vide | ls : OK
+PATH vide | /bin/ls : OK
+PATH vide | ./my_exe : OK
+PATH vide | my_exe : KO
+my_exe : OK
+PATH /bin | /bin/ls : OK
+PATH :/bin | /bin/ls : OK
+PWD && OLDPWD : OK 
+
+Semi-colon : 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+Simple pipes : 
+OK 
+OK 
+OK 
+OK 
+OK 
+
+Multiple pipes : 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+Simple / Double Redirections : 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+OK 
+
+Errors : 
+Looking for Missing Name : 
+KO 
+KO 
+Looking for Ambiguous : 
+KO 
+KO 
+KO 
+KO 
+OK 
+KO 
+KO 
+Looking for Invalid null command. : 
+KO 
+KO 
+KO 
+KO 
+KO 
+
+OK : Pas de Segmentation fault 
+OK : Pas de Segmentation fault 
+KO
+OK
+KO
+Mix easy : 
+OK 
+OK 
+Mix medium : 
+OK 
+OK 
+KO 
+OK 
+OK 
+OK 
+Mix hard : 
+KO 

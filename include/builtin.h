@@ -5,11 +5,10 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Apr 29 23:44:07 2016 Frederic ODDOU
-** Last update Fri May 06 11:59:34 2016 oddou_f
+** Last update Tue May 10 19:02:03 2016 oddou_f
 */
 
-#ifndef BUILTIN_
-# define BUILTIN_
+#pragma once
 
 # include "shell.h"
 
@@ -63,5 +62,3 @@ int			b_builtins(int			ac,
 				   t_shell		*shell);
 
 extern t_builtin	g_builtin[];
-
-#endif

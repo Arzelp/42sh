@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SHELL="./42sh"
-REFER="/bin/tcsh"
+REFER="/bin/tcsh -f"
 
 CAT=`which cat`
 GREP=`which grep`
@@ -111,7 +111,7 @@ make_manifest()
   echo '        {'
   echo '          "name": "'$NAME'",'
   echo '          "cmd": "./moul.sh '$lst'",'
-  echo '          "expected": "^OK$"'
+  echo '          "expected": "^OK"'
   echo '        }'
   echo '      ]'
   echo -n '    }'
@@ -120,6 +120,15 @@ make_manifest()
   echo '  }'
   echo '}'
 }
+
+for sig in `trap -l`
+do
+  echo "$sig" | grep "^SIG" >/dev/null 2>&1
+  if [ $? -eq 0 ]
+  then
+    trap "echo Received signal $sig !" $sig
+  fi
+done
 
 if [ ! -f tests ]
 then
@@ -147,7 +156,7 @@ then
   do
     path_backup=$PATH
     load_test $lst 1
-    PATH=$path_backup
+    export PATH=$path_backup
   done
 else
   if [ "X$1" = "X0" ]

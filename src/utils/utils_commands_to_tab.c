@@ -5,11 +5,12 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 10:43:24 2016 Frederic ODDOU
-** Last update Mon May 09 22:11:27 2016 oddou_f
+** Last update Wed May 11 19:40:32 2016 oddou_f
 */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "shell.h"
 #include "utils.h"
 
@@ -34,7 +35,8 @@ bool			utils_commands_to_tab(t_shell		*shell,
 
   if (pipe == NULL)
     return (false);
-    tmp = pipe->commands;
+  shell_treat_backquotes(shell, pipe);
+  tmp = pipe->commands;
   if ((pipe->ac = utils_commands_count(tmp)) <= 0)
     return (false);
   if ((pipe->av = malloc(sizeof(char *) * (pipe->ac + 1))) == NULL)

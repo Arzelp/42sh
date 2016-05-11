@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Mon May 09 22:10:00 2016 oddou_f
+** Last update Wed May 11 14:03:49 2016 oddou_f
 */
 
 #ifndef UTILS_H_
@@ -59,5 +59,6 @@ bool			utils_commands_to_tab(t_shell		*shell,
 */
 char			*utils_get_var(t_shell			*shell,
 				       t_commands		*commands);
+char			*utils_get_homepath(t_commands		*commands);
 
 #endif
