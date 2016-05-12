@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Wed May 11 19:29:08 2016 oddou_f
+** Last update Thu May 12 21:45:00 2016 oddou_f
 */
 
 #ifndef SHELL_H_
@@ -109,6 +109,8 @@ void			shell_treat_backquotes(t_shell		*shell,
 					       t_pipe		*pipe);
 
 int			shell_wait_status(int			status);
+
+void			shell_treat_glob(t_pipe			*pipe);
 
 /*
 ** shell_treat_pipe.c

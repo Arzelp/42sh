@@ -35,6 +35,7 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_SHELL)shell_treat_pipe.c \
 	$(DIR_SHELL)shell_treat_parenthese.c \
 	$(DIR_SHELL)shell_treat_backquotes.c \
+	$(DIR_SHELL)shell_treat_glob.c \
 	$(DIR_SHELL)shell_prompt.c \
 	$(DIR_SHELL)shell_list.c \
 	$(DIR_SHELL)shell_redirection.c \

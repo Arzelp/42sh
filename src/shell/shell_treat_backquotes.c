@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 11 19:27:03 2016 Frederic ODDOU
-** Last update Wed May 11 19:45:13 2016 oddou_f
+** Last update Thu May 12 21:47:39 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -75,6 +75,7 @@ void			shell_treat_backquotes(t_shell		*shell,
 	  commands = shell_fork_backquotes(shell, pipe, commands);
 	  utils_pipe_delete_command(pipe, tmp);
 	}
-      commands = commands->next;
+      if (commands != NULL)
+	commands = commands->next;
     }
 }

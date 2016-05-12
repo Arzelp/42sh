@@ -5,13 +5,24 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 12:43:01 2016 Frederic ODDOU
-** Last update Tue May 10 14:11:18 2016 oddou_f
+** Last update Thu May 12 18:14:01 2016 oddou_f
 */
 
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
+#include <stdio.h>
 #include "shell.h"
+
+static bool		shell_check_access(char		*str)
+{
+  if (access(str, X_OK) == 0)
+    return (true);
+  else if (errno == ENOTDIR)
+    printf("%s: N'est pas un dossier.\n", str);
+  return (false);
+}
 
 static char		*shell_find_program(t_shell	*shell,
 					   char		*name)
@@ -35,7 +46,7 @@ static char		*shell_find_program(t_shell	*shell,
 	  (str = strcat(str, "/")) == NULL ||
 	  (str = strcat(str, name)) == NULL)
 	return (NULL);
-      if (access(str, X_OK) == 0)
+      if (shell_check_access(str))
 	return (str);
       i++;
     }
@@ -59,7 +70,7 @@ char			*shell_get_path(t_shell		*shell,
     }
   else
     {
-      if (access(name, X_OK) == 0)
+      if (shell_check_access(name))
 	return (strdup(name));
     }
   return (NULL);

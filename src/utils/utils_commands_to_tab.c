@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 10:43:24 2016 Frederic ODDOU
-** Last update Wed May 11 19:40:32 2016 oddou_f
+** Last update Thu May 12 21:45:29 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -36,6 +36,7 @@ bool			utils_commands_to_tab(t_shell		*shell,
   if (pipe == NULL)
     return (false);
   shell_treat_backquotes(shell, pipe);
+  shell_treat_glob(pipe);
   tmp = pipe->commands;
   if ((pipe->ac = utils_commands_count(tmp)) <= 0)
     return (false);
