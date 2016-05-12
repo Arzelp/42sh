@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:38:22 2016 Frederic ODDOU
-** Last update Wed May 11 20:50:23 2016 oddou_f
+** Last update Fri May 13 00:48:32 2016 oddou_f
 */
 
 #include <unistd.h>
@@ -21,7 +21,8 @@ void			shell_step(t_shell			*shell,
   if (str != NULL)
     {
       shell_commands_free(shell);
-      parser_control(shell, str);
+      if (parser_control(shell, str) == false)
+	shell->last_return = EXIT_FAILURE;
       free(str);
       shell_list_treat(shell);
       shell_commands_free(shell);

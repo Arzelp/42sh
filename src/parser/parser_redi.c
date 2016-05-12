@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 12:13:38 2016 Frederic ODDOU
-** Last update Mon May 09 00:09:46 2016 oddou_f
+** Last update Fri May 13 01:02:58 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -51,7 +51,7 @@ static bool		parser_redi_add_right(t_pipe		*pipe,
 static bool		parser_redi_add_left(t_pipe		*pipe,
 					     t_commands		*commands)
 {
-  if (pipe->redi[RED_LEFT] || pipe->redi[RED_TWO_LEFT])
+  if (pipe->prev || pipe->redi[RED_LEFT] || pipe->redi[RED_TWO_LEFT])
     {
       fprintf(stdout, "%s\n", ERR_AMBIIN);
       return (false);

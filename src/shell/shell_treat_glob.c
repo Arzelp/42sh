@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May 12 21:31:22 2016 Frederic ODDOU
-** Last update Thu May 12 21:47:26 2016 oddou_f
+** Last update Fri May 13 00:59:41 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -35,13 +35,15 @@ static t_commands	*shell_glob_find(t_commands		*commands)
   int			i;
 
   i = 0;
-  if (glob(commands->str, GLOB_MARK, NULL, &globbuf) != 0)
+  if (glob(commands->str, 0, NULL, &globbuf) != 0)
     return (commands);
   if (globbuf.gl_pathv == NULL)
     return (commands);
   while (globbuf.gl_pathv[i] != NULL)
     {
-      commands = utils_commands_add_right(commands, strdup(globbuf.gl_pathv[i]), ID_WITHOUT);
+      commands = utils_commands_add_right(commands,
+					  strdup(globbuf.gl_pathv[i]),
+					  ID_WITHOUT);
       i++;
     }
   globfree(&globbuf);

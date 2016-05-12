@@ -123,22 +123,6 @@ TESTS=
   echo 'coucou'
 [15-END]
 
-[16]
-NAME="setenv and unsetenv"
-SETUP=""
-CLEAN=""
-TESTS=
-  echo 'unsetenv _'
-  echo 'unsetenv SHLVL'
-  echo 'unsetenv LS_COLORS'
-  echo 'setenv toto'
-  echo 'setenv tata coucou'
-  echo 'env'
-  echo '/bin/env'
-  echo 'setenv titi abcd'
-  echo 'unsetenv tata'
-  echo 'env'
-[16-END]
 
 [17]
 NAME="cd"
@@ -288,3 +272,83 @@ TESTS=
   echo "cat fic >> fic"
   echo "cat fic"
 [32-END]
+
+[33]
+NAME="Gestion d'erreur (redirection >>>)"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "ls >>> .totopepito"
+[33-END]
+
+[34]
+NAME="Gestion d'erreur (pipe après redirection)"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "ls > .totopepito | grep 42sh"
+[34-END]
+
+[35]
+NAME="Gestion d'erreur (input redirection après pipe)"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "ls | grep i < .totopepito"
+[35-END]
+
+[36]
+NAME="Gestion d'erreur (pipe sans rien)"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "ls |"
+[36-END]
+
+[37]
+NAME="Gestion d'erreur (juste redirection)"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo ">.totopepito"
+[37-END]
+
+[38]
+NAME="Gestion d'erreur (entre pipe)"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "cat 42sh | | touch .totopepito"
+[38-END]
+
+[39]
+NAME="Gestion d'erreur (pipe debut de chaine)"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "|ls > .totopepito"
+[39-END]
+
+[40]
+NAME="Backquotes"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "echo `ls`"
+[40-END]
+
+[41]
+NAME="Globbing"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "ls -R ../*"
+[41-END]
+
+[42]
+NAME="Parenthèses"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "(ls | cat -e) | cat -e"
+[42-END]
