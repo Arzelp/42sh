@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sun May  8 15:17:14 2016 Frederic ODDOU
-** Last update Mon May 09 10:35:35 2016 oddou_f
+** Last update Thu May 12 23:14:55 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -30,7 +30,6 @@ bool			shell_list_treat(t_shell	*shell)
     {
       if (list->treat == true)
 	{
-	  shell_pipe_open(shell, list->pipe);
 	  shell_treat_pipe_exec(shell, list, list->pipe);
 	  shell_treat_pipe_wait(shell, list->pipe);
 	  if (shell->last_return != EXIT_SUCCESS)

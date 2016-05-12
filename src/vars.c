@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Fri May 06 12:00:34 2016 oddou_f
+** Last update Thu May 12 23:34:55 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ t_sig_mess		g_sig_mess[] =
     {SIGUSR1, "User-defined signal 1"},
     {SIGSEGV, "Segmentation fault"},
     {SIGUSR2, "User-defined signal 2"},
-    {SIGPIPE, "Broken pipe"},
+    {SIGPIPE, ""},
     {SIGALRM, "Alarm clock"},
     {SIGTERM, "Termination"},
     {SIGSTKFLT, "Stack fault"},

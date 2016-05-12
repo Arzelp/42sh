@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri May  6 12:29:25 2016 Frederic ODDOU
-** Last update Wed May 11 19:42:02 2016 oddou_f
+** Last update Thu May 12 23:31:08 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -13,37 +13,23 @@
 #include <stdio.h>
 #include "shell.h"
 
-void			shell_pipe_close_fd(t_pipe		*pipe)
+void			shell_pipe_close(t_pipe			*pipe)
 {
-  if (pipe->fd[FD_IN] != -1)
-    close(pipe->fd[FD_IN]);
-  if (pipe->fd[FD_OUT] != -1)
-    close(pipe->fd[FD_OUT]);
-}
-
-void			shell_pipe_close_next(t_pipe		*pipe)
-{
-  while (pipe != NULL)
+  if (pipe->prev != NULL)
     {
-      shell_pipe_close_fd(pipe);
-      pipe = pipe->next;
+      close(pipe->prev->fd[FD_OUT]);
+      close(pipe->fd[FD_IN]);
     }
 }
 
-void			shell_pipe_open(t_shell			*shell,
-					t_pipe			*mypipe)
+void			shell_pipe_open(t_pipe			*mypipe)
 {
   int			fd[2];
 
-  while (mypipe != NULL && mypipe->next != NULL)
+  if (mypipe->next)
     {
-      if ((pipe(fd)) == -1)
-	{
-	  fprintf(stderr, ERROR_FUNCTION, "pipe");
-	  shell_close(shell, EXIT_FAILURE);
-	}
+      pipe(fd);
       mypipe->next->fd[FD_IN] = fd[0];
       mypipe->fd[FD_OUT] = fd[1];
-      mypipe = mypipe->next;
     }
 }

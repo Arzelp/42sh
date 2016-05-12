@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:01 2016 Frederic ODDOU
-** Last update Mon May 09 23:56:26 2016 oddou_f
+** Last update Thu May 12 23:45:39 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -15,6 +15,16 @@
 #include "my.h"
 #include "builtin.h"
 #include "shell.h"
+
+static void	shell_init_path(t_shell		*shell)
+{
+  char		*path;
+
+  path = b_getenv(shell->ae, "PATH");
+  if (path == NULL)
+    path = DEFAULT_PATH;
+  shell->path = my_str_to_wordtab(path, ':');
+}
 
 bool		shell_init(t_shell		*shell,
 			   int			ac,
@@ -34,7 +44,7 @@ bool		shell_init(t_shell		*shell,
   shell->fd[FD_IN] = STDIN_FILENO;
   shell->fd[FD_OUT] = STDOUT_FILENO;
   shell->write = false;
-  shell->path = my_str_to_wordtab(b_getenv(shell->ae, "PATH"), ':');
+  shell_init_path(shell);
   shell->pid.pid = getpid();
   if ((shell->pid.pgid = getpgid(shell->pid.pid)) == -1)
     return (false);

@@ -129,6 +129,7 @@ SETUP=""
 CLEAN=""
 TESTS=
   echo 'unsetenv _'
+  echo 'unsetenv SHLVL'
   echo 'unsetenv LS_COLORS'
   echo 'setenv toto'
   echo 'setenv tata coucou'
@@ -208,7 +209,7 @@ NAME="multipipe and FDMAX"
 SETUP="ulimit -n 21"
 CLEAN=""
 TESTS=
-  echo -e "ls -lR /dev | cat  | tr y Y | grep ttY | cat | cat | cat | cat | cat | cat |cat"
+  echo -e "ls -l /dev | cat  | tr y Y | grep ttY | cat | cat | cat | cat | cat | cat |cat"
 [24-END]
 
 [25]
@@ -216,7 +217,7 @@ NAME="multipipe and error"
 SETUP=""
 CLEAN=""
 TESTS=
-  echo -e "ls -lR /dev | cat  | tr y Y | grep ttY | cat | cati | cat"
+  echo -e "ls -l /dev | cat  | tr y Y | grep ttY | cat | cati | cat"
 [25-END]
 
 [26]

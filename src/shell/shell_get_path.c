@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 12:43:01 2016 Frederic ODDOU
-** Last update Thu May 12 18:14:01 2016 oddou_f
+** Last update Thu May 12 23:00:42 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -54,6 +54,20 @@ static char		*shell_find_program(t_shell	*shell,
   return (NULL);
 }
 
+static char		*shell_get_path_dir(char	*name)
+{
+  char			*str;
+
+  if ((str = malloc(sizeof(char) * (strlen(name) + 3))) == NULL)
+    return (NULL);
+  memset(str, '\0', strlen(name) + 3);
+  strcat(str, "./");
+  strcat(str, name);
+  if (shell_check_access(str))
+    return (str);
+  return (NULL);
+}
+
 char			*shell_get_path(t_shell		*shell,
 					char		*name)
 {
@@ -63,10 +77,15 @@ char			*shell_get_path(t_shell		*shell,
     return (NULL);
   if (strncmp(name, "./", 2) && strncmp(name, "/", 1))
     {
-      if (shell->path == NULL)
-	return (NULL);
-      if ((str = shell_find_program(shell, name)) != NULL)
-	return (str);
+      if (strstr(name, "/") != NULL)
+	return (shell_get_path_dir(name));
+      else
+	{
+	  if (shell->path == NULL)
+	    return (NULL);
+	  if ((str = shell_find_program(shell, name)) != NULL)
+	    return (str);
+	}
     }
   else
     {

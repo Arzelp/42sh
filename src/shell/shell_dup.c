@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 10:24:30 2016 Frederic ODDOU
-** Last update Mon May 09 23:58:02 2016 oddou_f
+** Last update Thu May 12 23:27:52 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -36,7 +36,6 @@ static void		shell_dup_redirection(t_shell		*shell,
 }
 
 void			shell_dup(t_shell			*shell,
-				  t_list			*list,
 				  t_pipe			*pipe)
 {
   shell_dup_redirection(shell, pipe);
@@ -52,5 +51,5 @@ void			shell_dup(t_shell			*shell,
       fprintf(stderr, ERROR_FUNCTION, "dup2");
       shell_close(shell, EXIT_FAILURE);
     }
-  shell_pipe_close_next(list->pipe);
+  shell_pipe_close(pipe);
 }

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Thu May 12 21:45:00 2016 oddou_f
+** Last update Thu May 12 23:41:33 2016 oddou_f
 */
 
 #ifndef SHELL_H_
@@ -16,6 +16,8 @@
 
 # define ERROR_FUNCTION	"Error: %s function failled.\n"
 # define ERROR_NOTFOUND	"%s: Command not found.\n"
+
+# define DEFAULT_PATH	"/bin:/sbin:/usr/bin:/usr/sbin"
 
 typedef struct		s_commands
 {
@@ -97,7 +99,6 @@ void			shell_redirection(t_shell 		*shell,
 					  int			*fd);
 
 void			shell_dup(t_shell			*shell,
-				  t_list			*list,
 				  t_pipe			*pipe);
 
 void			shell_step(t_shell			*shell,
@@ -124,9 +125,7 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 /*
 ** shell_pipe.c
 */
-void			shell_pipe_close_fd(t_pipe		*pipe);
-void			shell_pipe_close_next(t_pipe		*pipe);
-void			shell_pipe_open(t_shell			*shell,
-					t_pipe			*mypipe);
+void			shell_pipe_close(t_pipe			*pipe);
+void			shell_pipe_open(t_pipe			*mypipe);
 
 #endif
