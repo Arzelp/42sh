@@ -1460,7 +1460,7 @@ test_41
 
 echo "Mix easy : "
 test_22
-test_33 "cat 42sh | cat 42sh|head -n 1 > .totopepito" "cat 42sh | cat 42sh|head -n 1 > .totopepita" ".totopepito" ".totopepita"
+#test_33 "cat 42sh | cat 42sh|head -n 1 > .totopepito" "cat 42sh | cat 42sh|head -n 1 > .totopepita" ".totopepito" ".totopepita"
 
 echo "Mix medium : "
 test_33 "ls > .totopepito ; cat < .totopepito > .raclette ; grep < .raclette i | cat -e | wc -l > .totopepito" "ls > .totopepita ; cat < .totopepita > .tartiflette ; grep < .tartiflette i | cat -e | wc -l > .totopepita" ".totopepito" ".totopepita"

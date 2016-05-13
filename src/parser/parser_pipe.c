@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 14:38:03 2016 Frederic ODDOU
-** Last update Mon May 09 23:29:10 2016 oddou_f
+** Last update Fri May 13 23:10:50 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -27,11 +27,11 @@ static bool		parser_check_pipe(t_commands		*commands)
   tmp = commands;
   while (tmp != NULL)
     {
-      if (tmp->index_delim != ID_WITHOUT && IF_PIPE(tmp->index_delim))
+      if (tmp->index_delim != ID_WITHOUT && (IF_PIPE(tmp->index_delim)))
 	{
 	  if ((tmp == commands || tmp->next == NULL) ||
 	      (tmp->next != NULL && tmp->next->index_delim != ID_WITHOUT &&
-	       IF_PIPE(tmp->next->index_delim)))
+	       (IF_PIPE(tmp->next->index_delim))))
 	    {
 	      fprintf(stdout, "%s\n", ERR_NULL);
 	      return (false);
@@ -56,7 +56,7 @@ static void		parser_get_pipe(t_list			*list)
     {
       if (tmp->prev != NULL &&
 	  tmp->prev->index_delim != ID_WITHOUT &&
-	  IF_PIPE(tmp->prev->index_delim))
+	  (IF_PIPE(tmp->prev->index_delim)))
 	{
           list->pipe = utils_pipe_add_right(list->pipe, tmp);
 	  utils_commands_purge_elem(tmp->prev);

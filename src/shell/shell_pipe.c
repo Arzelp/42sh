@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri May  6 12:29:25 2016 Frederic ODDOU
-** Last update Thu May 12 23:31:08 2016 oddou_f
+** Last update Fri May 13 20:33:34 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -15,11 +15,10 @@
 
 void			shell_pipe_close(t_pipe			*pipe)
 {
-  if (pipe->prev != NULL)
-    {
-      close(pipe->prev->fd[FD_OUT]);
-      close(pipe->fd[FD_IN]);
-    }
+  if (pipe->fd[FD_OUT] > STDOUT_FILENO)
+    close(pipe->fd[FD_OUT]);
+  if (pipe->fd[FD_IN] > STDIN_FILENO)
+    close(pipe->fd[FD_IN]);
 }
 
 void			shell_pipe_open(t_pipe			*mypipe)

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 22:48:24 2016 Frederic ODDOU
-** Last update Mon May 09 00:10:24 2016 oddou_f
+** Last update Fri May 13 22:02:55 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -30,7 +30,7 @@ static bool		parser_delete_excess(t_shell		*shell)
     {
       if (tmp->index_delim != ID_WITHOUT &&
 	  tmp->next->index_delim != ID_WITHOUT &&
-	  IF_SEP(tmp->index_delim) && IF_SEP(tmp->next->index_delim))
+	  (IF_SEP(tmp->index_delim)) && (IF_SEP(tmp->next->index_delim)))
 	{
 	  if (GET_ID(tmp->index_delim) != ID_SEP ||
 	      (GET_ID(tmp->index_delim) == ID_SEP &&
@@ -99,12 +99,12 @@ static void		parser_delete_limit(t_shell		*shell)
       while (tmp != NULL && tmp->next != NULL)
 	tmp = tmp->next;
       if (tmp != first &&
-	  tmp->index_delim != ID_WITHOUT && IF_SEP(tmp->index_delim))
+	  tmp->index_delim != ID_WITHOUT && (IF_SEP(tmp->index_delim)))
 	{
 	  del++;
 	  utils_commands_delete_elem(shell, tmp);
 	}
-      if (first->index_delim != ID_WITHOUT && IF_SEP(first->index_delim))
+      if (first->index_delim != ID_WITHOUT && (IF_SEP(first->index_delim)))
 	{
 	  del++;
 	  utils_commands_delete_elem(shell, first);

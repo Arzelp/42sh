@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:46:15 2016 Frederic ODDOU
-** Last update Thu Apr 28 16:32:16 2016 oddou_f
+** Last update Fri May 13 22:03:36 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -27,7 +27,7 @@ void			parser_list(t_shell			*shell)
 	{
 	  if (tmp->prev != NULL &&
 	      tmp->prev->index_delim != ID_WITHOUT &&
-	      IF_SEP(tmp->prev->index_delim))
+	      (IF_SEP(tmp->prev->index_delim)))
 	    {
 	      shell->list = utils_list_add_right(shell->list,
 						 tmp,

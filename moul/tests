@@ -352,3 +352,43 @@ CLEAN=""
 TESTS=
   echo "(ls | cat -e) | cat -e"
 [42-END]
+
+[43]
+NAME="OU et ET"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "ls || ls -R || lol && ls ../ -R && echo salut"
+[43-END]
+
+[44]
+NAME="Mix medium 1"
+SETUP=""
+CLEAN="rm .totopepito"
+TESTS=
+  echo "ls > .totopepito ; cat < .totopepito > .raclette ; grep < .raclette i | cat -e | wc -l > .totopepito ; cat .totopepito"
+[44-END]
+
+[45]
+NAME="Mix medium 2"
+SETUP=""
+CLEAN="rm .totopepito"
+TESTS=
+  echo ">    .totopepito ls ../ -lR ; ; ; ;; ls >>   .totopepito -l ; echo .totopepito oui ; cat .totopepito"
+[45-END]
+
+[46]
+NAME="Mix medium 3"
+SETUP=""
+CLEAN="rm .tartiflette; rm .totopepito"
+TESTS=
+  echo "ls ../ -lR > .totopepito && <.totopepito cat>.totopepito; <.totopepito cat| cat >> .tartiflette; ; cat .tartiflette ;"
+[46-END]
+
+[47]
+NAME="Hard"
+SETUP=""
+CLEAN="rm .raclette ; rm .totopepito"
+TESTS=
+  echo "> .totopepito ls      -l ; echo oui > .raclette ; cat < .totopepito | grep i >> .raclette ; ls -l /dev | grep tty | grep 3 >> .raclette ; < .raclette cat | grep t | > .totopepito wc -c ; cat .totopepito"
+[47-END]

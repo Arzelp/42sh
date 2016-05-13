@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 10:24:30 2016 Frederic ODDOU
-** Last update Thu May 12 23:27:52 2016 oddou_f
+** Last update Fri May 13 19:27:56 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -52,4 +52,6 @@ void			shell_dup(t_shell			*shell,
       shell_close(shell, EXIT_FAILURE);
     }
   shell_pipe_close(pipe);
+  if (pipe->next != NULL)
+    close(pipe->next->fd[FD_IN]);
 }

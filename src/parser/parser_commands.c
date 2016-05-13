@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 10:32:16 2016 Frederic ODDOU
-** Last update Mon May 09 21:12:32 2016 oddou_f
+** Last update Fri May 13 22:03:29 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -70,7 +70,7 @@ static bool		parser_not_without(t_shell		*shell,
 
   *i += strlen(g_parser_delimit[id_delimit].delimit);
   deb = *i;
-  if (GET_TYPE(id_delimit) == D_GET || IF_SEP(id_delimit))
+  if (GET_TYPE(id_delimit) == D_GET || (IF_SEP(id_delimit)))
     shell->commands = utils_commands_add_right(shell->commands,
 					       NULL,
 					       id_delimit);
