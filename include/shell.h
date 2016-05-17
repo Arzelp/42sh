@@ -5,19 +5,18 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Thu May 12 23:41:33 2016 oddou_f
+** Last update Sat May 14 23:27:55 2016 oddou_f
 */
 
-#ifndef SHELL_H_
-# define SHELL_H_
+#pragma once
 
-# include <stdbool.h>
-# include "enum.h"
+#include <stdbool.h>
+#include "enum.h"
 
-# define ERROR_FUNCTION	"Error: %s function failled.\n"
-# define ERROR_NOTFOUND	"%s: Command not found.\n"
+#define ERROR_FUNCTION	"Error: %s function failled.\n"
+#define ERROR_NOTFOUND	"%s: Command not found.\n"
 
-# define DEFAULT_PATH	"/bin:/sbin:/usr/bin:/usr/sbin"
+#define DEFAULT_PATH	"/bin:/sbin:/usr/bin:/usr/sbin"
 
 typedef struct		s_commands
 {
@@ -127,5 +126,3 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 */
 void			shell_pipe_close(t_pipe			*pipe);
 void			shell_pipe_open(t_pipe			*mypipe);
-
-#endif

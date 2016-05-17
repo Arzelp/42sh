@@ -5,13 +5,12 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Wed May 11 14:03:49 2016 oddou_f
+** Last update Sat May 14 23:28:13 2016 oddou_f
 */
 
-#ifndef UTILS_H_
-# define UTILS_H_
+#pragma once
 
-# include "shell.h"
+#include "shell.h"
 
 /*
 ** Gestion des commandes (Ajout / Suppression / Vide / Purge / Back)
@@ -60,5 +59,3 @@ bool			utils_commands_to_tab(t_shell		*shell,
 char			*utils_get_var(t_shell			*shell,
 				       t_commands		*commands);
 char			*utils_get_homepath(t_commands		*commands);
-
-#endif

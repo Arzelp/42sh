@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May 12 21:31:22 2016 Frederic ODDOU
-** Last update Fri May 13 00:59:41 2016 oddou_f
+** Last update Mon May 16 17:13:13 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -54,6 +54,7 @@ void			shell_treat_glob(t_pipe			*pipe)
 {
   t_commands		*commands;
   t_commands		*tmp;
+  t_commands		*tmp_next;
 
   commands = pipe->commands;
   while (commands != NULL)
@@ -61,10 +62,12 @@ void			shell_treat_glob(t_pipe			*pipe)
       if (commands->index_delim == ID_WITHOUT && shell_if_glob(commands->str))
 	{
 	  tmp = commands;
+	  tmp_next = tmp->next;
 	  commands = shell_glob_find(commands);
 	  utils_pipe_delete_command(pipe, tmp);
+	  commands = tmp_next;
 	}
-      if (commands != NULL)
+      else
 	commands = commands->next;
     }
 }

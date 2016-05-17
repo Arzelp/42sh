@@ -5,11 +5,10 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:01:53 2016 Frederic ODDOU
-** Last update Sun May 08 18:16:28 2016 oddou_f
+** Last update Sat May 14 23:27:00 2016 oddou_f
 */
 
-#ifndef ENUM_H_
-# define ENUM_H_
+#pragma once
 
 typedef enum		e_pipe_fd
   {
@@ -53,5 +52,3 @@ typedef enum		e_parser_delimit
     D_GET		= 2,
     D_SEPARATOR		= 3
   }			t_parser_delimit;
-
-#endif

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 16:39:30 2016 Frederic ODDOU
-** Last update Wed May 11 19:40:18 2016 oddou_f
+** Last update Mon May 16 17:15:11 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -90,6 +90,7 @@ t_pipe			*utils_pipe_add_right(t_pipe		*pipe,
   new->commands = commands;
   new->av = NULL;
   new->ac = 0;
+  new->pid = 0;
   new->redi[RED_RIGHT] = NULL;
   new->redi[RED_TWO_RIGHT] = NULL;
   new->redi[RED_LEFT] = NULL;

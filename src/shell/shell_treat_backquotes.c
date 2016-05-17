@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 11 19:27:03 2016 Frederic ODDOU
-** Last update Thu May 12 21:47:39 2016 oddou_f
+** Last update Mon May 16 21:05:25 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -24,12 +24,20 @@ static t_commands	*shell_fork_pere(t_shell		*shell,
 {
   char			*str;
   int			status;
+  int			size;
+  char			*next;
 
   waitpid(mypipe->pid, &status, WUNTRACED);
   shell->last_return = shell_wait_status(status);
   close(fd[1]);
-  while ((str = get_next_line(fd[0])) != NULL)
+  size = 0;
+  if ((next = malloc(sizeof(char))) == NULL)
+    return (NULL);
+  next[0] = '\0';
+  str = NULL;
+  while ((str = get_next_line(fd[0], &next, &size)) != NULL)
     commands = utils_commands_add_right(commands, str, ID_WITHOUT);
+  free(next);
   close(fd[0]);
   return (commands);
 }
@@ -65,6 +73,7 @@ void			shell_treat_backquotes(t_shell		*shell,
 {
   t_commands		*commands;
   t_commands		*tmp;
+  t_commands		*tmp_next;
 
   commands = pipe->commands;
   while (commands != NULL)
@@ -72,10 +81,12 @@ void			shell_treat_backquotes(t_shell		*shell,
       if (commands->index_delim == ID_BACK_QUOTE)
 	{
 	  tmp = commands;
+	  tmp_next = tmp->next;
 	  commands = shell_fork_backquotes(shell, pipe, commands);
 	  utils_pipe_delete_command(pipe, tmp);
+	  commands = tmp_next;
 	}
-      if (commands != NULL)
+      else
 	commands = commands->next;
     }
 }

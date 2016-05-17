@@ -5,18 +5,17 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:05 2016 Frederic ODDOU
-** Last update Thu May 05 15:23:25 2016 oddou_f
+** Last update Mon May 16 18:31:17 2016 oddou_f
 */
 
-#ifndef MY_H_
-# define MY_H_
+#pragma once
 
-# include <stdbool.h>
-# include <stdarg.h>
+#include <stdbool.h>
+#include <stdarg.h>
 
-# define READ_SIZE (4096)
+#define READ_SIZE (4096)
 
-char		*get_next_line(const int	fd);
+char		*get_next_line(const int fd, char **next, int *size);
 int		my_tab_len(char			**tab);
 char		**my_tab_cpy(char		**tab);
 bool		my_tab_free(char		**tab);
@@ -29,5 +28,3 @@ unsigned int	my_count_char(char		*str,
 char		**my_str_to_wordtab(char	*str,
 				    char	c);
 int		my_atoi(char			*str);
-
-#endif

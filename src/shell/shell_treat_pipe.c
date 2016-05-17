@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 10:18:46 2016 Frederic ODDOU
-** Last update Fri May 13 19:26:26 2016 oddou_f
+** Last update Mon May 16 17:16:23 2016 oddou_f
 */
 
 #include <stdio.h>
@@ -40,11 +40,12 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 					      t_list		*list,
 					      t_pipe		*pipe)
 {
-  if (pipe && pipe->commands)
+  if (pipe != NULL && pipe->commands != NULL)
     {
       shell_pipe_open(pipe);
-      if (pipe->commands->index_delim != ID_PARENTHESE &&
-	  utils_commands_to_tab(shell, pipe) == true)
+      if (pipe->commands->index_delim == ID_PARENTHESE)
+	shell->last_return = shell_treat_parenthese(shell, pipe);
+      else if (utils_commands_to_tab(shell, pipe) == true)
 	{
 	  if ((pipe->pid = fork()) == -1)
 	    {
@@ -59,8 +60,6 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 	  else if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
 	    shell->last_return = b_exec(shell, pipe);
 	}
-      else if (pipe->commands->index_delim == ID_PARENTHESE)
-	shell->last_return = shell_treat_parenthese(shell, pipe);
     }
   shell_pipe_close(pipe);
   if (pipe->next)
@@ -74,9 +73,10 @@ void			shell_treat_pipe_wait(t_shell		*shell,
   int			low;
 
   low = EXIT_SUCCESS;
-  shell->last_return = 0;
-  while (pipe != NULL)
+  status = 0;
+  while (pipe != NULL && pipe->pid != 0)
     {
+      shell->last_return = EXIT_SUCCESS;
       waitpid(pipe->pid, &status, WUNTRACED);
       shell->last_return = shell_wait_status(status);
       if (shell->last_return == EXIT_FAILURE)

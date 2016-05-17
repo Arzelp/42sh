@@ -5,11 +5,10 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sun May  1 18:19:03 2016 Frederic ODDOU
-** Last update Sun May 01 18:25:44 2016 oddou_f
+** Last update Sat May 14 23:28:04 2016 oddou_f
 */
 
-#ifndef SIG_MESS_
-# define SIG_MESS_
+#pragma once
 
 typedef struct 		s_sig_mess
 {
@@ -20,5 +19,3 @@ typedef struct 		s_sig_mess
 void			sig_display(int			status);
 
 extern t_sig_mess	g_sig_mess[];
-
-#endif

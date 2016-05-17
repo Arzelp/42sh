@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 21:53:36 2016 Frederic ODDOU
-** Last update Fri May 13 14:25:04 2016 oddou_f
+** Last update Mon May 16 17:59:44 2016 oddou_f
 */
 
 #include <stdbool.h>
@@ -27,6 +27,7 @@ bool			parser_control(t_shell			*shell,
   if (parser_commands(shell, str) == false ||
       parser_check_separator(shell) == false)
     {
+      shell->commands = utils_commands_go_back(shell->commands);
       utils_commands_delete_list(shell->commands);
       shell->commands = NULL;
       return (false);

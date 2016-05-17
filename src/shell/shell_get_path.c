@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 12:43:01 2016 Frederic ODDOU
-** Last update Thu May 12 23:00:42 2016 oddou_f
+** Last update Mon May 16 17:22:20 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -65,6 +65,7 @@ static char		*shell_get_path_dir(char	*name)
   strcat(str, name);
   if (shell_check_access(str))
     return (str);
+  free(str);
   return (NULL);
 }
 

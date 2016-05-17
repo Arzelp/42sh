@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 09:37:29 2016 Frederic ODDOU
-** Last update Mon May 09 10:17:38 2016 oddou_f
+** Last update Mon May 16 21:12:15 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -34,7 +34,10 @@ static char		*shell_redirection_realloc(char		*concat,
   len_concat = strlen(concat);
   len = len_concat + strlen(str) + 2;
   if ((concat = realloc(concat, sizeof(char) * len)) == NULL)
-    return (NULL);
+    {
+      free(str);
+      return (NULL);
+    }
   concat = strcat(concat, str);
   concat = strcat(concat, "\n");
   return (concat);
@@ -44,13 +47,18 @@ static char		*shell_redirection_gnl(char		*red_in)
 {
   char			*str;
   char			*concat;
+  int			size;
+  char			*next;
 
-  str = NULL;
-  if ((concat = malloc(1)) == NULL)
+  size = 0;
+  if ((next = malloc(sizeof(char))) == NULL ||
+      (concat = malloc(sizeof(char))) == NULL)
     return (NULL);
+  next[0] = '\0';
   concat[0] = '\0';
+  str = NULL;
   shell_redirection_prompt();
-  while ((str = get_next_line(STDIN_FILENO)) != NULL
+  while ((str = get_next_line(STDIN_FILENO, &next, &size)) != NULL
 	 && strncmp(red_in, str, strlen(red_in)))
     {
       if ((concat = shell_redirection_realloc(concat, str)) == NULL)

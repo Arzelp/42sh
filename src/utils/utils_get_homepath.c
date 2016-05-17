@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 11 13:29:54 2016 Frederic ODDOU
-** Last update Wed May 11 14:07:13 2016 oddou_f
+** Last update Mon May 16 17:23:32 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -37,7 +37,10 @@ static char		*utils_get_path_username(t_commands	*commands)
     i++;
   str[i] = '\0';
   if ((pws = getpwnam(str)) == NULL)
-    return (NULL);
+    {
+      free(str);
+      return (NULL);
+    }
   free(str);
   return (pws->pw_dir);
 }

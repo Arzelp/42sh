@@ -1,119 +1,125 @@
 /*
-** get_line.c for get line in /
+** get_next_line.c for get_next_line in /home/alies/rendu/CPE_2015_getnextline
 **
-** Made by Frederic ODDOU
-** Login oddou_f <frederic.oddou@epitech.eu>
+** Made by Arnaud Alies
+** Login   <alies_a@epitech.net>
 **
-** Started on  Wed Jan 13 21:49:09 2016 Frederic ODDOU
-** Last update Wed Jan 13 21:49:09 2016 Frederic ODDOU
+** Started on  Thu Dec 17 13:44:58 2015 Arnaud Alies
+** Last update Mon May 16 21:19:53 2016 Frederic ODDOU
 */
 
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "my.h"
 
-char			*get_cat(char *str,
-				 char *buffer,
-				 long len,
-				 long size)
+int	append_next(char **next, int *next_size,
+		    const char *buff, const int buff_size)
 {
-  long			i1;
-  long			i2;
-  char			*new;
+  char	*res;
+  int	x;
 
-  i1 = 0;
-  i2 = 0;
-  if ((len + size + 1) > 0 &&
-      (new = malloc(sizeof(char) * (len + size))) == NULL)
-    return (NULL);
-  while (i1 < len)
+  if ((res = malloc(sizeof(char) * (buff_size + *next_size + 1))) == NULL)
+    return (1);
+  x = 0;
+  while (x < *next_size)
     {
-      new[i1] = str[i1];
-      i1++;
+      res[x] = (*next)[x];
+      x += 1;
     }
-  while (i2 < size)
-    new[i1++] = buffer[i2++];
-  if (len > 0)
-    free(str);
-  return (new);
-}
-
-long			get_first_n(char *str, long len)
-{
-  long			i;
-
-  i = 0;
-  while (i < len)
+  x = 0;
+  while (x < buff_size)
     {
-      if (str[i] == '\n')
-	return (i);
-      i++;
+      res[*next_size] = buff[x];
+      *next_size += 1;
+      x += 1;
     }
-  return (-1);
+  res[*next_size] = '\0';
+  if (*next != NULL)
+    free(*next);
+  *next = res;
+  return (0);
 }
 
-char			*get_new(char *str, long deb, long end)
+char	*dump_next(char **next, int *next_size, int x)
 {
-  char			*new;
-  long			i;
+  char	*res;
+  char	*new_next;
+  int	size;
 
-  i = 0;
-  if (((end - deb) + 1) > 0 &&
-      (new = malloc(sizeof(char) * ((end - deb) + 1))) == NULL)
+  size = *next_size - x;
+  if ((new_next = malloc(sizeof(char) * (size))) == NULL)
     return (NULL);
-  while (deb < end)
-    new[i++] = str[deb++];
-  new[i] = '\0';
-  return (new);
+  if ((res = malloc(sizeof(char) * (x + 1))) == NULL)
+    return (NULL);
+  *next_size = 0;
+  while (*next_size < x)
+    {
+      res[*next_size] = (*next)[*next_size];
+      *next_size += 1;
+    }
+  res[*next_size - 1] = '\0';
+  *next_size = 0;
+  while (*next_size < size)
+    {
+      new_next[*next_size] = (*next)[x + *next_size];
+      *next_size += 1;
+    }
+  free(*next);
+  *next = new_next;
+  return (res);
 }
 
-char			*get_str(const int fd,
-				 char *str,
-				 long *len,
-				 long *back)
+int		is_line(int set)
 {
-  char			buffer[READ_SIZE];
-  long			size;
+  static int	is_line = 1;
 
-  str = (*len == 0) ? "" : str;
-  while ((*back = get_first_n(str, *len)) == -1)
+  if (set == -1)
+    is_line = 0;
+  if (set == 1)
+    is_line = 1;
+  return (is_line);
+}
+
+char	*get_line(char **next, int *next_size)
+{
+  int	x;
+
+  x = 0;
+  while (x < *next_size)
     {
-      if ((size = read(fd, buffer, READ_SIZE)) <= 0)
+      if ((*next)[x] == '\n' || (*next)[x] == ';')
 	{
-	  if (*len > 0)
+	  is_line((*next)[x] == '\n' ? 1 : -1);
+	  return (dump_next(next, next_size, x + 1));
+	}
+      x += 1;
+    }
+  return (NULL);
+}
+
+char		*get_next_line(const int fd, char **next, int *size)
+{
+  char		buff[READ_SIZE];
+  int		r;
+  char		*res;
+
+  if (fd < 0)
+    return (NULL);
+  while ((res = get_line(next, size)) == NULL)
+    {
+      if ((r = read(fd, buff, READ_SIZE)) == -1)
+	return (NULL);
+      if (append_next(next, size, buff, r))
+	return (NULL);
+      if (r <= 0)
+	{
+	  if (*size > 0)
 	    {
-	      *back = *len;
-	      return (str);
+	      *size += 1;
+	      return (dump_next(next, size, *size));
 	    }
 	  return (NULL);
 	}
-      if ((str = get_cat(str, buffer, *len, size)) == NULL)
-	return (NULL);
-      *len += size;
     }
-  return (str);
-}
-
-char			*get_next_line(const int fd)
-{
-  static long		len;
-  static char		*str;
-  long			back;
-  char			*new;
-  char			*ret;
-
-  if ((str = get_str(fd, str, &len, &back)) == NULL)
-    return (NULL);
-  if ((ret = get_new(str, 0, back)) == NULL)
-    return (NULL);
-  if ((len - (back + 1)) > 0)
-    {
-      new = get_new(str, back + 1, len);
-      free(str);
-      str = new;
-    }
-  else
-    free(str);
-  len -= (back + 1);
-  return (ret);
+  return (res);
 }
