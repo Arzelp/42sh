@@ -52,8 +52,10 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_UTILS)utils_commands_to_tab.c \
 	$(DIR_UTILS)utils_list.c \
 	$(DIR_UTILS)utils_pipe.c \
+	$(DIR_UTILS)utils_locales.c \
 	$(DIR_UTILS)utils_signal.c \
 	$(DIR_UTILS)utils_get_var.c \
+	$(DIR_UTILS)utils_tab_fusion.c \
 	$(DIR_UTILS)utils_get_homepath.c \
 	$(DIR_BUILTIN)b_getenv.c \
 	$(DIR_BUILTIN)b_exec.c \
@@ -64,6 +66,7 @@ SRC 		= $(DIR_SRC)main.c \
 	$(DIR_BUILTIN)b_which.c \
 	$(DIR_BUILTIN)b_exit.c \
 	$(DIR_BUILTIN)b_cd.c \
+	$(DIR_BUILTIN)b_set.c \
 	$(DIR_BUILTIN)b_builtins.c \
 	$(DIR_SRC)vars.c
 

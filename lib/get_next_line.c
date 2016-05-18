@@ -5,18 +5,20 @@
 ** Login   <alies_a@epitech.net>
 **
 ** Started on  Thu Dec 17 13:44:58 2015 Arnaud Alies
-** Last update Mon May 16 21:19:53 2016 Frederic ODDOU
+** Last update Tue May 17 12:59:31 2016 Frederic ODDOU
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "my.h"
 
-int	append_next(char **next, int *next_size,
-		    const char *buff, const int buff_size)
+static int	append_next(char	**next,
+			    int		*next_size,
+			    const char	*buff,
+			    const int	buff_size)
 {
-  char	*res;
-  int	x;
+  char		*res;
+  int		x;
 
   if ((res = malloc(sizeof(char) * (buff_size + *next_size + 1))) == NULL)
     return (1);
@@ -40,11 +42,13 @@ int	append_next(char **next, int *next_size,
   return (0);
 }
 
-char	*dump_next(char **next, int *next_size, int x)
+static char	*dump_next(char		**next,
+			   int 		*next_size,
+			   int 		x)
 {
-  char	*res;
-  char	*new_next;
-  int	size;
+  char		*res;
+  char		*new_next;
+  int		size;
 
   size = *next_size - x;
   if ((new_next = malloc(sizeof(char) * (size))) == NULL)
@@ -69,7 +73,7 @@ char	*dump_next(char **next, int *next_size, int x)
   return (res);
 }
 
-int		is_line(int set)
+static int	is_line(int		set)
 {
   static int	is_line = 1;
 
@@ -80,9 +84,10 @@ int		is_line(int set)
   return (is_line);
 }
 
-char	*get_line(char **next, int *next_size)
+static char	*get_line(char 		**next,
+			  int 		*next_size)
 {
-  int	x;
+  int		x;
 
   x = 0;
   while (x < *next_size)
