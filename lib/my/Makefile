@@ -5,7 +5,7 @@
 ## Login oddou_f <frederic.oddou@epitech.eu>
 ##
 ## Started on  Sat Apr 16 11:22:30 2016 Frederic ODDOU
-## Last update Sat Apr 16 11:22:30 2016 Frederic ODDOU
+## Last update Thu May 19 15:08:26 2016 alies_a
 ##
 
 ECHO	= /bin/echo -e
@@ -15,7 +15,7 @@ TEAL	= "\033[1;36m"
 RED	= "\033[0;31m"
 BLUE	= "\033[0;34m"
 
-DIRINC	= ../include/
+DIRINC	= ../../include/
 
 SRC	=  get_next_line.c \
 	my_tab_cpy.c \
@@ -30,22 +30,22 @@ SRC	=  get_next_line.c \
 	my_tab_cat_dyn.c \
 	my_str_to_wordtab.c
 
-CC			= gcc
+CC	= gcc
 
-RM			= rm -f
+RM	= rm -f
 
-LIB			=
+LIB	=
 
-FLAG		=	-Wall \
-	-Wextra \
-	-Werror \
-	-I ../include/ -g
+FLAG	=	-Wall \
+		-Wextra \
+		-Werror \
+		-I$(DIRINC) -g
 
-NAME	= libmy.a
+NAME	=	libmy.a
 
-OBJS	= $(SRC:.c=.o)
+OBJS	=	$(SRC:.c=.o)
 
-all:	message $(NAME)
+all:		message $(NAME)
 
 message:
 	@$(ECHO) $(BLUE) "  _      _____ ____  " $(DEFAULT)
@@ -56,21 +56,21 @@ message:
 	@$(ECHO) $(BLUE) " |______|_____|____/" $(DEFAULT)
 
 $(NAME):	$(OBJS)
-	@ar rc $(NAME) $(OBJS) && \
-	 $(ECHO) $(GREEN) "[AR]" $(TEAL) $(NAME) $(DEFAULT) || \
-	 $(ECHO) $(RED) "[XX]" $(TEAL) $(NAME)
+		@ar rc $(NAME) $(OBJS) && \
+	 	$(ECHO) $(GREEN) "[AR]" $(TEAL) $(NAME) $(DEFAULT) || \
+	 	$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME)
 
 clean:
-	@$(RM) $(OBJS)
+		@$(RM) $(OBJS)
 
-fclean:	clean
-	@$(RM) $(NAME)
+fclean:		clean
+		@$(RM) $(NAME)
 
 re: fclean all
 
 .c.o:
 	@gcc $(LIB) $(FLAG) -c $< -o $@ && \
-	 $(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) || \
-	 $(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
+	$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) || \
+	$(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
 
 .PHONY: all clean fclean re $(NAME) message
