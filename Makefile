@@ -5,7 +5,7 @@
 ## Login oddou_f <frederic.oddou@epitech.eu>
 ##
 ## Started on  Sat Apr 16 10:50:08 2016 Frederic ODDOU
-## Last update Thu May 19 15:05:52 2016 alies_a
+## Last update Thu May 19 15:11:58 2016 alies_a
 ##
 
 ECHO		=	/bin/echo -e
@@ -18,6 +18,9 @@ BLUE		=	"\033[0;34m"
 DIR_INC = ./include/
 DIR_LIB = ./lib/my/
 DIR_SRC = ./src/
+
+CH_PATH		=	./lib/getch/
+CH_INC		=	./lib/getch/include/
 
 DIR_SHELL	=	$(DIR_SRC)shell/
 DIR_PARSER	= 	$(DIR_SRC)parser/
@@ -82,14 +85,16 @@ RM	=	rm -f
 CFLAGS	+=	-Wextra \
 		-Wall \
 		-Werror \
-		-I$(DIR_INC) -g
+		-I$(DIR_INC) -I$(CH_INC) -g
 
 LDFLAGS	=	-L ./lib/my/ \
 		-l my \
+		-L $(CH_PATH) \
+		-l getch \
 
 NAME	=	42sh
 
-all:		libmy message $(NAME)
+all:		libmy getch message $(NAME)
 
 message:
 	@$(ECHO) $(BLUE) "  _  _  ___    _____  _    _ " $(DEFAULT)
@@ -101,6 +106,9 @@ message:
 
 libmy:
 		@make -C $(DIR_LIB) -f Makefile -s
+
+getch:
+		make -C $(CH_PATH)
 
 $(NAME):	$(OBJ)
 		@$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
