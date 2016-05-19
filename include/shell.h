@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Wed May 18 14:19:12 2016 oddou_f
+** Last update Thu May 19 13:56:39 2016 oddou_f
 */
 
 #pragma once
@@ -17,6 +17,7 @@
 #define ERROR_NOTFOUND	"%s: Command not found.\n"
 
 #define DEFAULT_PATH	"/bin:/sbin:/usr/bin:/usr/sbin"
+#define SHRC		".42shrc"
 
 typedef struct		s_commands
 {
@@ -135,3 +136,5 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 */
 void			shell_pipe_close(t_pipe			*pipe);
 void			shell_pipe_open(t_pipe			*mypipe);
+
+bool			shell_load_42shrc(t_shell		*shell);

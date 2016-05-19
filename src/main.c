@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 10:57:32 2016 Frederic ODDOU
-** Last update Tue May 10 10:53:12 2016 oddou_f
+** Last update Thu May 19 13:51:44 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -19,6 +19,7 @@ int		main(int ac, char **av, char **ae)
   shell_signal(true);
   if (shell_init(&shell, ac, av, ae) == false)
     return (EXIT_FAILURE);
+  shell_load_42shrc(&shell);
   shell_get_commands(&shell);
   shell_close(&shell, shell.last_return);
   return (EXIT_SUCCESS);

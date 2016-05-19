@@ -42,6 +42,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_SHELL)shell_prompt.c \
 		$(DIR_SHELL)shell_list.c \
 		$(DIR_SHELL)shell_redirection.c \
+		$(DIR_SHELL)shell_load_42shrc.c \
 		$(DIR_SHELL)shell_signaux.c \
 		$(DIR_SHELL)shell_wait_status.c \
 		$(DIR_PARSER)parser_commands.c \
@@ -108,17 +109,19 @@ libmy:
 		@make -C $(DIR_LIB) -f Makefile -s
 
 getch:
-		make -C $(CH_PATH)
+		@make -C $(CH_PATH) -f Makefile -s
 
 $(NAME):	$(OBJ)
 		@$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 clean:
 		@make clean -C $(DIR_LIB) -f Makefile -s
+		@make clean -C $(CH_PATH) -f Makefile -s
 		@$(RM) $(OBJ)
 
 fclean:		clean
 		@make fclean -C $(DIR_LIB) -f Makefile -s
+		@make fclean -C $(CH_PATH) -f Makefile -s
 		@$(RM) ./$(NAME)
 
 re:		fclean all
@@ -128,4 +131,4 @@ re:		fclean all
 		$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) || \
 		$(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libmy getch $(NAME) .c.o message

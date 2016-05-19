@@ -5,13 +5,14 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:38:22 2016 Frederic ODDOU
-** Last update Thu May 19 15:31:39 2016 alies_a
+** Last update Thu May 19 17:50:36 2016 oddou_f
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <fcntl.h>
 #include "my.h"
 #include "shell.h"
 #include "parser.h"
@@ -25,14 +26,15 @@ t_key g_keys[] = {
   {NULL, K_UNK},
 };
 
-void	shell_step(t_shell *shell,
-		   char *str)
+void			shell_step(t_shell			*shell,
+				   char				*str)
 {
   if (str != NULL)
     {
       shell_commands_free(shell);
       if (parser_control(shell, str) == false)
 	shell->last_return = EXIT_FAILURE;
+      free(str);
       shell_list_treat(shell);
       shell_commands_free(shell);
     }
@@ -50,27 +52,11 @@ bool		shell_get_commands(t_shell *shell)
 	return (false);
       shell_step(shell, str);
       shell_prompt(shell);
-      free(str);
     }
   rd_free();
   return (true);
 }
-
 /*
-void			shell_step(t_shell			*shell,
-				   char				*str)
-{
-  if (str != NULL)
-    {
-      shell_commands_free(shell);
-      if (parser_control(shell, str) == false)
-	shell->last_return = EXIT_FAILURE;
-      free(str);
-      shell_list_treat(shell);
-      shell_commands_free(shell);
-    }
-}
-
 bool			shell_get_commands(t_shell		*shell)
 {
   char			*str;

@@ -59,6 +59,9 @@ $(NAME):	$(OBJS)
 		@ar rc $(NAME) $(OBJS) && \
 	 	$(ECHO) $(GREEN) "[AR]" $(TEAL) $(NAME) $(DEFAULT) || \
 	 	$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME)
+		@ranlib $(NAME) && \
+	 	$(ECHO) $(GREEN) "[AR]" $(TEAL) $(NAME) $(DEFAULT) || \
+	 	$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME)
 
 clean:
 		@$(RM) $(OBJS)
@@ -73,4 +76,4 @@ re: fclean all
 	$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) || \
 	$(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
 
-.PHONY: all clean fclean re $(NAME) message
+.PHONY: all clean fclean re $(NAME) message .c.o

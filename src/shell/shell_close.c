@@ -5,13 +5,14 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:33 2016 Frederic ODDOU
-** Last update Thu May 19 12:33:20 2016 oddou_f
+** Last update Thu May 19 16:49:46 2016 oddou_f
 */
 
 #include <stdlib.h>
 #include "my.h"
 #include "shell.h"
 #include "utils.h"
+#include "rd.h"
 
 bool		shell_close(t_shell		*shell,
 			    unsigned char	value)
@@ -23,5 +24,6 @@ bool		shell_close(t_shell		*shell,
   utils_alias_delete_list(shell->alias);
   my_tab_free(shell->path);
   my_tab_free(shell->ae);
+  rd_free();
   exit(value);
 }

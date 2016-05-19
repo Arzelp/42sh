@@ -1,12 +1,19 @@
 ##
 ## Makefile for example in /home/alies_a/perso/simple-getch
-## 
+##
 ## Made by alies_a
 ## Login   <alies_a@epitech.net>
-## 
-## Started on  Mon May  9 15:35:25 2016 alies_a
-## Last update Thu May 19 14:54:03 2016 alies_a
 ##
+## Started on  Mon May  9 15:35:25 2016 alies_a
+## Last update Thu May 19 16:26:05 2016 Frederic ODDOU
+##
+
+ECHO		=	/bin/echo -e
+DEFAULT		=	"\033[00m"
+GREEN		=	"\033[0;32m"
+TEAL		=	"\033[1;36m"
+RED		=	"\033[0;31m"
+BLUE		=	"\033[0;34m"
 
 NAME	=	libgetch.a
 
@@ -50,18 +57,35 @@ SRCS	=	$(CH)get.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
-all:		$(NAME)
+all:		message $(NAME)
 
 $(NAME):	$(OBJS)
-		ar rc $(NAME) $(OBJS)
-		ranlib $(NAME)
+		@ar rc $(NAME) $(OBJS) && \
+	 	$(ECHO) $(GREEN) "[AR]" $(TEAL) $(NAME) $(DEFAULT) || \
+	 	$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME)
+		@ranlib $(NAME) && \
+	 	$(ECHO) $(GREEN) "[AR]" $(TEAL) $(NAME) $(DEFAULT) || \
+	 	$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME)
+
+message:
+	@$(ECHO) $(BLUE) "  _____      _    _____ _    _ " $(DEFAULT)
+	@$(ECHO) $(BLUE) " / ____|    | |  / ____| |  | |" $(DEFAULT)
+	@$(ECHO) $(BLUE) "| |  __  ___| |_| |    | |__| |" $(DEFAULT)
+	@$(ECHO) $(BLUE) "| | |_ |/ _ \ __| |    |  __  |" $(DEFAULT)
+	@$(ECHO) $(BLUE) "| |__| |  __/ |_| |____| |  | |" $(DEFAULT)
+	@$(ECHO) $(BLUE) " \_____|\___|\__|\_____|_|  |_|" $(DEFAULT)
 
 clean:
-		$(RM) $(OBJS)
+		@$(RM) $(OBJS)
 
 fclean:		clean
-		$(RM) $(NAME)
+		@$(RM) $(NAME)
 
 re:		fclean all
 
-.PHONY: all clean fclean re
+.c.o:
+		@gcc $(CFLAGS) $(LDFLAGS) -c $< -o $@ && \
+		$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) || \
+		$(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
+
+.PHONY: all clean fclean re $(NAME) message .c.o
