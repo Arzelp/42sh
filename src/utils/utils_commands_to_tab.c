@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 30 10:43:24 2016 Frederic ODDOU
-** Last update Thu May 12 21:45:29 2016 oddou_f
+** Last update Thu May 19 12:57:56 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -50,5 +50,6 @@ bool			utils_commands_to_tab(t_shell		*shell,
       i++;
     }
   pipe->av[i] = NULL;
+  pipe->av = utils_alias_replace(shell, pipe->av, false);
   return (true);
 }

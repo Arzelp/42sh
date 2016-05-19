@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:05 2016 Frederic ODDOU
-** Last update Mon May 16 18:31:17 2016 oddou_f
+** Last update Thu May 19 12:50:23 2016 oddou_f
 */
 
 #pragma once
@@ -28,3 +28,10 @@ unsigned int	my_count_char(char		*str,
 char		**my_str_to_wordtab(char	*str,
 				    char	c);
 int		my_atoi(char			*str);
+bool		my_tabn_cmp(char		**tab1,
+			    char		**tab2,
+			    int			n);
+void		my_tab_cat(char			**tab1,
+			   char			**tab2);
+void		my_tab_cat_dyn(char		**tab1,
+			       char		**tab2);

@@ -25,6 +25,9 @@ SRC	=  get_next_line.c \
 	my_tab_free.c \
 	my_count_char.c \
 	my_atoi.c \
+	my_tabn_cmp.c \
+	my_tab_cat.c \
+	my_tab_cat_dyn.c \
 	my_str_to_wordtab.c
 
 CC			= gcc

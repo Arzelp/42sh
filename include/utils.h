@@ -5,11 +5,12 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Wed May 18 13:19:52 2016 oddou_f
+** Last update Thu May 19 12:56:26 2016 oddou_f
 */
 
 #pragma once
 
+#include <stdbool.h>
 #include "shell.h"
 
 /*
@@ -78,3 +79,22 @@ void			utils_locales_delete_elem(t_locales	*loc);
 void			utils_locales_delete_list(t_locales	*loc);
 t_locales		*utils_locales_find_elem(char		*name,
 						 t_locales	*loc);
+
+/*
+** Gestion des alias
+*/
+void			utils_alias_delete_list(t_alias		*alias);
+void			utils_alias_delete_elem(t_alias		*alias);
+t_alias			*utils_alias_add_left(t_alias		*alias,
+					      char		**av_origin,
+					      char		**av_to);
+t_alias			*utils_alias_add_right(t_alias		*alias,
+					       char		**av_origin,
+					       char		**av_to);
+
+/*
+** Remplacement des alias
+*/
+char			**utils_alias_replace(t_shell		*shell,
+					      char		**av,
+					      bool		press);

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Sat May 14 23:27:55 2016 oddou_f
+** Last update Wed May 18 14:19:12 2016 oddou_f
 */
 
 #pragma once
@@ -49,6 +49,14 @@ typedef struct		s_list
   struct s_list		*prev;
 }			t_list;
 
+typedef struct		s_alias
+{
+  char			**av_origin;
+  char			**av_to;
+  struct s_alias	*next;
+  struct s_alias	*prev;
+}			t_alias;
+
 typedef struct		s_locales
 {
   char			*name;
@@ -75,6 +83,7 @@ typedef struct		s_shell
   char			**path;
   t_commands		*commands;
   t_list		*list;
+  t_alias		*alias;
 }			t_shell;
 
 bool			shell_init(t_shell			*shell,

@@ -5,13 +5,14 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 18 12:44:31 2016 Frederic ODDOU
-** Last update Wed May 18 13:26:19 2016 oddou_f
+** Last update Wed May 18 17:05:20 2016 oddou_f
 */
 
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "builtin.h"
 #include "utils.h"
@@ -24,20 +25,23 @@ static int		b_set_treat(char			**av,
 
   reponse[0] = NULL;
   reponse[1] = NULL;
-  if (utils_tab_fusion(av, reponse))
+  if (utils_tab_fusion(av, reponse) == false)
+    return (EXIT_FAILURE);
+  if (reponse[0] == NULL || strlen(reponse[0]) <= 0)
     {
-      if ((loc = utils_locales_find_elem(reponse[0], shell->locales)) != NULL)
-	{
-	  if (loc->name != NULL)
-	    free(loc->name);
-	  if (loc->value != NULL)
-	    free(loc->value);
-	  loc->name = reponse[0];
-	  loc->value = reponse[1];
-	}
-      else
-	shell->locales = utils_locales_add_left(reponse, shell->locales);
+      free(reponse[0]);
+      return (EXIT_FAILURE);
     }
+  if ((loc = utils_locales_find_elem(reponse[0], shell->locales)) != NULL)
+    {
+      free(loc->name);
+      if (loc->value != NULL)
+	free(loc->value);
+      loc->name = reponse[0];
+      loc->value = reponse[1];
+    }
+  else
+    shell->locales = utils_locales_add_left(reponse, shell->locales);
   return (EXIT_SUCCESS);
 }
 
@@ -51,7 +55,7 @@ int			b_set(int				ac,
   else
     {
       if (shell->write)
-	fprintf(stdout, "[Usage] set name=value");
+	fprintf(stdout, "[Usage] set name=value\n");
     }
   return (EXIT_FAILURE);
 }
