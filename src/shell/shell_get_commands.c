@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:38:22 2016 Frederic ODDOU
-** Last update Fri May 20 17:17:04 2016 oddou_f
+** Last update Sat May 21 22:59:25 2016 oddou_f
 */
 
 #include <unistd.h>
@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <fcntl.h>
+#include "utils.h"
 #include "my.h"
 #include "shell.h"
 #include "parser.h"
@@ -50,6 +51,8 @@ bool		shell_get_commands(t_shell *shell)
     {
       if ((str = strdup(line)) == NULL)
 	return (false);
+      if (strlen(str) > 0)
+	shell->history = utils_history_add_right(shell->history, strdup(line));
       shell_step(shell, str);
       shell_prompt(shell);
     }
@@ -58,8 +61,7 @@ bool		shell_get_commands(t_shell *shell)
 }
 
 
-/*
-bool			shell_get_commands(t_shell		*shell)
+bool			shell_get_commands_moul(t_shell		*shell)
 {
   char			*str;
   int			size;
@@ -72,10 +74,11 @@ bool			shell_get_commands(t_shell		*shell)
   shell_prompt(shell);
   while ((str = get_next_line(STDIN_FILENO, &next, &size)) != NULL)
     {
+      if (strlen(str) > 0)
+	shell->history = utils_history_add_right(shell->history, strdup(str));
       shell_step(shell, str);
       shell_prompt(shell);
     }
   free(next);
   return (true);
 }
-*/

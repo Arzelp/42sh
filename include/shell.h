@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Sat May 21 11:22:59 2016 oddou_f
+** Last update Sat May 21 22:57:59 2016 oddou_f
 */
 
 #pragma once
@@ -81,6 +81,14 @@ typedef struct		s_jobs
   struct s_jobs		*prev;
 }			t_jobs;
 
+typedef struct		s_past
+{
+  unsigned int		id;
+  char			*str;
+  struct s_past		*next;
+  struct s_past		*prev;
+}			t_past;
+
 typedef struct		s_shell
 {
   bool			write;
@@ -95,6 +103,7 @@ typedef struct		s_shell
   t_list		*list;
   t_alias		*alias;
   t_jobs		*jobs;
+  t_past		*history;
 }			t_shell;
 
 bool			shell_init(t_shell			*shell,
@@ -104,6 +113,7 @@ bool			shell_init(t_shell			*shell,
 void			shell_signal(bool			ign);
 bool			shell_close(t_shell			*shell,
 				    unsigned char		value);
+bool			shell_get_commands_moul(t_shell		*shell);
 bool			shell_get_commands(t_shell		*shell);
 void			shell_commands_free(t_shell		*shell);
 char			*shell_get_path(t_shell			*shell,

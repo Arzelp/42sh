@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Sat May 21 11:43:31 2016 oddou_f
+** Last update Sat May 21 21:50:00 2016 oddou_f
 */
 
 #pragma once
@@ -111,3 +111,12 @@ void			utils_jobs_delete_list(t_shell		*shell,
 					       t_jobs		*jobs);
 void			utils_jobs_delete_elem(t_shell		*shell,
 					       t_jobs		*jobs);
+
+/*
+** Gestion de l'historique
+*/
+t_past			*utils_history_add_right(t_past		*history,
+						 char		*str);
+void			utils_history_delete_elem(t_past	*history);
+void			utils_history_delete_list(t_past	*history);
+t_past			*utils_history_go_back(t_past		*past);

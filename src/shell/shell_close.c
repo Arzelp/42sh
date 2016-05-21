@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:33 2016 Frederic ODDOU
-** Last update Sat May 21 12:24:14 2016 oddou_f
+** Last update Sat May 21 21:46:36 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -23,6 +23,7 @@ bool		shell_close(t_shell		*shell,
   utils_locales_delete_list(shell->locales);
   utils_alias_delete_list(shell->alias);
   utils_jobs_delete_list(shell, shell->jobs);
+  utils_history_delete_list(shell->history);
   my_tab_free(shell->path);
   my_tab_free(shell->ae);
   rd_free();

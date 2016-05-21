@@ -5,11 +5,10 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:01 2016 Frederic ODDOU
-** Last update Sat May 21 11:26:42 2016 oddou_f
+** Last update Sat May 21 21:39:34 2016 oddou_f
 */
 
 #include <stdlib.h>
-#include <sys/types.h>
 #include <string.h>
 #include <unistd.h>
 #include "my.h"
@@ -46,6 +45,7 @@ bool		shell_init(t_shell		*shell,
   shell->write = false;
   shell->alias = NULL;
   shell->jobs = NULL;
+  shell->history = NULL;
   shell_init_path(shell);
   shell->pid.pid = getpid();
   if ((shell->pid.pgid = getpgid(shell->pid.pid)) == -1)
