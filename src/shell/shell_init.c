@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:30:01 2016 Frederic ODDOU
-** Last update Wed May 18 14:19:30 2016 oddou_f
+** Last update Sat May 21 11:26:42 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -45,6 +45,7 @@ bool		shell_init(t_shell		*shell,
   shell->fd[FD_OUT] = STDOUT_FILENO;
   shell->write = false;
   shell->alias = NULL;
+  shell->jobs = NULL;
   shell_init_path(shell);
   shell->pid.pid = getpid();
   if ((shell->pid.pgid = getpgid(shell->pid.pid)) == -1)

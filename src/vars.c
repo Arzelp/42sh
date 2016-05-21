@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Wed May 18 14:16:42 2016 oddou_f
+** Last update Sat May 21 12:17:47 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -59,11 +59,10 @@ t_builtin		g_builtin[] =
     {"env", b_env},
     {"setenv", b_setenv},
     {"unsetenv", b_unsetenv},
-    {"alias", NULL},
     {"echo", NULL},
     {"history", NULL},
-    {"jobs", NULL},
-    {"fg", NULL},
+    {"jobs", b_jobs},
+    {"fg", b_fg},
     {"set", b_set},
     {"builtins", b_builtins},
     {"alias", b_alias},

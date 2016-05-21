@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:38:22 2016 Frederic ODDOU
-** Last update Thu May 19 17:50:36 2016 oddou_f
+** Last update Fri May 20 17:17:04 2016 oddou_f
 */
 
 #include <unistd.h>
@@ -56,6 +56,8 @@ bool		shell_get_commands(t_shell *shell)
   rd_free();
   return (true);
 }
+
+
 /*
 bool			shell_get_commands(t_shell		*shell)
 {

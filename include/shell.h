@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Thu May 19 13:56:39 2016 oddou_f
+** Last update Sat May 21 11:22:59 2016 oddou_f
 */
 
 #pragma once
@@ -72,6 +72,15 @@ typedef struct		s_pid
   pid_t			pgid;
 }			t_pid;
 
+typedef struct		s_jobs
+{
+  unsigned int		id;
+  char			*name;
+  pid_t			pid;
+  struct s_jobs		*next;
+  struct s_jobs		*prev;
+}			t_jobs;
+
 typedef struct		s_shell
 {
   bool			write;
@@ -85,6 +94,7 @@ typedef struct		s_shell
   t_commands		*commands;
   t_list		*list;
   t_alias		*alias;
+  t_jobs		*jobs;
 }			t_shell;
 
 bool			shell_init(t_shell			*shell,

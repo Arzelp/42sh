@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Apr 29 23:44:07 2016 Frederic ODDOU
-** Last update Wed May 18 14:16:25 2016 oddou_f
+** Last update Sat May 21 12:06:29 2016 oddou_f
 */
 
 #pragma once
@@ -63,8 +63,14 @@ int			b_builtins(int			ac,
 int			b_set(int			ac,
 			      char			**av,
 			      t_shell			*shell);
-int			b_alias(int				ac,
-				char				**av,
-				t_shell				*shell);
+int			b_alias(int			ac,
+				char			**av,
+				t_shell			*shell);
+int			b_jobs(int			ac,
+			       char			**av,
+			       t_shell			*shell);
+int			b_fg(int			ac,
+			     char			**av,
+			     t_shell			*shell);
 
 extern t_builtin	g_builtin[];

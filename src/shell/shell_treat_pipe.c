@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 10:18:46 2016 Frederic ODDOU
-** Last update Mon May 16 17:16:23 2016 oddou_f
+** Last update Sat May 21 12:18:54 2016 oddou_f
 */
 
 #include <stdio.h>
@@ -78,6 +78,15 @@ void			shell_treat_pipe_wait(t_shell		*shell,
     {
       shell->last_return = EXIT_SUCCESS;
       waitpid(pipe->pid, &status, WUNTRACED);
+      if (WIFSTOPPED(status))
+	{
+	  shell->jobs = utils_jobs_add_right(shell->jobs,
+					     strdup(pipe->av[0]),
+					     pipe->pid);
+	  printf("\r[%u]\t+ %d Suspended\t%s\n", shell->jobs->id,
+		 shell->jobs->pid, shell->jobs->name);
+	  shell->jobs = utils_jobs_go_back(shell->jobs);
+	}
       shell->last_return = shell_wait_status(status);
       if (shell->last_return == EXIT_FAILURE)
 	low = EXIT_FAILURE;

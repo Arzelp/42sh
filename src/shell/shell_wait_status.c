@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 11 14:27:09 2016 Frederic ODDOU
-** Last update Wed May 11 14:28:43 2016 oddou_f
+** Last update Sat May 21 11:50:10 2016 oddou_f
 */
 
 #include <stdio.h>
@@ -24,9 +24,6 @@ int			shell_wait_status(int			status)
   else if (WIFEXITED(status))
     return (WEXITSTATUS(status));
   else if (WIFSTOPPED(status))
-    {
-      printf("Suspended\n");
-      return (WSTOPSIG(status));
-    }
-  return (0);
+    return (WSTOPSIG(status));
+  return (EXIT_SUCCESS);
 }

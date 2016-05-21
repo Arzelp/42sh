@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 12:42:47 2016 Frederic ODDOU
-** Last update Thu May 19 12:56:26 2016 oddou_f
+** Last update Sat May 21 11:43:31 2016 oddou_f
 */
 
 #pragma once
@@ -98,3 +98,16 @@ t_alias			*utils_alias_add_right(t_alias		*alias,
 char			**utils_alias_replace(t_shell		*shell,
 					      char		**av,
 					      bool		press);
+
+/*
+** Gestion des jobs
+*/
+t_jobs			*utils_jobs_go_back(t_jobs		*jobs);
+t_jobs			*utils_jobs_go_end(t_jobs		*jobs);
+t_jobs			*utils_jobs_add_right(t_jobs		*jobs,
+					      char		*name,
+					      pid_t		pid);
+void			utils_jobs_delete_list(t_shell		*shell,
+					       t_jobs		*jobs);
+void			utils_jobs_delete_elem(t_shell		*shell,
+					       t_jobs		*jobs);
