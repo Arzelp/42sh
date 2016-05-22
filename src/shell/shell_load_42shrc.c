@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May 19 13:18:44 2016 Frederic ODDOU
-** Last update Thu May 19 13:56:45 2016 oddou_f
+** Last update Sat May 21 23:04:49 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -24,10 +24,13 @@ bool			shell_load_42shrc(t_shell		*shell)
 
   size = 0;
   str = NULL;
-  if ((next = strdup("")) == NULL)
-    return (false);
   if ((fd = open(SHRC, O_RDONLY)) == -1)
     return (false);
+  if ((next = strdup("")) == NULL)
+    {
+      close(fd);
+      return (false);
+    }
   while ((str = get_next_line(fd, &next, &size)) != NULL)
     shell_step(shell, str);
   if (next != NULL)

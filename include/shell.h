@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Sat May 21 22:57:59 2016 oddou_f
+** Last update Sun May 22 14:24:15 2016 oddou_f
 */
 
 #pragma once
@@ -148,7 +148,6 @@ void			shell_treat_glob(t_pipe			*pipe);
 void			shell_treat_pipe_wait(t_shell		*shell,
 					      t_pipe		*pipe);
 void			shell_treat_pipe_exec(t_shell		*shell,
-					      t_list		*list,
 					      t_pipe		*pipe);
 
 /*

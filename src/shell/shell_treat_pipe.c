@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 10:18:46 2016 Frederic ODDOU
-** Last update Sat May 21 12:18:54 2016 oddou_f
+** Last update Sun May 22 15:49:25 2016 oddou_f
 */
 
 #include <stdio.h>
@@ -37,10 +37,9 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
 }
 
 void			shell_treat_pipe_exec(t_shell		*shell,
-					      t_list		*list,
 					      t_pipe		*pipe)
 {
-  if (pipe != NULL && pipe->commands != NULL)
+  while (pipe != NULL && pipe->commands != NULL)
     {
       shell_pipe_open(pipe);
       if (pipe->commands->index_delim == ID_PARENTHESE)
@@ -54,16 +53,16 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 	    }
 	  else if (pipe->pid == 0)
 	    {
+	      setpgid(0, 0);
 	      shell_dup(shell, pipe);
 	      shell_treat_pipe_commands(shell, pipe);
 	    }
 	  else if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
 	    shell->last_return = b_exec(shell, pipe);
 	}
+      shell_pipe_close(pipe);
+      pipe = pipe->next;
     }
-  shell_pipe_close(pipe);
-  if (pipe->next)
-    shell_treat_pipe_exec(shell, list, pipe->next);
 }
 
 void			shell_treat_pipe_wait(t_shell		*shell,
@@ -77,7 +76,9 @@ void			shell_treat_pipe_wait(t_shell		*shell,
   while (pipe != NULL && pipe->pid != 0)
     {
       shell->last_return = EXIT_SUCCESS;
+      tcsetpgrp(STDERR_FILENO, shell->list->pipe->pid);
       waitpid(pipe->pid, &status, WUNTRACED);
+      tcsetpgrp(STDERR_FILENO, shell->pid.pid);
       if (WIFSTOPPED(status))
 	{
 	  shell->jobs = utils_jobs_add_right(shell->jobs,

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 11 13:29:54 2016 Frederic ODDOU
-** Last update Mon May 16 17:23:32 2016 oddou_f
+** Last update Sat May 21 23:50:49 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -55,7 +55,7 @@ static char		*utils_convert_home(t_commands		*commands,
   i = 0;
   while (commands->str[i] != '\0' && commands->str[i] != '/')
     i++;
-  len = strlen(&commands->str[i]) + strlen(path);
+  len = strlen(&commands->str[i]) + strlen(path) + 1;
   if ((new = malloc(sizeof(char) * len)) == NULL)
     return (NULL);
   new = memset(new, '\0', len);
