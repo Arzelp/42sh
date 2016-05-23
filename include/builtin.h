@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Apr 29 23:44:07 2016 Frederic ODDOU
-** Last update Sat May 21 21:43:57 2016 oddou_f
+** Last update Mon May 23 15:41:42 2016 oddou_f
 */
 
 #pragma once
@@ -75,5 +75,8 @@ int			b_fg(int			ac,
 int			b_history(int			ac,
 				  char			**av,
 				  t_shell		*shell);
+int			b_export(int			ac,
+				 char			**av,
+				 t_shell		*shell);
 
 extern t_builtin	g_builtin[];

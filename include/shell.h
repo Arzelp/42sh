@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Sun May 22 14:24:15 2016 oddou_f
+** Last update Mon May 23 15:12:33 2016 oddou_f
 */
 
 #pragma once
@@ -141,6 +141,9 @@ void			shell_treat_backquotes(t_shell		*shell,
 int			shell_wait_status(int			status);
 
 void			shell_treat_glob(t_pipe			*pipe);
+
+bool			shell_script(t_shell			*shell,
+				     char			*file);
 
 /*
 ** shell_treat_pipe.c

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Sat May 21 21:44:08 2016 oddou_f
+** Last update Mon May 23 15:35:31 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -57,6 +57,7 @@ t_builtin		g_builtin[] =
     {"exit", b_exit},
     {"which", b_which},
     {"env", b_env},
+    {"export", b_export},
     {"setenv", b_setenv},
     {"unsetenv", b_unsetenv},
     {"echo", NULL},

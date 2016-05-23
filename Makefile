@@ -41,11 +41,13 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_SHELL)shell_treat_glob.c \
 		$(DIR_SHELL)shell_prompt.c \
 		$(DIR_SHELL)shell_list.c \
+		$(DIR_SHELL)shell_script.c \
 		$(DIR_SHELL)shell_redirection.c \
 		$(DIR_SHELL)shell_load_42shrc.c \
 		$(DIR_SHELL)shell_signaux.c \
 		$(DIR_SHELL)shell_wait_status.c \
 		$(DIR_PARSER)parser_commands.c \
+		$(DIR_PARSER)parser_commands_comment.c \
 		$(DIR_PARSER)parser_commands_backslash.c \
 		$(DIR_PARSER)parser_control.c \
 		$(DIR_PARSER)parser_list.c \
@@ -74,6 +76,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_BUILTIN)b_which.c \
 		$(DIR_BUILTIN)b_exit.c \
 		$(DIR_BUILTIN)b_cd.c \
+		$(DIR_BUILTIN)b_export.c \
 		$(DIR_BUILTIN)b_history.c \
 		$(DIR_BUILTIN)b_set.c \
 		$(DIR_BUILTIN)b_fg.c \

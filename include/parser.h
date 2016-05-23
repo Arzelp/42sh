@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Apr 28 14:44:52 2016 Frederic ODDOU
-** Last update Sun May 15 00:21:34 2016 oddou_f
+** Last update Mon May 23 14:36:07 2016 oddou_f
 */
 
 #pragma once
@@ -42,5 +42,6 @@ void			parser_list(t_shell			*shell);
 bool			parser_pipe(t_shell			*shell);
 bool			parser_redi(t_list			*list);
 void			parser_commands_backslash(t_commands	*commands);
+t_commands		*parser_commands_comment(t_commands	*commands);
 
 extern t_parser		g_parser_delimit[];
