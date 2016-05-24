@@ -149,11 +149,15 @@ int			shell_wait_status(int			status);
 void			shell_treat_glob(t_pipe			*pipe);
 
 bool			shell_script(t_shell			*shell,
-				     char			*file);
+				     int			ac,
+				     char			**av);
+
+bool			shell_load_42shrc(t_shell		*shell);
 
 /*
 ** shell_treat_pipe.c
 */
+
 void			shell_treat_pipe_wait(t_shell		*shell,
 					      t_pipe		*pipe);
 void			shell_treat_pipe_exec(t_shell		*shell,
@@ -162,14 +166,15 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 /*
 ** shell_pipe.c
 */
+
 void			shell_pipe_close(t_pipe			*pipe);
 void			shell_pipe_open(t_pipe			*mypipe);
 
-bool			shell_load_42shrc(t_shell		*shell);
 
 /*
 ** shell_prompt_func.c
 */
+
 void			shell_prompt_user(t_shell		*shell);
 void			shell_prompt_version(t_shell		*shell);
 void			shell_prompt_ret_value(t_shell		*shell);

@@ -16,6 +16,7 @@
 /*
 ** Gestion des commandes (Ajout / Suppression / Vide / Purge / Back)
 */
+
 t_commands		*utils_commands_add_right(t_commands	*commands,
 						  char		*str,
 						  short		index_delim);
@@ -28,6 +29,7 @@ t_commands		*utils_commands_go_back(t_commands	*commands);
 /*
 ** Gestion de la liste (Ajout / Suppression / Vide / Back)
 */
+
 t_list			*utils_list_add_right(t_list		*list,
 					      t_commands	*commands,
 					      short		type_separator);
@@ -39,6 +41,7 @@ t_list			*utils_list_go_back(t_list		*list);
 /*
 ** Gestion des pipes (Ajout / Suppression / Vide / Back)
 */
+
 void			utils_pipe_delete_command(t_pipe	*pipe,
 						  t_commands	*commands);
 t_pipe			*utils_pipe_add_right(t_pipe		*pipe,
@@ -51,12 +54,14 @@ t_pipe			*utils_pipe_go_back(t_pipe		*pipe);
 /*
 ** Convertie les commandes en tab
 */
+
 bool			utils_commands_to_tab(t_shell		*shell,
 					      t_pipe		*pipe);
 
 /*
 ** Obtention de la variable environnement ou locale
 */
+
 char			*utils_get_var(t_shell			*shell,
 				       t_commands		*commands);
 char			*utils_get_homepath(t_commands		*commands);
@@ -64,6 +69,7 @@ char			*utils_get_homepath(t_commands		*commands);
 /*
 ** Fusion pour alias et set
 */
+
 bool			utils_if_fusion(char			**tab);
 bool			utils_tab_fusion(char			**tab,
 					 char			*reponse[2]);
@@ -71,6 +77,7 @@ bool			utils_tab_fusion(char			**tab,
 /*
 ** Gestion des locales
 */
+
 t_locales		*utils_locales_add_right(char		*reponse[2],
 						 t_locales	*commands);
 t_locales		*utils_locales_add_left(char		*reponse[2],
@@ -83,6 +90,7 @@ t_locales		*utils_locales_find_elem(char		*name,
 /*
 ** Gestion des alias
 */
+
 void			utils_alias_delete_list(t_alias		*alias);
 void			utils_alias_delete_elem(t_alias		*alias);
 t_alias			*utils_alias_add_left(t_alias		*alias,
@@ -95,6 +103,7 @@ t_alias			*utils_alias_add_right(t_alias		*alias,
 /*
 ** Remplacement des alias
 */
+
 char			**utils_alias_replace(t_shell		*shell,
 					      char		**av,
 					      bool		press);
@@ -102,6 +111,7 @@ char			**utils_alias_replace(t_shell		*shell,
 /*
 ** Gestion des jobs
 */
+
 t_jobs			*utils_jobs_go_back(t_jobs		*jobs);
 t_jobs			*utils_jobs_go_end(t_jobs		*jobs);
 t_jobs			*utils_jobs_add_right(t_jobs		*jobs,
@@ -115,6 +125,7 @@ void			utils_jobs_delete_elem(t_shell		*shell,
 /*
 ** Gestion de l'historique
 */
+
 t_past			*utils_history_add_right(t_past		*history,
 						 char		*str);
 void			utils_history_delete_elem(t_past	*history);

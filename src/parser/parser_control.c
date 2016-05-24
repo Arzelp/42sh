@@ -20,6 +20,7 @@
 ** 3- On sépare toutes les listes de commandes (&& || ;)
 ** 4- On sépare dans les listes toutes les pipes
 */
+
 bool			parser_control(t_shell			*shell,
 				       char			*str)
 {
