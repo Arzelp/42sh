@@ -106,6 +106,12 @@ typedef struct		s_shell
   t_past		*history;
 }			t_shell;
 
+typedef struct		s_ps1
+{
+  char			*replace;
+  void			(*func)(t_shell	*shell);
+}			t_ps1;
+
 bool			shell_init(t_shell			*shell,
 				   int				ac,
 				   char				**av,
@@ -160,3 +166,13 @@ void			shell_pipe_close(t_pipe			*pipe);
 void			shell_pipe_open(t_pipe			*mypipe);
 
 bool			shell_load_42shrc(t_shell		*shell);
+
+/*
+** shell_prompt_func.c
+*/
+void			shell_prompt_user(t_shell		*shell);
+void			shell_prompt_version(t_shell		*shell);
+void			shell_prompt_ret_value(t_shell		*shell);
+void			shell_prompt_nb_line(t_shell		*shell);
+void			shell_prompt_directory(t_shell		*shell);
+void			shell_prompt_echap(t_shell		*shell);

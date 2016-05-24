@@ -8,7 +8,6 @@
 ** Last update Thu May 19 12:54:57 2016 oddou_f
 */
 
-#include <stdbool.h>
 #include <stdlib.h>
 #include "shell.h"
 #include "utils.h"

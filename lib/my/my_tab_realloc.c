@@ -9,7 +9,6 @@
 */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include "my.h"
 
 char		**my_tab_realloc(char	**tab,

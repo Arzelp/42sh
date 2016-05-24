@@ -9,8 +9,6 @@
 */
 
 #include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
 #include "my.h"
 
 char		**my_tab_delete_elem(char	**tab,

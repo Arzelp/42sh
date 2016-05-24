@@ -9,7 +9,6 @@
 */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include "shell.h"
 #include "utils.h"
