@@ -31,7 +31,9 @@ static char		*utils_get_var_find(t_shell		*shell,
 	return (loc->value);
       loc = loc->next;
     }
-  return (&commands->str[1]);
+  free(commands->str);
+  commands->str = strdup("");
+  return (commands->str);
 }
 
 static char		*utils_get_var_return(t_shell		*shell,

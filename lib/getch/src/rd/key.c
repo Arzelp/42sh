@@ -1,11 +1,11 @@
 /*
 ** key.c for key in /home/alies_a/perso/simple-getch
-** 
+**
 ** Made by alies_a
 ** Login   <alies_a@epitech.net>
-** 
+**
 ** Started on  Mon May 16 13:21:15 2016 alies_a
-** Last update Wed May 18 16:44:35 2016 alies_a
+** Last update Tue May 24 23:44:01 2016 John Doe
 */
 
 #include "rd.h"
@@ -15,6 +15,7 @@ static t_act g_actions[] = {
   {rd_right, K_RIGHT},
   {rd_up, K_UP},
   {rd_down, K_DOWN},
+  {rd_tab, K_TAB},
   {rd_back, K_BACK},
   {NULL, K_UNK}
 };

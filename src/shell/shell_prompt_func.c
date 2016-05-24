@@ -5,7 +5,7 @@
 ** Login   <login_x@epitech.eu>
 **
 ** Started on  Tue May 24 13:37:39 2016 John Doe
-** Last update Tue May 24 13:41:46 2016 John Doe
+** Last update Tue May 24 23:51:06 2016 John Doe
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ void			shell_prompt_directory(t_shell		*shell)
 void			shell_prompt_nb_line(t_shell		*shell)
 {
   if (shell->history)
-    printf("%u", shell->history->id);
+    printf("%u", shell->history->id + 1);
   else
     printf("1");
 }
