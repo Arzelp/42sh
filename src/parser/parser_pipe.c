@@ -9,7 +9,6 @@
 */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include "shell.h"
 #include "utils.h"
@@ -20,6 +19,7 @@
 ** On vérifie aussi si une pipe n'est pas suivi d'une pipe
 ** Si c'est le cas c'est une erreur
 */
+
 static bool		parser_check_pipe(t_commands		*commands)
 {
   t_commands		*tmp;
@@ -45,6 +45,7 @@ static bool		parser_check_pipe(t_commands		*commands)
 /*
 ** On sépare les pipes avec la liste chainée pipe
 */
+
 static void		parser_get_pipe(t_list			*list)
 {
   t_commands		*tmp;
@@ -70,6 +71,7 @@ static void		parser_get_pipe(t_list			*list)
 /*
 ** Si il y a des parenthèses avec des commandes dans le même pipes on rejete
 */
+
 static bool		parser_pipe_parenthese(t_pipe		*pipe)
 {
   t_commands		*tmp;

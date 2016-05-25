@@ -9,7 +9,6 @@
 */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 #include "shell.h"
@@ -21,6 +20,7 @@
 ** Le 1er est différent de ";" c'est une erreur SAUF si c'est suivi de "||"
 ** Suppression des séparateurs en excès.
 */
+
 static bool		parser_delete_excess(t_shell		*shell)
 {
   t_commands		*tmp;
@@ -55,6 +55,7 @@ static bool		parser_delete_excess(t_shell		*shell)
 ** Impossibilité de mettre un séparateur "||" en début de chaine
 ** Impossibilité de mettre un séparateur en fin de chaine sauf ";"
 */
+
 static bool		parser_check_limit(t_shell		*shell)
 {
   t_commands		*tmp;
@@ -86,6 +87,7 @@ static bool		parser_check_limit(t_shell		*shell)
 /*
 ** On supprime les séparateurs qui sont aux limites
 */
+
 static void		parser_delete_limit(t_shell		*shell)
 {
   t_commands		*tmp;

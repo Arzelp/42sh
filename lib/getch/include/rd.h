@@ -1,41 +1,40 @@
 /*
 ** rd.h for rd in /home/alies_a/perso/simple-getch
-** 
+**
 ** Made by alies_a
 ** Login   <alies_a@epitech.net>
-** 
+**
 ** Started on  Fri May 13 11:51:08 2016 alies_a
-** Last update Thu May 19 14:53:47 2016 alies_a
+** Last update Wed May 25 14:36:26 2016 John Doe
 */
 
-#ifndef RD_H_
-# define RD_H_
+#pragma once
 
-# include "ch.h"
+#include "ch.h"
 
-# define RD_LINE ((rd->history->lines)[rd->history->pos])
-# define HISTORY_SIZE (10)
+#define RD_LINE ((rd->history->lines)[rd->history->pos])
+#define HISTORY_SIZE (10)
 
-typedef struct s_history
+typedef struct	s_history
 {
-  char *lines[HISTORY_SIZE];
-  int pos;
-} t_history;
+  char		*lines[HISTORY_SIZE];
+  int		pos;
+}		t_history;
 
-typedef struct s_rd
+typedef struct	s_rd
 {
-  int fd;
-  int curs;
-  t_history *history;
-} t_rd;
+  int		fd;
+  int		curs;
+  t_history	*history;
+}		t_rd;
 
 typedef int(*t_action)(t_rd *rd, int key);
 
-typedef struct s_act
+typedef struct	s_act
 {
-  t_action func;
-  int key;
-} t_act;
+  t_action	func;
+  int		key;
+}		t_act;
 
 /*
 ** Notes:
@@ -65,5 +64,6 @@ int     rd_right(t_rd *rd, int key);
 int     rd_up(t_rd *rd, int key);
 int     rd_back(t_rd *rd, int key);
 int     rd_down(t_rd *rd, int key);
-
-#endif
+int     rd_tab(t_rd *rd, int key);
+int     rd_ctrl_l(t_rd *rd, int key);
+int     rd_del(t_rd *rd, int key);

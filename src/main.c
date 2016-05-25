@@ -29,7 +29,7 @@ int		main(int ac, char **av, char **ae)
 	shell_get_commands_moul(&shell);
     }
   else if (ac >= 1)
-    shell_script(&shell, av[1]);
+    shell_script(&shell, ac, av);
   shell_close(&shell, shell.last_return);
   return (EXIT_SUCCESS);
 }

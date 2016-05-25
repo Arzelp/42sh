@@ -40,6 +40,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_SHELL)shell_treat_backquotes.c \
 		$(DIR_SHELL)shell_treat_glob.c \
 		$(DIR_SHELL)shell_prompt.c \
+		$(DIR_SHELL)shell_prompt_func.c \
 		$(DIR_SHELL)shell_list.c \
 		$(DIR_SHELL)shell_script.c \
 		$(DIR_SHELL)shell_redirection.c \

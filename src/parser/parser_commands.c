@@ -9,7 +9,6 @@
 */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 #include "shell.h"
@@ -19,6 +18,7 @@
 /*
 ** On essai de savoir si la chaine correspond à un de nos délimiteurs
 */
+
 static short		parser_type_delimit(char		*str,
 					    int			*n)
 {
@@ -42,6 +42,7 @@ static short		parser_type_delimit(char		*str,
 ** Par exemple pour "(", on fait toute la chaine jusqu'au premier ")"
 ** Sinon c'est une erreur
 */
+
 static bool		parser_find_end(char			*str,
 					char			*end,
 					int			*i)
@@ -61,6 +62,7 @@ static bool		parser_find_end(char			*str,
 ** Si c'est une commande à garder comme les rédirection ou separateur on prend
 ** Si c'est un délimiteur on va chercher jusqu'où il se termine
 */
+
 static bool		parser_not_without(t_shell		*shell,
 					   char			*str,
 					   int			*i,

@@ -8,7 +8,6 @@
 ** Last update Sat Apr 16 11:45:18 2016 Frederic ODDOU
 */
 
-#include <stdbool.h>
 #include <stdlib.h>
 #include "my.h"
 

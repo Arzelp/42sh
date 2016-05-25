@@ -17,19 +17,41 @@
 #include "utils.h"
 #include "my.h"
 
+static void		shell_script_get_av(t_shell	*shell,
+					    int		ac,
+					    char	**av)
+{
+  int			i;
+  char			name[10];
+  char			*reponse[2];
+
+  i = 2;
+  while (i < ac)
+    {
+      memset(name, '\0', 10);
+      snprintf(name, 10, "%d", i - 1);
+      reponse[0] = strdup(name);
+      reponse[1] = strdup(av[i]);
+      shell->locales = utils_locales_add_left(reponse, shell->locales);
+      i++;
+    }
+}
+
 bool			shell_script(t_shell	*shell,
-				     char	*file)
+				     int	ac,
+				     char	**av)
 {
   int			fd;
   char			*str;
   int			size;
   char			*next;
 
-  if ((fd = open(file, O_RDONLY)) == -1)
+  if ((fd = open(av[1], O_RDONLY)) == -1)
     {
-      fprintf(stderr, "%s: Aucun fichier ou dossier de ce type.\n", file);
+      fprintf(stderr, "%s: Aucun fichier ou dossier de ce type.\n", av[1]);
       return (false);
     }
+  shell_script_get_av(shell, ac, av);
   size = 0;
   str = NULL;
   if ((next = strdup("")) == NULL)

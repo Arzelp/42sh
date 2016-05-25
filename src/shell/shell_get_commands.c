@@ -5,12 +5,11 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 23 17:38:22 2016 Frederic ODDOU
-** Last update Sat May 21 22:59:25 2016 oddou_f
+** Last update Tue May 24 16:32:29 2016 oddou_f
 */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <fcntl.h>
 #include "utils.h"
@@ -19,13 +18,14 @@
 #include "parser.h"
 #include "rd.h"
 
-t_key g_keys[] = {
-  {"[A", K_UP},
-  {"[B", K_DOWN},
-  {"[D", K_LEFT},
-  {"[C", K_RIGHT},
-  {NULL, K_UNK},
-};
+static t_key	g_keys[] =
+  {
+    {"[A", K_UP},
+    {"[B", K_DOWN},
+    {"[D", K_LEFT},
+    {"[C", K_RIGHT},
+    {NULL, K_UNK},
+  };
 
 void			shell_step(t_shell			*shell,
 				   char				*str)

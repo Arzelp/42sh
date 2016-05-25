@@ -5,7 +5,7 @@
 ## Login   <alies_a@epitech.net>
 ##
 ## Started on  Mon May  9 15:35:25 2016 alies_a
-## Last update Thu May 19 16:26:05 2016 Frederic ODDOU
+## Last update Wed May 25 14:45:02 2016 John Doe
 ##
 
 ECHO		=	/bin/echo -e
@@ -46,6 +46,9 @@ SRCS	=	$(CH)get.c \
 		$(RD)up.c \
 		$(RD)back.c \
 		$(RD)down.c \
+		$(RD)tab.c \
+		$(RD)del.c \
+		$(RD)ctrl_l.c \
 		$(RD)put.c \
 		$(RD)add_char.c \
 		$(RD)rm_char.c \

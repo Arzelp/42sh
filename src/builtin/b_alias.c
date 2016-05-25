@@ -8,7 +8,6 @@
 ** Last update Mon May 23 15:44:46 2016 oddou_f
 */
 
-#include <stdbool.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
