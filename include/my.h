@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:05 2016 Frederic ODDOU
-** Last update Thu May 19 12:50:23 2016 oddou_f
+** Last update Wed May 25 14:39:23 2016 Arthur Josso
 */
 
 #pragma once
@@ -13,7 +13,8 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-#define READ_SIZE (4096)
+#define READ_SIZE	(4096)
+#define DOUBLE_SIZE	(10)
 
 char		*get_next_line(const int fd, char **next, int *size);
 int		my_tab_len(char			**tab);
@@ -35,3 +36,5 @@ void		my_tab_cat(char			**tab1,
 			   char			**tab2);
 void		my_tab_cat_dyn(char		**tab1,
 			       char		**tab2);
+double		get_double(char			*s);
+bool		is_float(char const		*str);

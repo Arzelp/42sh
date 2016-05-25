@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Mon May 23 15:35:31 2016 oddou_f
+** Last update Mon May 23 16:59:27 2016 Arthur Josso
 */
 
 #include <stdlib.h>
@@ -67,6 +67,7 @@ t_builtin		g_builtin[] =
     {"set", b_set},
     {"builtins", b_builtins},
     {"alias", b_alias},
+    {"sort", b_sort},
     {NULL, NULL},
   };
 

@@ -5,7 +5,7 @@
 ## Login oddou_f <frederic.oddou@epitech.eu>
 ##
 ## Started on  Sat Apr 16 10:50:08 2016 Frederic ODDOU
-## Last update Thu May 19 15:11:58 2016 alies_a
+## Last update Wed May 25 19:00:50 2016 Arthur Josso
 ##
 
 ECHO		=	/bin/echo -e
@@ -82,6 +82,10 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_BUILTIN)b_fg.c \
 		$(DIR_BUILTIN)b_jobs.c \
 		$(DIR_BUILTIN)b_alias.c \
+		$(DIR_BUILTIN)b_sort.c \
+		$(DIR_BUILTIN)b_sort_flag.c \
+		$(DIR_BUILTIN)b_sort_gentmp.c \
+		$(DIR_BUILTIN)b_sort_sort.c \
 		$(DIR_BUILTIN)b_builtins.c \
 		$(DIR_SRC)vars.c
 

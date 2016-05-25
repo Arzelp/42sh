@@ -5,7 +5,7 @@
 ## Login oddou_f <frederic.oddou@epitech.eu>
 ##
 ## Started on  Sat Apr 16 11:22:30 2016 Frederic ODDOU
-## Last update Thu May 19 15:08:26 2016 alies_a
+## Last update Wed May 25 14:35:43 2016 Arthur Josso
 ##
 
 ECHO	= /bin/echo -e
@@ -28,7 +28,9 @@ SRC	=  get_next_line.c \
 	my_tabn_cmp.c \
 	my_tab_cat.c \
 	my_tab_cat_dyn.c \
-	my_str_to_wordtab.c
+	my_str_to_wordtab.c \
+	my_getdouble.c \
+	my_is_float.c
 
 CC	= gcc
 
