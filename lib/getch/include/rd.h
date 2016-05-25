@@ -5,7 +5,7 @@
 ** Login   <alies_a@epitech.net>
 **
 ** Started on  Fri May 13 11:51:08 2016 alies_a
-** Last update Tue May 24 23:44:15 2016 John Doe
+** Last update Wed May 25 14:36:26 2016 John Doe
 */
 
 #pragma once
@@ -65,3 +65,5 @@ int     rd_up(t_rd *rd, int key);
 int     rd_back(t_rd *rd, int key);
 int     rd_down(t_rd *rd, int key);
 int     rd_tab(t_rd *rd, int key);
+int     rd_ctrl_l(t_rd *rd, int key);
+int     rd_del(t_rd *rd, int key);

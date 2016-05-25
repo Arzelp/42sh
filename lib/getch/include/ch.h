@@ -5,7 +5,7 @@
 ** Login   <alies_a@epitech.net>
 **
 ** Started on  Mon May  9 16:33:59 2016 alies_a
-** Last update Tue May 24 23:44:08 2016 John Doe
+** Last update Wed May 25 14:37:04 2016 John Doe
 */
 
 #pragma once
@@ -20,9 +20,11 @@ enum
   {
     K_ERR	= -1,
     K_CD	= 4,
+    K_TAB	= '\t',
+    K_CTR_L	= 12,
+    K_DEL	= 126,
     K_BACK	= 127,
     K_UNK	= 255,
-    K_TAB	= '\t',
     K_UP,
     K_DOWN,
     K_LEFT,
