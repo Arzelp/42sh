@@ -72,6 +72,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_BUILTIN)b_exec.c \
 		$(DIR_BUILTIN)b_is_builtin.c \
 		$(DIR_BUILTIN)b_env.c \
+		$(DIR_BUILTIN)b_echo.c \
 		$(DIR_BUILTIN)b_setenv.c \
 		$(DIR_BUILTIN)b_unsetenv.c \
 		$(DIR_BUILTIN)b_which.c \

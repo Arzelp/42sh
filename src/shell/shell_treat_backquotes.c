@@ -17,6 +17,11 @@
 #include "shell.h"
 #include "utils.h"
 
+/*
+** waitpid(mypipe->pid, &status, WUNTRACED);
+** shell->last_return = shell_wait_status(status);
+*/
+
 static t_commands	*shell_fork_pere(t_shell		*shell,
 					 t_pipe			*mypipe,
 					 t_commands		*commands,
@@ -27,9 +32,9 @@ static t_commands	*shell_fork_pere(t_shell		*shell,
   int			size;
   char			*next;
 
-  waitpid(mypipe->pid, &status, WUNTRACED);
-  shell->last_return = shell_wait_status(status);
-  close(fd[1]);
+  (void)status;
+  (void)mypipe;
+  (void)shell;
   size = 0;
   if ((next = malloc(sizeof(char))) == NULL)
     return (NULL);
@@ -65,6 +70,7 @@ static t_commands	*shell_fork_backquotes(t_shell		*shell,
       shell_step(shell, strdup(commands->str));
       shell_close(shell, shell->last_return);
     }
+  close(fd[1]);
   return (shell_fork_pere(shell, mypipe, commands, fd));
 }
 

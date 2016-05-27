@@ -15,6 +15,14 @@
 #include <unistd.h>
 #include "shell.h"
 
+/*
+** else
+** {
+**   waitpid(pipe->pid, &status, WUNTRACED);
+**   shell->last_return = shell_wait_status(status);
+** }
+*/
+
 int			shell_treat_parenthese(t_shell		*shell,
 					       t_pipe		*pipe)
 {
@@ -34,10 +42,6 @@ int			shell_treat_parenthese(t_shell		*shell,
       shell_step(shell, strdup(pipe->commands->str));
       shell_close(shell, shell->last_return);
     }
-  else
-    {
-      waitpid(pipe->pid, &status, WUNTRACED);
-      shell->last_return = shell_wait_status(status);
-    }
+  (void)status;
   return (shell->last_return);
 }

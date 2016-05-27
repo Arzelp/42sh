@@ -17,8 +17,10 @@ void			shell_pipe_close(t_pipe			*pipe)
 {
   if (pipe->fd[FD_OUT] > STDOUT_FILENO)
     close(pipe->fd[FD_OUT]);
+  pipe->fd[FD_OUT] = STDOUT_FILENO;
   if (pipe->fd[FD_IN] > STDIN_FILENO)
     close(pipe->fd[FD_IN]);
+  pipe->fd[FD_IN] = STDIN_FILENO;
 }
 
 void			shell_pipe_open(t_pipe			*mypipe)
@@ -27,7 +29,11 @@ void			shell_pipe_open(t_pipe			*mypipe)
 
   if (mypipe->next)
     {
-      pipe(fd);
+      if ((pipe(fd)) == -1)
+	{
+	  fprintf(stderr, ERROR_FUNCTION, "pipe");
+	  return ;
+	}
       mypipe->next->fd[FD_IN] = fd[0];
       mypipe->fd[FD_OUT] = fd[1];
     }

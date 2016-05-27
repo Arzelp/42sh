@@ -39,6 +39,7 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
 void			shell_treat_pipe_exec(t_shell		*shell,
 					      t_pipe		*pipe)
 {
+
   while (pipe != NULL && pipe->commands != NULL)
     {
       shell_pipe_open(pipe);

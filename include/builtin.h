@@ -81,5 +81,8 @@ int			b_export(int			ac,
 int			b_sort(int			ac,
 			       char			**av,
 			       t_shell			*shell);
+int			b_echo(int			ac,
+			       char			**av,
+			       t_shell			*shell);
 
 extern t_builtin	g_builtin[];
