@@ -52,14 +52,58 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
 
 
 
+void			shell_end_pipe(t_shell		*shell,
+				       t_pipe		*pipe);
 void			shell_exec_pipe(t_shell		*shell,
-					t_pipe		*pipe,
-					t_list		*list)
-{
-  pid_t		pid;
-  int		status;
+					t_pipe		*pipe);
 
-  //printf("pere : %d / pid : %d / groupe : %d\n", getppid(), getpid(), getpgid(getpid()));
+void			shell_exec_first_pipe(t_shell	*shell,
+					      t_pipe	*pipe)
+{
+  pid_t			pid;
+  int			status;
+
+  status = 0;
+  if ((pid = fork()) == -1)
+    {
+      fprintf(stderr, ERROR_FUNCTION, "fork");
+      shell_close(shell, EXIT_FAILURE);
+    }
+  else if (pid == 0)
+    {
+      setpgrp();
+      shell_exec_pipe(shell, pipe);
+      shell_close(shell, EXIT_SUCCESS);
+    }
+  else
+    {
+      if (isatty(STDIN_FILENO))
+	tcsetpgrp(STDERR_FILENO, pid);
+      waitpid(pid, &status, WUNTRACED);
+      if (isatty(STDIN_FILENO))
+	tcsetpgrp(STDERR_FILENO, shell->pid.pid);
+      if (WIFSTOPPED(status))
+	{
+	  shell->jobs = utils_jobs_add_right(shell->jobs,
+					     strdup(pipe->av[0]),
+					     pipe->pid);
+	  printf("\r[%u]\t+ %d Suspended\t%s\n", shell->jobs->id,
+		 shell->jobs->pid, shell->jobs->name);
+	  shell->jobs = utils_jobs_go_back(shell->jobs);
+	}
+      shell->last_return = shell_wait_status(status);
+      if (pipe->commands->index_delim != ID_PARENTHESE &&
+	  utils_commands_to_tab(shell, pipe) == true)
+	{
+	  if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
+	    shell->last_return = b_exec(shell, pipe);
+	}
+    }
+}
+
+void			shell_exec_pipe(t_shell		*shell,
+					t_pipe		*pipe)
+{
   shell_pipe_open(pipe);
   if (pipe->commands->index_delim == ID_PARENTHESE)
     shell->last_return = shell_treat_parenthese(shell, pipe);
@@ -72,6 +116,8 @@ void			shell_exec_pipe(t_shell		*shell,
 	}
       else if (pipe->pid == 0)
 	{
+	  if (pipe->prev == NULL)
+	    setpgrp();
 	  shell_dup(shell, pipe);
 	  if (pipe->next)
 	    close(pipe->next->fd[FD_IN]);
@@ -81,33 +127,60 @@ void			shell_exec_pipe(t_shell		*shell,
 	shell->last_return = b_exec(shell, pipe);
     }
   shell_pipe_close(pipe);
+  shell_end_pipe(shell, pipe);
+}
+
+
+void			shell_end_pipe(t_shell		*shell,
+				       t_pipe		*pipe)
+{
+  int			status;
+  pid_t			pid;
+
+  status = 0;
   if (pipe->next != NULL)
     {
       if ((pid = fork()) == -1)
-      	{
-      	  fprintf(stderr, ERROR_FUNCTION, "fork");
-      	  shell_close(shell, EXIT_FAILURE);
+	{
+	  fprintf(stderr, ERROR_FUNCTION, "fork");
+	  shell_close(shell, EXIT_FAILURE);
 	}
       else if (pid == 0)
 	{
-	  shell_exec_pipe(shell, pipe->next, list);
-      	  shell_close(shell, shell->last_return);
-        }
+	  if (pipe->prev == NULL)
+	    setpgrp();
+	  shell_exec_pipe(shell, pipe->next);
+	  shell_close(shell, shell->last_return);
+	}
       if (pipe->next)
 	close(pipe->next->fd[FD_IN]);
       waitpid(pid, &status, WUNTRACED);
       shell->last_return = shell_wait_status(status);
     }
-  if (pipe->pid != 0)
+  if (pipe->pid == 0)
+    return ;
+  if (pipe->prev == NULL)
     {
+      if (isatty(STDIN_FILENO))
+	tcsetpgrp(STDERR_FILENO, pipe->pid);
       waitpid(pipe->pid, &status, WUNTRACED);
+      if (isatty(STDIN_FILENO))
+	tcsetpgrp(STDERR_FILENO, shell->pid.pid);
       shell_pipe_close(pipe);
-      shell->last_return = shell_wait_status(status);
+      if (WIFSTOPPED(status))
+	{
+	  shell->jobs = utils_jobs_add_right(shell->jobs,
+					     strdup(pipe->av[0]),
+					     pipe->pid);
+	  printf("\r[%u]\t+ %d Suspended\t%s\n", shell->jobs->id,
+		 shell->jobs->pid, shell->jobs->name);
+	  shell->jobs = utils_jobs_go_back(shell->jobs);
+	}
     }
+  else
+    waitpid(pipe->pid, &status, WUNTRACED);
+  shell->last_return = shell_wait_status(status);
 }
-
-
-
 
 bool			shell_list_treat(t_shell	*shell)
 {
@@ -118,7 +191,9 @@ bool			shell_list_treat(t_shell	*shell)
     {
       if (list->treat == true)
 	{
-	  shell_exec_pipe(shell, list->pipe, list);
+
+
+	  shell_exec_pipe(shell, list->pipe);
 	  //shell_treat_pipe_wait(shell, list->pipe);
 	  if (shell->last_return != EXIT_SUCCESS)
 	    shell_list_desactive(list->next, ID_AND);
