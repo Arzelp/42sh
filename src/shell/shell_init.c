@@ -18,11 +18,17 @@
 static void	shell_init_path(t_shell		*shell)
 {
   char		*path;
+  char		buffer[4096];
 
   path = b_getenv(shell->ae, "PATH");
   if (path == NULL)
-    path = DEFAULT_PATH;
-  shell->path = my_str_to_wordtab(path, ':');
+    {
+      memset(buffer, '\0', 4096);
+      confstr(_CS_PATH, buffer, 4096);
+      shell->path = my_str_to_wordtab(buffer, ':');
+    }
+  else
+    shell->path = my_str_to_wordtab(path, ':');
 }
 
 bool		shell_init(t_shell		*shell,

@@ -146,7 +146,7 @@ void			shell_treat_backquotes(t_shell		*shell,
 
 int			shell_wait_status(int			status);
 
-void			shell_treat_glob(t_pipe			*pipe);
+bool			shell_treat_glob(t_pipe			*pipe);
 
 bool			shell_script(t_shell			*shell,
 				     int			ac,
@@ -157,9 +157,8 @@ bool			shell_load_42shrc(t_shell		*shell);
 /*
 ** shell_treat_pipe.c
 */
-
-void			shell_treat_pipe_wait(t_shell		*shell,
-					      t_pipe		*pipe);
+void			shell_end_pipe(t_shell			*shell,
+				       t_pipe			*pipe);
 void			shell_treat_pipe_exec(t_shell		*shell,
 					      t_pipe		*pipe);
 

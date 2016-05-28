@@ -16,6 +16,44 @@
 #include "utils.h"
 #include "my.h"
 
+static void		tab_view(char				**tab)
+{
+  int			i;
+  int			len;
+
+  i = 0;
+  len = my_tab_len(tab);
+  if (len > 1)
+    printf("'");
+  while (tab[i] != NULL)
+    {
+      printf("%s", tab[i]);
+      if (tab[i + 1] != NULL)
+	printf(" ");
+      i++;
+    }
+  if (len > 1)
+    printf("'");
+}
+
+static void		b_alias_view(t_shell			*shell)
+{
+  t_alias		*alias;
+
+  alias = shell->alias;
+  while (alias != NULL && alias->next != NULL)
+    alias = alias->next;
+  while (alias != NULL)
+    {
+      printf("alias ");
+      tab_view(alias->av_origin);
+      printf("=");
+      tab_view(alias->av_to);
+      printf("\n");
+      alias = alias->prev;
+    }
+}
+
 static int		b_alias_treat(char			**av,
 				      t_shell			*shell)
 {
@@ -48,7 +86,7 @@ int			b_alias(int				ac,
   else
     {
       if (shell->write)
-	fprintf(stdout, "[Usage] alias command=replace\n");
+	b_alias_view(shell);
     }
   return (EXIT_FAILURE);
 }

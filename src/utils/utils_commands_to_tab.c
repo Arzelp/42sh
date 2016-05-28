@@ -35,7 +35,8 @@ bool			utils_commands_to_tab(t_shell		*shell,
   if (pipe == NULL)
     return (false);
   shell_treat_backquotes(shell, pipe);
-  shell_treat_glob(pipe);
+  if (shell_treat_glob(pipe) == false)
+    return (false);
   tmp = pipe->commands;
   if ((pipe->ac = utils_commands_count(tmp)) <= 0)
     return (false);

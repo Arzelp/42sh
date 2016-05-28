@@ -5,7 +5,7 @@
 ** Login   <alies_a@epitech.net>
 **
 ** Started on  Thu Dec 17 13:44:58 2015 Arnaud Alies
-** Last update Tue May 17 12:59:31 2016 Frederic ODDOU
+** Last update Sat May 28 15:39:28 2016 Frederic ODDOU
 */
 
 #include <unistd.h>
@@ -92,7 +92,7 @@ static char	*get_line(char 		**next,
   x = 0;
   while (x < *next_size)
     {
-      if ((*next)[x] == '\n' || (*next)[x] == ';')
+      if ((*next)[x] == '\n')
 	{
 	  is_line((*next)[x] == '\n' ? 1 : -1);
 	  return (dump_next(next, next_size, x + 1));
