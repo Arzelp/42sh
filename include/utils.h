@@ -13,6 +13,8 @@
 #include <stdbool.h>
 #include "shell.h"
 
+#define NOT_FOUND	(-1)
+
 /*
 ** Gestion des commandes (Ajout / Suppression / Vide / Purge / Back)
 */
@@ -131,3 +133,12 @@ t_past			*utils_history_add_right(t_past		*history,
 void			utils_history_delete_elem(t_past	*history);
 void			utils_history_delete_list(t_past	*history);
 t_past			*utils_history_go_back(t_past		*past);
+
+/*
+** Gestion des alias spéciaux
+*/
+
+bool			utils_special_alias_set(t_shell		*shell,
+						char		**reponse);
+bool			utils_special_alias_execute(t_shell	*shell,
+						    char	*name);

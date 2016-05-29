@@ -56,6 +56,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_PARSER)parser_redi.c \
 		$(DIR_PARSER)parser_check_separator.c \
 		$(DIR_UTILS)utils_commands.c \
+		$(DIR_UTILS)utils_special_alias.c \
 		$(DIR_UTILS)utils_commands_to_tab.c \
 		$(DIR_UTILS)utils_list.c \
 		$(DIR_UTILS)utils_pipe.c \

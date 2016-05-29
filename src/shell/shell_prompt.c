@@ -75,6 +75,7 @@ void			shell_prompt(t_shell			*shell)
   t_locales		*loc;
   char			*ps1;
 
+  utils_special_alias_execute(shell, "precmd");
   if (isatty(STDIN_FILENO))
     {
       ps1 = "?> ";

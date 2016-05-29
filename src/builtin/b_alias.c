@@ -57,21 +57,15 @@ static void		b_alias_view(t_shell			*shell)
 static int		b_alias_treat(char			**av,
 				      t_shell			*shell)
 {
-  char			*reponse[2];
   char			**tab_to;
 
-  reponse[0] = NULL;
-  reponse[1] = NULL;
-  if (utils_tab_fusion(av, reponse))
+  if (utils_special_alias_set(shell, &av[1]) == false)
     {
-      tab_to = my_str_to_wordtab(reponse[1], ' ');
+      tab_to = my_str_to_wordtab(av[2], ' ');
       tab_to = utils_alias_replace(shell, tab_to, true);
       shell->alias = utils_alias_add_left(shell->alias,
-					  my_str_to_wordtab(reponse[0], ' '),
+					  my_str_to_wordtab(av[1], ' '),
 					  tab_to);
-      free(reponse[0]);
-      free(reponse[1]);
-      return (EXIT_SUCCESS);
     }
   return (EXIT_SUCCESS);
 }
@@ -81,8 +75,8 @@ int			b_alias(int				ac,
 				t_shell				*shell)
 {
   (void)ac;
-  if (utils_if_fusion(&av[1]) == true)
-    return (b_alias_treat(&av[1], shell));
+  if (ac > 2)
+    return (b_alias_treat(av, shell));
   else
     {
       if (shell->write)

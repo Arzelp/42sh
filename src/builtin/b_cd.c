@@ -16,6 +16,7 @@
 #include "shell.h"
 #include "builtin.h"
 #include "my.h"
+#include "utils.h"
 
 static void		b_cd_env(t_shell		*shell,
 				 char			*oldpwd)
@@ -56,6 +57,8 @@ static int		b_cd_goto(char			*directory,
     }
   free(shell->oldpwd);
   b_cd_env(shell, oldpwd);
+  if (!shell->write)
+    utils_special_alias_execute(shell, "cwdcmd");
   return (EXIT_SUCCESS);
 }
 

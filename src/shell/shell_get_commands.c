@@ -49,6 +49,7 @@ bool		shell_get_commands(t_shell *shell)
   shell_prompt(shell);
   while ((line = rd_line(STDOUT_FILENO, g_keys)) != NULL)
     {
+      utils_special_alias_execute(shell, "postcmd");
       if ((str = strdup(line)) == NULL)
 	return (false);
       if (strlen(str) > 0)
@@ -73,6 +74,7 @@ bool			shell_get_commands_moul(t_shell		*shell)
   shell_prompt(shell);
   while ((str = get_next_line(STDIN_FILENO, &next, &size)) != NULL)
     {
+      utils_special_alias_execute(shell, "postcmd");
       if (strlen(str) > 0)
 	shell->history = utils_history_add_right(shell->history, strdup(str));
       shell_step(shell, str);
