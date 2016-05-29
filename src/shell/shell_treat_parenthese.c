@@ -42,6 +42,7 @@ int			shell_treat_parenthese(t_shell		*shell,
       shell_step(shell, strdup(pipe->commands->str));
       shell_close(shell, shell->last_return);
     }
-  (void)status;
+  waitpid(pipe->pid, &status, WUNTRACED);
+  shell->last_return = shell_wait_status(status);
   return (shell->last_return);
 }

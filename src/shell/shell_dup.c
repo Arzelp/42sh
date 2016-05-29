@@ -39,14 +39,18 @@ void			shell_dup(t_shell			*shell,
 				  t_pipe			*pipe)
 {
   shell_dup_redirection(shell, pipe);
-  if ((pipe->fd[FD_IN] != -1 && dup2(pipe->fd[FD_IN], 0) == -1) ||
-      (shell->fd[FD_IN] != STDIN_FILENO && dup2(shell->fd[FD_IN], 0) == -1))
+  if ((shell->fd[FD_IN] != STDIN_FILENO &&
+       pipe->prev == NULL &&
+       dup2(shell->fd[FD_IN], 0) == -1) ||
+      (pipe->fd[FD_IN] != -1 && dup2(pipe->fd[FD_IN], 0) == -1))
     {
       fprintf(stderr, ERROR_FUNCTION, "dup2");
       shell_close(shell, EXIT_FAILURE);
     }
-  if ((pipe->fd[FD_OUT] != -1 && dup2(pipe->fd[FD_OUT], 1) == -1) ||
-      (shell->fd[FD_OUT] != STDOUT_FILENO && dup2(shell->fd[FD_OUT], 1) == -1))
+  if ((shell->fd[FD_OUT] != STDOUT_FILENO &&
+       pipe->next == NULL &&
+       dup2(shell->fd[FD_OUT], 1) == -1) ||
+      (pipe->fd[FD_OUT] != -1 && dup2(pipe->fd[FD_OUT], 1) == -1))
     {
       fprintf(stderr, ERROR_FUNCTION, "dup2");
       shell_close(shell, EXIT_FAILURE);
