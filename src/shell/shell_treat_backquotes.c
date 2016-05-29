@@ -17,11 +17,6 @@
 #include "shell.h"
 #include "utils.h"
 
-/*
-** waitpid(mypipe->pid, &status, WUNTRACED);
-** shell->last_return = shell_wait_status(status);
-*/
-
 static t_commands	*shell_fork_pere(t_shell		*shell,
 					 t_pipe			*mypipe,
 					 t_commands		*commands,

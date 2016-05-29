@@ -36,7 +36,10 @@ static void		parser_commands_purge(t_commands	*commands)
     {
       if (!strncmp(g_parser_delimit[commands->index_delim].end,
 		   &commands->str[i],
-		   strlen(g_parser_delimit[commands->index_delim].end)))
+		   strlen(g_parser_delimit[commands->index_delim].end)) ||
+	  !strncmp(g_parser_delimit[commands->index_delim].delimit,
+		   &commands->str[i],
+		   strlen(g_parser_delimit[commands->index_delim].delimit)))
 	{
 	  if (i > 0 && commands->str[i - 1] == '\\')
 	    parser_commands_purge_str(&commands->str[i - 1]);

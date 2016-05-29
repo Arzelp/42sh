@@ -10,24 +10,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/wait.h>
 #include <string.h>
 #include <unistd.h>
 #include "shell.h"
 
-/*
-** else
-** {
-**   waitpid(pipe->pid, &status, WUNTRACED);
-**   shell->last_return = shell_wait_status(status);
-** }
-*/
-
 int			shell_treat_parenthese(t_shell		*shell,
 					       t_pipe		*pipe)
 {
-  int			status;
-
   if ((pipe->pid = fork()) == -1)
     {
       fprintf(stderr, ERROR_FUNCTION, "fork");
@@ -42,7 +31,5 @@ int			shell_treat_parenthese(t_shell		*shell,
       shell_step(shell, strdup(pipe->commands->str));
       shell_close(shell, shell->last_return);
     }
-  waitpid(pipe->pid, &status, WUNTRACED);
-  shell->last_return = shell_wait_status(status);
-  return (shell->last_return);
+  return (EXIT_SUCCESS);
 }
