@@ -91,12 +91,9 @@ t_pipe			*utils_pipe_add_right(t_pipe		*pipe,
   new->av = NULL;
   new->ac = 0;
   new->pid = 0;
-  new->redi[RED_RIGHT] = NULL;
-  new->redi[RED_TWO_RIGHT] = NULL;
-  new->redi[RED_LEFT] = NULL;
-  new->redi[RED_TWO_LEFT] = NULL;
-  new->fd[FD_IN] = -1;
-  new->fd[FD_OUT] = -1;
+  new->redi[RED_RIGHT] = new->redi[RED_TWO_RIGHT] = NULL;
+  new->redi[RED_LEFT] = new->redi[RED_TWO_LEFT] = NULL;
+  new->fd[FD_IN] = new->fd[FD_OUT] = -1;
   new->path = NULL;
   if (pipe != NULL)
     {

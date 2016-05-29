@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <errno.h>
 #include <string.h>
 #include <limits.h>
 #include <unistd.h>
@@ -27,7 +28,17 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
   if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
     shell->last_return = b_exec(shell, pipe);
   else if ((pipe->path = shell_get_path(shell, pipe->av[0])) != NULL)
-    execve(pipe->path, pipe->av, shell->ae);
+    {
+      execve(pipe->path, pipe->av, shell->ae);
+      if (errno == ENOEXEC)
+	{
+	  fprintf(stdout, "%s: Erreur de format pour exec(). ", pipe->av[0]);
+  	  fprintf(stdout, "Binary file not executable.\n");
+	}
+      else
+	fprintf(stdout, "%s: Permission non accordée.\n", pipe->av[0]);
+      shell->last_return = EXIT_FAILURE;
+    }
   else
     {
       shell->last_return = EXIT_FAILURE;

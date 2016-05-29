@@ -16,7 +16,8 @@
 #define ERROR_FUNCTION	"Error: %s function failled.\n"
 #define ERROR_NOTFOUND	"%s: Command not found.\n"
 
-#define DEFAULT_PATH	"/bin:/sbin:/usr/bin:/usr/sbin"
+#define HISTORY_LIMIT	100
+
 #define SHRC		".42shrc"
 
 typedef struct		s_commands
@@ -125,7 +126,6 @@ void			shell_commands_free(t_shell		*shell);
 char			*shell_get_path(t_shell			*shell,
 					char			*name);
 
-
 bool			shell_list_treat(t_shell		*shell);
 void			shell_prompt(t_shell			*shell);
 
@@ -157,6 +157,7 @@ bool			shell_load_42shrc(t_shell		*shell);
 /*
 ** shell_treat_pipe.c
 */
+
 void			shell_end_pipe(t_shell			*shell,
 				       t_pipe			*pipe);
 void			shell_treat_pipe_exec(t_shell		*shell,
@@ -168,7 +169,6 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 
 void			shell_pipe_close(t_pipe			*pipe);
 void			shell_pipe_open(t_pipe			*mypipe);
-
 
 /*
 ** shell_prompt_func.c

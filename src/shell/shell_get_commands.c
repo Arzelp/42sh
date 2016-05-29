@@ -60,7 +60,6 @@ bool		shell_get_commands(t_shell *shell)
   return (true);
 }
 
-
 bool			shell_get_commands_moul(t_shell		*shell)
 {
   char			*str;

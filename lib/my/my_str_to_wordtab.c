@@ -36,8 +36,6 @@ static char		**my_str_to_wordtab_fill(char		**tab,
   return (tab);
 }
 
-
-
 char			**my_str_to_wordtab(char		*str,
 					    char		c)
 {

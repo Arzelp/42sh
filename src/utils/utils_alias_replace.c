@@ -19,8 +19,8 @@ static char		**utils_alias_change(t_alias		*alias,
   char			**new;
   int			len;
 
-  len = my_tab_len(&av[my_tab_len(alias->av_origin)]) +
-      my_tab_len(alias->av_to);
+  len = my_tab_len(&av[my_tab_len(alias->av_origin)])
+      + my_tab_len(alias->av_to);
   if ((new = malloc(sizeof(char *) * (len + 2))) == NULL)
     return (av);
   new[0] = NULL;
@@ -36,8 +36,8 @@ static char		**utils_alias_change_force(t_alias	*alias,
   char			**new;
   int			len;
 
-  len = my_tab_len(&av[my_tab_len(alias->av_origin)]) +
-      my_tab_len(alias->av_to);
+  len = my_tab_len(&av[my_tab_len(alias->av_origin)])
+      + my_tab_len(alias->av_to);
   if ((new = malloc(sizeof(char *) * (len + 2))) == NULL)
     return (av);
   new[0] = NULL;

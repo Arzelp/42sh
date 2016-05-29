@@ -12,26 +12,17 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 #include "shell.h"
 #include "builtin.h"
 #include "my.h"
 
-static int		b_cd_goto(char			*directory,
-				  t_shell		*shell)
+static void		b_cd_env(t_shell		*shell,
+				 char			*oldpwd)
 {
   char			*av[4];
   char			pwd[4096];
-  char			oldpwd[4096];
 
-  if (getcwd(oldpwd, 4096) == NULL)
-    strcpy(oldpwd, "/");
-  if (chdir(directory) == -1)
-    {
-      if (shell->write)
-	fprintf(stdout, NO_FOLDER, directory);
-      return (EXIT_FAILURE);
-    }
-  free(shell->oldpwd);
   shell->oldpwd = strdup(oldpwd);
   av[0] = "setenv";
   av[1] = "OLDPWD";
@@ -43,6 +34,28 @@ static int		b_cd_goto(char			*directory,
   av[1] = "PWD";
   av[2] = pwd;
   b_setenv(3, av, shell);
+}
+
+static int		b_cd_goto(char			*directory,
+				  t_shell		*shell)
+{
+  char			oldpwd[4096];
+
+  if (getcwd(oldpwd, 4096) == NULL)
+    strcpy(oldpwd, "/");
+  if (chdir(directory) == -1)
+    {
+      if (shell->write)
+	{
+	  if (errno == EACCES)
+	    fprintf(stdout, NO_PERMIT, directory);
+	  else
+	    fprintf(stdout, NO_FOLDER, directory);
+	}
+      return (EXIT_FAILURE);
+    }
+  free(shell->oldpwd);
+  b_cd_env(shell, oldpwd);
   return (EXIT_SUCCESS);
 }
 
@@ -61,9 +74,7 @@ int			b_cd(int			ac,
   else
     {
       if (!strcmp(av[1], "-"))
-	{
-	  return (b_cd_goto(shell->oldpwd, shell));
-	}
+	return (b_cd_goto(shell->oldpwd, shell));
       else
 	return (b_cd_goto(av[1], shell));
     }

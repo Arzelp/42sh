@@ -44,6 +44,20 @@ static int		b_set_treat(char			**av,
   return (EXIT_SUCCESS);
 }
 
+static void		b_set_display(t_shell			*shell)
+{
+  t_locales		*loc;
+
+  loc = shell->locales;
+  while (loc != NULL && loc->prev != NULL)
+    loc = loc->prev;
+  while (loc != NULL)
+    {
+      printf("%s\t%s\n", loc->name, loc->value);
+      loc = loc->next;
+    }
+}
+
 int			b_set(int				ac,
 			      char				**av,
 			      t_shell				*shell)
@@ -54,7 +68,7 @@ int			b_set(int				ac,
   else
     {
       if (shell->write)
-	fprintf(stdout, "[Usage] set name=value\n");
+	b_set_display(shell);
     }
   return (EXIT_FAILURE);
 }

@@ -114,11 +114,9 @@ bool			parser_commands(t_shell			*shell,
 	shell->commands = utils_commands_add_right(shell->commands,
 						   strndup(&str[deb], i - deb),
 						   ID_WITHOUT);
-      if (id_delimit != ID_WITHOUT)
-	{
-	  if (parser_not_without(shell, str, &i, id_delimit) == false)
-	    return (false);
-	}
+      if (id_delimit != ID_WITHOUT &&
+	  parser_not_without(shell, str, &i, id_delimit) == false)
+	return (false);
     }
   shell->commands = utils_commands_go_back(shell->commands);
   shell->commands = parser_commands_comment(shell->commands);
