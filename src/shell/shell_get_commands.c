@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include "utils.h"
 #include "my.h"
 #include "shell.h"
@@ -38,6 +39,11 @@ void			shell_step(t_shell			*shell,
       free(str);
       shell_list_treat(shell);
       shell_commands_free(shell);
+      if (shell->exit_active == true)
+	{
+	  printf("exit\n");
+	  shell_close(shell, shell->last_return);
+	}
     }
 }
 

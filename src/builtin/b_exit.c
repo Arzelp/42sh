@@ -61,9 +61,6 @@ int			b_exit(int			ac,
 	return (EXIT_FAILURE);
       ret = my_atoi(av[1]);
     }
-  shell_commands_free(shell);
-  shell_close(shell, ret);
-  if (shell->write)
-    printf("exit\n");
-  return (EXIT_FAILURE);
+  shell->exit_active = true;
+  return (ret);
 }

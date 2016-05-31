@@ -29,6 +29,12 @@ typedef struct		s_builtin
   int			(*func)(int ac, char **av, t_shell *shell);
 }			t_builtin;
 
+typedef struct		s_echo_type
+{
+  char			*str;
+  char			c;
+}			t_echo_type;
+
 char			*b_getenv(char			**tab,
 				  char			*name);
 char			*b_findenv(char			**tab,
@@ -85,5 +91,8 @@ int			b_sort(int			ac,
 int			b_echo(int			ac,
 			       char			**av,
 			       t_shell			*shell);
+int			b_yes(int			ac,
+			      char			**av,
+			      t_shell			*shell);
 
 extern t_builtin	g_builtin[];

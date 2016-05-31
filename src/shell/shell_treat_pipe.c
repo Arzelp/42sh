@@ -55,9 +55,20 @@ static void		shell_wait_pipe(t_shell			*shell,
   status = 0;
   if (pipe->prev == NULL)
     {
-      shell_change_tgrp(pipe->pid);
-      waitpid(pipe->pid, &status, WUNTRACED);
-      shell_change_tgrp(shell->pid.pid);
+      /*
+      if (!strcmp(pipe->commands->str, "cat"))
+	{
+	  shell_change_tgrp(shell->pid.pid);
+	  waitpid(pipe->pid, &status, WNOHANG);
+	  shell_change_tgrp(shell->pid.pid);
+	  printf("lol\n");
+	}
+      else
+	{*/
+	  shell_change_tgrp(pipe->pid);
+	  waitpid(pipe->pid, &status, WUNTRACED);
+	  shell_change_tgrp(shell->pid.pid);
+	//}
       shell_pipe_close(pipe);
       if (WIFSTOPPED(status))
 	{

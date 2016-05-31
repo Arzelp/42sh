@@ -38,3 +38,5 @@ void		my_tab_cat_dyn(char		**tab1,
 			       char		**tab2);
 double		get_double(char			*s);
 bool		is_float(char const		*str);
+int		base_converter(char		*nb,
+			       int		base);

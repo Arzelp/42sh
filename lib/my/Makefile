@@ -30,6 +30,7 @@ SRC	=  get_next_line.c \
 	my_tab_cat_dyn.c \
 	my_str_to_wordtab.c \
 	my_getdouble.c \
+	base_converter.c \
 	my_is_float.c
 
 CC	= gcc

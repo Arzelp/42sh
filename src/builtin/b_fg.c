@@ -28,13 +28,15 @@ static int		b_fg_treat(t_shell		*shell,
   if (!shell->write)
     {
       pgid = getpgid(jobs->pid);
-      tcsetpgrp(STDERR_FILENO, pgid);
+      shell_change_tgrp(pgid);
+      //tcsetpgrp(STDERR_FILENO, pgid);
       kill(jobs->pid, SIGCONT);
       waitpid(jobs->pid, &status, WUNTRACED);
       shell->last_return = shell_wait_status(status);
       if (!WIFSTOPPED(status))
 	utils_jobs_delete_elem(shell, jobs);
-      tcsetpgrp(STDERR_FILENO, shell->pid.pgid);
+      shell_change_tgrp(shell->pid.pgid);
+      //tcsetpgrp(STDERR_FILENO, shell->pid.pgid);
     }
   return (shell->last_return);
 }

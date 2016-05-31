@@ -80,6 +80,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_BUILTIN)b_which.c \
 		$(DIR_BUILTIN)b_exit.c \
 		$(DIR_BUILTIN)b_cd.c \
+		$(DIR_BUILTIN)b_yes.c \
 		$(DIR_BUILTIN)b_export.c \
 		$(DIR_BUILTIN)b_history.c \
 		$(DIR_BUILTIN)b_set.c \

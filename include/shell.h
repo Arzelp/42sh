@@ -107,6 +107,7 @@ typedef struct		s_shell
   t_alias		*alias;
   t_jobs		*jobs;
   t_past		*history;
+  bool			exit_active;
 }			t_shell;
 
 typedef struct		s_ps1

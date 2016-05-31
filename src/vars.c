@@ -69,6 +69,7 @@ t_builtin		g_builtin[] =
     {"alias", b_alias},
     {"sort", b_sort},
     {"echo", b_echo},
+    {"yes", b_yes},
     {NULL, NULL},
   };
 
