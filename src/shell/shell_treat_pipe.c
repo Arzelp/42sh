@@ -55,11 +55,9 @@ static void		shell_wait_pipe(t_shell			*shell,
   status = 0;
   if (pipe->prev == NULL)
     {
-      if (isatty(STDIN_FILENO))
-	tcsetpgrp(STDERR_FILENO, pipe->pid);
+      shell_change_tgrp(pipe->pid);
       waitpid(pipe->pid, &status, WUNTRACED);
-      if (isatty(STDIN_FILENO))
-	tcsetpgrp(STDERR_FILENO, shell->pid.pid);
+      shell_change_tgrp(shell->pid.pid);
       shell_pipe_close(pipe);
       if (WIFSTOPPED(status))
 	{
@@ -91,8 +89,11 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 	}
       else if (pipe->pid == 0)
 	{
-	  if (pipe->prev == NULL)
-	    setpgrp();
+	  if (pipe->prev == NULL || getpgid(getpid()) == getpgid(getppid()))
+	    {
+	      shell_change_tgrp(getpid());
+	      setpgrp();
+	    }
 	  shell_dup(shell, pipe);
       	  if (pipe->next)
 	    close(pipe->next->fd[FD_IN]);
@@ -121,8 +122,8 @@ void			shell_end_pipe(t_shell			*shell,
 	}
       else if (pid == 0)
 	{
-	  if (pipe->prev == NULL)
-	    setpgrp();
+	  if (pipe->prev == NULL || getpgid(getpid()) == getpgid(getppid()))
+	    setpgid(getpid(), getpgid(pipe->pid));
 	  shell_treat_pipe_exec(shell, pipe->next);
 	  shell_close(shell, shell->last_return);
 	}

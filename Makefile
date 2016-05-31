@@ -47,6 +47,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_SHELL)shell_load_42shrc.c \
 		$(DIR_SHELL)shell_signaux.c \
 		$(DIR_SHELL)shell_wait_status.c \
+		$(DIR_SHELL)shell_change_tgrp.c \
 		$(DIR_PARSER)parser_commands.c \
 		$(DIR_PARSER)parser_commands_comment.c \
 		$(DIR_PARSER)parser_commands_backslash.c \

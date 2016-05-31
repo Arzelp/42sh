@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Sun May 29 22:32:00 2016 Frederic ODDOU
-** Last update Sun May 29 23:27:15 2016 Frederic ODDOU
+** Last update Tue May 31 17:58:16 2016 Frederic ODDOU
 */
 
 #include <stdlib.h>
@@ -34,7 +34,6 @@ static short		utils_special_alias_find(char		*name)
     }
   return (NOT_FOUND);
 }
-
 
 bool			utils_special_alias_set(t_shell		*shell,
 						char		**av)

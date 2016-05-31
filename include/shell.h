@@ -18,6 +18,8 @@
 
 #define HISTORY_LIMIT	100
 
+#define LIMIT_BUF_QUOTE	10000000
+
 #define SHRC		".42shrc"
 
 typedef struct		s_commands
@@ -153,6 +155,8 @@ bool			shell_script(t_shell			*shell,
 				     char			**av);
 
 bool			shell_load_42shrc(t_shell		*shell);
+
+void			shell_change_tgrp(pid_t			pid);
 
 /*
 ** shell_treat_pipe.c

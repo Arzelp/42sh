@@ -17,26 +17,32 @@
 #include "shell.h"
 #include "utils.h"
 
-static t_commands	*shell_fork_pere(t_shell		*shell,
-					 t_pipe			*mypipe,
+static t_commands	*shell_fork_pere(t_pipe			*mypipe,
 					 t_commands		*commands,
 					 int			*fd)
 {
   char			*str;
-  int			status;
   int			size;
   char			*next;
 
-  (void)status;
-  (void)mypipe;
-  (void)shell;
   size = 0;
   if ((next = malloc(sizeof(char))) == NULL)
     return (NULL);
   next[0] = '\0';
   str = NULL;
+  int len = 0;
   while ((str = get_next_line(fd[0], &next, &size)) != NULL)
-    commands = utils_commands_add_right(commands, str, ID_WITHOUT);
+    {
+      len += strlen(str);
+      if (len >= LIMIT_BUF_QUOTE)
+	{
+	  free(next);
+	  close(fd[0]);
+	  kill(mypipe->pid, SIGKILL);
+	  return (commands);
+	}
+      commands = utils_commands_add_right(commands, str, ID_WITHOUT);
+    }
   free(next);
   close(fd[0]);
   return (commands);
@@ -66,7 +72,7 @@ static t_commands	*shell_fork_backquotes(t_shell		*shell,
       shell_close(shell, shell->last_return);
     }
   close(fd[1]);
-  return (shell_fork_pere(shell, mypipe, commands, fd));
+  return (shell_fork_pere(mypipe, commands, fd));
 }
 
 void			shell_treat_backquotes(t_shell		*shell,

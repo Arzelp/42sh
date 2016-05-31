@@ -1,9 +1,3 @@
-ls | cat; cat
 cat | ./42sh
-&&
 cat out | less
 Touches Debut & Fin
-*ls
-cd | cd; cd -
-(cd /tmp | echo hello > out) | cat -A 
-/bin/kill -11 0 (Avec des pipes)
