@@ -145,6 +145,9 @@ bool			utils_special_alias_set(t_shell		*shell,
 bool			utils_special_alias_execute(t_shell	*shell,
 						    char	*name);
 
+/*
+** Gestion des variables
+*/
 
 char			*utils_get_var_find(t_shell		*shell,
 					    char		*find);

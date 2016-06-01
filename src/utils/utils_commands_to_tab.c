@@ -26,22 +26,12 @@ static unsigned int	utils_commands_count(t_commands		*commands)
   return (nb);
 }
 
-bool			utils_commands_to_tab(t_shell		*shell,
-					      t_pipe		*pipe)
+static bool		utils_commands_to_tab_param(t_shell	*shell,
+						    t_pipe	*pipe,
+						    t_commands	*tmp)
 {
   int			i;
-  t_commands		*tmp;
 
-  if (pipe == NULL)
-    return (false);
-  shell_treat_backquotes(shell, pipe);
-  if (shell_treat_glob(pipe) == false)
-    return (false);
-  tmp = pipe->commands;
-  if ((pipe->ac = utils_commands_count(tmp)) <= 0)
-    return (false);
-  if ((pipe->av = malloc(sizeof(char *) * (pipe->ac + 1))) == NULL)
-    return (false);
   i = 0;
   while (i < pipe->ac)
     {
@@ -57,4 +47,22 @@ bool			utils_commands_to_tab(t_shell		*shell,
   pipe->av[i] = NULL;
   pipe->av = utils_alias_replace(shell, pipe->av, false);
   return (true);
+}
+
+bool			utils_commands_to_tab(t_shell		*shell,
+					      t_pipe		*pipe)
+{
+  t_commands		*tmp;
+
+  if (pipe == NULL)
+    return (false);
+  shell_treat_backquotes(shell, pipe);
+  if (shell_treat_glob(pipe) == false)
+    return (false);
+  tmp = pipe->commands;
+  if ((pipe->ac = utils_commands_count(tmp)) <= 0)
+    return (false);
+  if ((pipe->av = malloc(sizeof(char *) * (pipe->ac + 1))) == NULL)
+    return (false);
+  return (utils_commands_to_tab_param(shell, pipe, tmp));
 }

@@ -58,7 +58,7 @@ static void		shell_wait_pipe(t_shell			*shell,
   if (pipe->prev == NULL)
     {
       waitpid(pipe->pid, &status, WUNTRACED);
-      shell_change_tgrp(shell->pid.pid);
+      shell_change_tgrp(shell->pid.pgid);
       shell_pipe_close(pipe);
       if (WIFSTOPPED(status))
 	{
@@ -68,6 +68,12 @@ static void		shell_wait_pipe(t_shell			*shell,
 	  printf("\r[%u]\t+ %d Suspended\t%s\n", shell->jobs->id,
 		 shell->jobs->pid, shell->jobs->name);
 	  shell->jobs = utils_jobs_go_back(shell->jobs);
+	  /*
+	  sleep(2);
+	  shell_change_tgrp(getpgid(pipe->pid));
+	  kill(pipe->pid, SIGCONT);
+	  waitpid(pipe->pid, &status, WUNTRACED);
+	  */
 	}
     }
   else
@@ -81,7 +87,7 @@ static void		shell_treat_pipe_exec_fils(t_shell	*shell,
   if (pipe->prev == NULL || getpgid(getpid()) == getpgid(getppid()))
     {
       setpgrp();
-      shell_change_tgrp(getpid());
+      shell_change_tgrp(getpgid(getpid()));
     }
   if (shell_dup(shell, pipe) == false)
     shell_close(shell, EXIT_FAILURE);
@@ -105,13 +111,19 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 	}
       else if (pipe->pid == 0)
 	shell_treat_pipe_exec_fils(shell, pipe);
-      else if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
+      else if (strcmp(pipe->av[0], "fg") &&
+	       b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
 	shell->last_return = b_exec(shell, pipe);
     }
   else
     shell->last_return = EXIT_FAILURE;
   shell_pipe_close(pipe);
   shell_end_pipe(shell, pipe);
+  if (pipe->commands->index_delim != ID_PARENTHESE &&
+      pipe->av != NULL &&
+      b_is_builtin(pipe->av[0]) != NOT_BUILTIN &&
+      !strcmp(pipe->av[0], "fg"))
+    shell->last_return = b_exec(shell, pipe);
 }
 
 void			shell_end_pipe(t_shell			*shell,

@@ -1,3 +1,0 @@
-cat | ./42sh
-cat out | less
-Touches Debut & Fin

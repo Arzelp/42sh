@@ -20,23 +20,19 @@
 static int		b_fg_treat(t_shell		*shell,
 				   t_jobs		*jobs)
 {
-  pid_t			pgid;
   int			status;
 
   status = 0;
   shell->last_return = EXIT_SUCCESS;
   if (!shell->write)
     {
-      pgid = getpgid(jobs->pid);
-      shell_change_tgrp(pgid);
-      //tcsetpgrp(STDERR_FILENO, pgid);
-      kill(jobs->pid, SIGCONT);
-      waitpid(jobs->pid, &status, WUNTRACED);
+      shell_change_tgrp(getpgid(jobs->pid));
+      kill(-jobs->pid, SIGCONT);
+      waitpid(-jobs->pid, &status, WUNTRACED);
       shell->last_return = shell_wait_status(status);
       if (!WIFSTOPPED(status))
 	utils_jobs_delete_elem(shell, jobs);
       shell_change_tgrp(shell->pid.pgid);
-      //tcsetpgrp(STDERR_FILENO, shell->pid.pgid);
     }
   return (shell->last_return);
 }
