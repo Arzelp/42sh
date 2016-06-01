@@ -24,13 +24,15 @@ static void		shell_list_desactive(t_list	*list,
 bool			shell_list_treat(t_shell	*shell)
 {
   t_list		*list;
+  pid_t			pgid;
 
   list = shell->list;
   while (list != NULL)
     {
       if (list->treat == true)
 	{
-	  shell_treat_pipe_exec(shell, list->pipe);
+	  pgid = shell_treat_pipe_do(shell, list->pipe);
+	  shell_treat_pipe_wait(shell, list->pipe, pgid);
 	  if (shell->last_return != EXIT_SUCCESS)
 	    shell_list_desactive(list->next, ID_AND);
 	  else

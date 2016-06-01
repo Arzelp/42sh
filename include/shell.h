@@ -163,10 +163,11 @@ void			shell_change_tgrp(pid_t			pid);
 ** shell_treat_pipe.c
 */
 
-void			shell_end_pipe(t_shell			*shell,
-				       t_pipe			*pipe);
-void			shell_treat_pipe_exec(t_shell		*shell,
-					      t_pipe		*pipe);
+pid_t			shell_treat_pipe_do(t_shell	*shell,
+					    t_pipe	*pipe);
+void			shell_treat_pipe_wait(t_shell	*shell,
+					      t_pipe	*pipe,
+					      pid_t	pgid);
 
 /*
 ** shell_pipe.c

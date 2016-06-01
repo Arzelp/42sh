@@ -49,17 +49,68 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
   shell_close(shell, shell->last_return);
 }
 
-static void		shell_wait_pipe(t_shell			*shell,
-					t_pipe			*pipe)
+static pid_t		shell_treat_commands(t_shell	*shell,
+					     t_pipe	*pipe,
+					     pid_t	pgid)
+{
+  if ((pipe->pid = fork()) == -1)
+    {
+      fprintf(stderr, ERROR_FUNCTION, "fork");
+      shell_close(shell, EXIT_FAILURE);
+    }
+  if (pipe->pid != 0)
+    {
+      if (pipe->prev == NULL)
+	pgid = pipe->pid;
+      setpgid(pipe->pid, pgid);
+      if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
+	shell->last_return = b_exec(shell, pipe);
+    }
+  if (pipe->pid == 0)
+    {
+      shell_signal(false);
+      if (shell_dup(shell, pipe) == false)
+	shell_close(shell, EXIT_FAILURE);
+      if (pipe->next)
+	close(pipe->next->fd[FD_IN]);
+      shell_treat_pipe_commands(shell, pipe);
+    }
+  return (pgid);
+}
+
+pid_t			shell_treat_pipe_do(t_shell	*shell,
+					    t_pipe	*pipe)
+{
+  pid_t			pgid;
+
+  pgid = 0;
+  while (pipe != NULL)
+    {
+      shell_pipe_open(pipe);
+      if (pipe->commands->index_delim == ID_PARENTHESE)
+        shell->last_return = shell_treat_parenthese(shell, pipe);
+      else if (utils_commands_to_tab(shell, pipe) == true)
+	pgid = shell_treat_commands(shell, pipe, pgid);
+      else
+	shell->last_return = EXIT_FAILURE;
+      shell_pipe_close(pipe);
+      pipe = pipe->next;
+    }
+  return (pgid);
+}
+
+void			shell_treat_pipe_wait(t_shell	*shell,
+					      t_pipe	*pipe,
+					      pid_t	pgid)
 {
   int			status;
 
   status = 0;
-  if (pipe->prev == NULL)
+  shell_change_tgrp(pgid);
+  while (pipe != NULL)
     {
-      waitpid(pipe->pid, &status, WUNTRACED);
-      shell_change_tgrp(shell->pid.pgid);
-      shell_pipe_close(pipe);
+      waitpid(-pgid, &status, WUNTRACED);
+      shell->last_return = shell_wait_status(status);
       if (WIFSTOPPED(status))
 	{
 	  shell->jobs = utils_jobs_add_right(shell->jobs,
@@ -68,90 +119,8 @@ static void		shell_wait_pipe(t_shell			*shell,
 	  printf("\r[%u]\t+ %d Suspended\t%s\n", shell->jobs->id,
 		 shell->jobs->pid, shell->jobs->name);
 	  shell->jobs = utils_jobs_go_back(shell->jobs);
-	  /*
-	  sleep(2);
-	  shell_change_tgrp(getpgid(pipe->pid));
-	  kill(pipe->pid, SIGCONT);
-	  waitpid(pipe->pid, &status, WUNTRACED);
-	  */
 	}
+      pipe = pipe->next;
     }
-  else
-    waitpid(pipe->pid, &status, WUNTRACED);
-  shell->last_return = shell_wait_status(status);
-}
-
-static void		shell_treat_pipe_exec_fils(t_shell	*shell,
-						   t_pipe	*pipe)
-{
-  if (pipe->prev == NULL || getpgid(getpid()) == getpgid(getppid()))
-    {
-      setpgrp();
-      shell_change_tgrp(getpgid(getpid()));
-    }
-  if (shell_dup(shell, pipe) == false)
-    shell_close(shell, EXIT_FAILURE);
-  if (pipe->next)
-    close(pipe->next->fd[FD_IN]);
-  shell_treat_pipe_commands(shell, pipe);
-}
-
-void			shell_treat_pipe_exec(t_shell		*shell,
-					      t_pipe		*pipe)
-{
-  shell_pipe_open(pipe);
-  if (pipe->commands->index_delim == ID_PARENTHESE)
-    shell->last_return = shell_treat_parenthese(shell, pipe);
-  else if (utils_commands_to_tab(shell, pipe) == true)
-    {
-      if ((pipe->pid = fork()) == -1)
-	{
-	  fprintf(stderr, ERROR_FUNCTION, "fork");
-	  shell_close(shell, EXIT_FAILURE);
-	}
-      else if (pipe->pid == 0)
-	shell_treat_pipe_exec_fils(shell, pipe);
-      else if (strcmp(pipe->av[0], "fg") &&
-	       b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
-	shell->last_return = b_exec(shell, pipe);
-    }
-  else
-    shell->last_return = EXIT_FAILURE;
-  shell_pipe_close(pipe);
-  shell_end_pipe(shell, pipe);
-  if (pipe->commands->index_delim != ID_PARENTHESE &&
-      pipe->av != NULL &&
-      b_is_builtin(pipe->av[0]) != NOT_BUILTIN &&
-      !strcmp(pipe->av[0], "fg"))
-    shell->last_return = b_exec(shell, pipe);
-}
-
-void			shell_end_pipe(t_shell			*shell,
-				       t_pipe			*pipe)
-{
-  pid_t			pid;
-  int			status;
-
-  status = 0;
-  if (pipe->next != NULL)
-    {
-      if ((pid = fork()) == -1)
-	{
-	  fprintf(stderr, ERROR_FUNCTION, "fork");
-	  shell_close(shell, EXIT_FAILURE);
-	}
-      else if (pid == 0)
-	{
-	  if (pipe->prev == NULL || getpgid(getpid()) == getpgid(getppid()))
-	    setpgid(getpid(), getpgid(pipe->pid));
-	  shell_treat_pipe_exec(shell, pipe->next);
-	  shell_close(shell, shell->last_return);
-	}
-      if (pipe->next)
-	close(pipe->next->fd[FD_IN]);
-      waitpid(pid, &status, WUNTRACED);
-      shell->last_return = shell_wait_status(status);
-    }
-  if (pipe->pid != 0)
-    shell_wait_pipe(shell, pipe);
+  shell_change_tgrp(shell->pid.pgid);
 }

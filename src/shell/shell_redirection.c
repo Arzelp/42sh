@@ -59,7 +59,7 @@ static char		*shell_redirection_gnl(char		*red_in)
   str = NULL;
   shell_redirection_prompt();
   while ((str = get_next_line(STDIN_FILENO, &next, &size)) != NULL
-	 && strncmp(red_in, str, strlen(red_in)))
+	 && strcmp(red_in, str))
     {
       if ((concat = shell_redirection_realloc(concat, str)) == NULL)
 	return (NULL);

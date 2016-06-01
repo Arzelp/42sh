@@ -49,7 +49,9 @@ bool			utils_if_fusion(char		**tab)
       if (tab[1][i + 1] != '\0' || tab[2] != NULL)
 	reponse[1] = true;
     }
-  if (reponse[0] == false || reponse[1] == false)
+  else
+    reponse[0] = true;
+  if (reponse[0] == false)
     return (false);
   return (true);
 }
@@ -78,7 +80,9 @@ bool			utils_tab_fusion(char		**tab,
       else if (tab[2] != NULL)
 	reponse[1] = strdup(tab[2]);
     }
-  if (reponse[0] == NULL || reponse[1] == NULL)
+  else
+    reponse[0] = strdup(tab[0]);
+  if (reponse[0] == NULL)
     return (false);
   return (true);
 }
