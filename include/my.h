@@ -40,3 +40,5 @@ double		get_double(char			*s);
 bool		is_float(char const		*str);
 int		base_converter(char		*nb,
 			       int		base);
+char		*my_str_realloc(char		*s1,
+				char		*s2);

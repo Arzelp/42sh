@@ -67,6 +67,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_UTILS)utils_jobs.c \
 		$(DIR_UTILS)utils_history.c \
 		$(DIR_UTILS)utils_get_var.c \
+		$(DIR_UTILS)utils_parse_var.c \
 		$(DIR_UTILS)utils_tab_fusion.c \
 		$(DIR_UTILS)utils_get_homepath.c \
 		$(DIR_UTILS)utils_alias_replace.c \

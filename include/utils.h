@@ -14,6 +14,8 @@
 #include "shell.h"
 
 #define NOT_FOUND	(-1)
+#define DELIM_VAR_OPEN	'{'
+#define DELIM_VAR_CLOSE	'}'
 
 /*
 ** Gestion des commandes (Ajout / Suppression / Vide / Purge / Back)
@@ -142,3 +144,9 @@ bool			utils_special_alias_set(t_shell		*shell,
 						char		**reponse);
 bool			utils_special_alias_execute(t_shell	*shell,
 						    char	*name);
+
+
+char			*utils_get_var_find(t_shell		*shell,
+					    char		*find);
+char			*utils_get_acolade(char			*find);
+int			utils_get_acolade_count(char		*find);

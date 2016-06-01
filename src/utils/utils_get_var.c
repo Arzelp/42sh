@@ -15,125 +15,88 @@
 #include "builtin.h"
 #include "parser.h"
 #include "utils.h"
+#include "my.h"
 
-#define DELIM_VAR_OPEN	'{'
-#define DELIM_VAR_CLOSE	'}'
-
-static int		utils_get_acolade_count(char		*find)
+static char		*utils_parser_var_normal(char		*str,
+						 char		s)
 {
-  int			i;
+  char			c[2];
 
-  i = 0;
-  if (*find != DELIM_VAR_OPEN)
-    return (-1);
-  while (find[i] != '\0')
-    {
-      if (find[i] == DELIM_VAR_CLOSE)
-	return (i);
-      i++;
-    }
-  return (-1);
+  c[0] = s;
+  c[1] = '\0';
+  return (my_str_realloc(str, c));
 }
 
-static char		*utils_get_acolade(char			*find)
+static char		*utils_parser_var_get_var(t_shell	*shell,
+						  char		*str,
+						  char		*new,
+						  int		*i)
 {
-  char			*new;
-  int			i;
+  char			*find;
+  char			*var;
 
-  i = 0;
-  if ((new = malloc(sizeof(char) * (utils_get_acolade_count(find) + 1))) == NULL)
-    return (NULL);
-  while (find[i + 1] != '\0' && find[i + 1] != DELIM_VAR_CLOSE)
+  find = var = NULL;
+  if (utils_get_acolade_count(&str[*i + 1]) != -1)
+    find = utils_get_acolade(&str[*i + 1]);
+  if ((var = utils_get_var_find(shell,
+				(find != NULL) ? find : &str[*i + 1])) == NULL)
     {
-      new[i] = find[i + 1];
-      i++;
+      if (new != NULL)
+	free(new);
+      return (NULL);
     }
-  new[i] = '\0';
+  if (find != NULL)
+    *i += utils_get_acolade_count(&str[*i + 1]) + 1;
+  else
+    *i += (int)strlen(&str[*i]) - 1;
+  new = my_str_realloc(new, var);
+  if (find != NULL)
+    free(find);
   return (new);
 }
 
-static char		*utils_get_var_find(t_shell		*shell,
-					    char		*find)
+static char		*utils_parser_var_return_val(t_shell	*shell,
+						     char	*str,
+						     char	*new,
+						     int	*i)
 {
-  char			*var;
-  t_locales		*loc;
+  char			*val;
 
-  loc = shell->locales;
-  if ((var = b_getenv(shell->ae, find)) != NULL)
-    return (var);
-  while (loc != NULL)
-    {
-      if (!strcmp(loc->name, find))
-	return (loc->value);
-      loc = loc->next;
-    }
-  fprintf(stderr, "%s: Undefined variable.\n", find);
-  return (NULL);
-}
-
-static char		*my_str_realloc(char			*s1,
-					char			*s2)
-{
-  size_t		len;
-
-  if (s1 == NULL || s2 == NULL)
-    return (NULL);
-  len = strlen(s1) + strlen(s2);
-  s1 = realloc(s1, sizeof(char) * (len + 1));
-  s1 = strcat(s1, s2);
-  return (s1);
+  if ((val = malloc(sizeof(char) * 4)) == NULL)
+    return (new);
+  val = memset(val, '\0', 4);
+  snprintf(val, 4, "%d", shell->last_return);
+  new = my_str_realloc(new, val);
+  free(val);
+  if (!strncmp(&str[*i], "$?", 2))
+    *i += 1;
+else if (!strncmp(&str[*i], "${?}", 4))
+  *i += 3;
+  return (new);
 }
 
 static char		*utils_parse_var(t_shell		*shell,
-					 char			*str)
+					 char			*str,
+					 t_commands		*commands)
 {
   int			i;
   char			*new;
-  char			*find;
-  char			*var;
-  char			c[2];
 
   i = 0;
-  if ((new = malloc(sizeof(char))) == NULL)
-    return (NULL);
-  *new = '\0';
-  memset(c, '\0', 2);
+  new = NULL;
   while (str[i] != '\0')
     {
-      find = NULL;
-      if (str[i] == '$')
-	{
-	  if (utils_get_acolade_count(&str[i + 1]) != -1)
-	    find = utils_get_acolade(&str[i + 1]);
-	  if ((var = utils_get_var_find(shell, (find != NULL) ? find : &str[i + 1])) == NULL)
-	    {
-	      free(new);
-	      return (NULL);
-	    }
-	  i += ((find != NULL) ? (utils_get_acolade_count(&str[i + 1]) + 2) : (int)strlen(&str[i])) - 1;
-	  new = my_str_realloc(new, var);
-	  if (find != NULL)
-	    free(find);
-	}
+      if (!strncmp(&str[i], "$?", 2) || !strncmp(&str[i], "${?}", 4))
+      new = utils_parser_var_return_val(shell, str, new, &i);
+      else if (str[i] == '$')
+	new = utils_parser_var_get_var(shell, str, new, &i);
       else
-	{
-	  *c = str[i];
-	  new = my_str_realloc(new, c);
-	}
+	new = utils_parser_var_normal(new, str[i]);
       i++;
     }
-  return (new);
-}
-
-static char		*utils_get_var_return(t_shell		*shell,
-					      t_commands	*commands)
-{
   free(commands->str);
-  if ((commands->str = malloc(sizeof(char) * 4)) == NULL)
-    return (NULL);
-  commands->str = memset(commands->str, '\0', 4);
-  snprintf(commands->str, 4, "%d", shell->last_return);
-  return (commands->str);
+  commands->str = new;
+  return (new);
 }
 
 char			*utils_get_var(t_shell			*shell,
@@ -144,11 +107,7 @@ char			*utils_get_var(t_shell			*shell,
   if (commands->str == NULL)
     return (NULL);
   if (strstr(commands->str, "$"))
-    {
-      if (!strncmp(commands->str, "$?", 2))
-	return (utils_get_var_return(shell, commands));
-      return (utils_parse_var(shell, commands->str));
-    }
+    commands->str = utils_parse_var(shell, commands->str, commands);
   if (!strncmp(commands->str, "~", 1))
     return (utils_get_homepath(commands));
   return (commands->str);
