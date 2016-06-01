@@ -13,14 +13,15 @@
 #include <stdio.h>
 #include "shell.h"
 
-static void		shell_dup_redirection(t_shell		*shell,
+static bool		shell_dup_redirection(t_shell		*shell,
 					      t_pipe		*pipe)
 {
   int		fd[2];
 
   fd[FD_IN] = 0;
   fd[FD_OUT] = 0;
-  shell_redirection(shell, pipe, fd);
+  if (shell_redirection(shell, pipe, fd) == false)
+    return (false);
   if (fd[FD_IN] > 0)
     {
       if (pipe->fd[FD_IN] != -1)
@@ -33,12 +34,14 @@ static void		shell_dup_redirection(t_shell		*shell,
 	close(pipe->fd[FD_OUT]);
       pipe->fd[FD_OUT] = fd[FD_OUT];
     }
+  return (true);
 }
 
-void			shell_dup(t_shell			*shell,
+bool			shell_dup(t_shell			*shell,
 				  t_pipe			*pipe)
 {
-  shell_dup_redirection(shell, pipe);
+  if (shell_dup_redirection(shell, pipe) == false)
+    return (false);
   if ((shell->fd[FD_IN] != STDIN_FILENO &&
        pipe->prev == NULL &&
        dup2(shell->fd[FD_IN], 0) == -1) ||
@@ -58,4 +61,5 @@ void			shell_dup(t_shell			*shell,
   shell_pipe_close(pipe);
   if (pipe->next != NULL)
     close(pipe->next->fd[FD_IN]);
+  return (true);
 }

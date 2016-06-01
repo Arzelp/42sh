@@ -132,11 +132,11 @@ char			*shell_get_path(t_shell			*shell,
 bool			shell_list_treat(t_shell		*shell);
 void			shell_prompt(t_shell			*shell);
 
-void			shell_redirection(t_shell 		*shell,
+bool			shell_redirection(t_shell 		*shell,
 					  t_pipe 		*pipe,
 					  int			*fd);
 
-void			shell_dup(t_shell			*shell,
+bool			shell_dup(t_shell			*shell,
 				  t_pipe			*pipe);
 
 void			shell_step(t_shell			*shell,

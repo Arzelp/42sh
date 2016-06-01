@@ -97,7 +97,7 @@ static int		shell_redirection_two_left(t_shell	*shell,
   return (p[0]);
 }
 
-void			shell_redirection(t_shell 		*shell,
+bool			shell_redirection(t_shell 		*shell,
 					  t_pipe 		*pipe,
 					  int			*fd)
 {
@@ -116,8 +116,14 @@ void			shell_redirection(t_shell 		*shell,
   if (pipe->redi[RED_LEFT])
     {
       flags = O_RDONLY;
-      fd[FD_IN] = open(pipe->redi[RED_LEFT], flags);
+      if ((fd[FD_IN] = open(pipe->redi[RED_LEFT], flags)) == -1)
+	{
+	  fprintf(stdout,
+		  "%s: No such file or directory.\n", pipe->redi[RED_LEFT]);
+	  return (false);
+	}
     }
   if (pipe->redi[RED_TWO_LEFT])
     fd[FD_IN] = shell_redirection_two_left(shell, pipe);
+  return (true);
 }

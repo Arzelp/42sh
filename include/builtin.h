@@ -18,8 +18,8 @@
 
 #define TOO_ARG		"%s: Too many arguments.\n"
 #define FEW_ARG		"%s: Too few arguments.\n"
-#define NO_FOLDER	"%s: Aucun fichier ou dossier de ce type.\n"
-#define NO_PERMIT	"%s: Permission non accordée.\n"
+#define NO_FOLDER	"%s: Not a directory.\n"
+#define NO_PERMIT	"%s: Permission denied.\n"
 #define SYNTAX_EXP	"%s: Expression Syntax.\n"
 #define IS_BUILTIN	"%s: shell built-in command.\n"
 

@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <pwd.h>
 #include "shell.h"
@@ -38,6 +39,7 @@ static char		*utils_get_path_username(t_commands	*commands)
   str[i] = '\0';
   if ((pws = getpwnam(str)) == NULL)
     {
+      fprintf(stderr, "Unknown user: %s.\n", str);
       free(str);
       return (NULL);
     }
@@ -73,12 +75,12 @@ char			*utils_get_homepath(t_commands		*commands)
   if (!strcmp(commands->str, "~") || !strncmp(commands->str, "~/", 2))
     {
       if ((path_user = utils_get_path_current_user()) == NULL)
-	return (commands->str);
+	return (NULL);
     }
   else
     {
       if ((path_user = utils_get_path_username(commands)) == NULL)
-	return (commands->str);
+	return (NULL);
     }
   return (utils_convert_home(commands, path_user));
 }

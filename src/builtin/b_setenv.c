@@ -15,6 +15,20 @@
 #include "builtin.h"
 #include "my.h"
 
+static bool		b_env_norme(char		*av1)
+{
+  int			i;
+
+  i = -1;
+  while (av1[++i] != '\0')
+    {
+      if ((av1[i] >= 0 && av1[i] <= 47) || (av1[i] >= 58 && av1[i] <= 64) ||
+	  (av1[i] >= 91 && av1[i] <= 94) || av1[i] == 96 || av1[i] >= 123)
+	return (false);
+    }
+  return (true);
+}
+
 static int		b_setenv_fill(t_shell		*shell,
 				      char		**av,
 				      char		*str,
@@ -63,6 +77,12 @@ static int		b_setenv_treat(char			**av,
 {
   int			len;
 
+  if (b_env_norme(av[1]) == false)
+    {
+      if (shell->write)
+	printf("setenv: Variable name must contain alphanumeric characters.\n");
+      return (EXIT_FAILURE);
+    }
   len = strlen(av[1]) + ((av[2] != NULL) ? strlen(av[2]) : 0) + 2;
   return (b_setenv_find(len, av, shell));
 }

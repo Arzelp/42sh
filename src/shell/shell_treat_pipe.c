@@ -32,11 +32,13 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
       execve(pipe->path, pipe->av, shell->ae);
       if (errno == ENOEXEC)
 	{
-	  fprintf(stdout, "%s: Erreur de format pour exec(). ", pipe->av[0]);
+	  fprintf(stdout,
+		  "%s: Exec format error. Binary file not executable.\n",
+		  pipe->av[0]);
   	  fprintf(stdout, "Binary file not executable.\n");
 	}
       else
-	fprintf(stdout, "%s: Permission non accordée.\n", pipe->av[0]);
+	fprintf(stdout, "%s: Permission denied.\n", pipe->av[0]);
       shell->last_return = EXIT_FAILURE;
     }
   else
@@ -55,20 +57,8 @@ static void		shell_wait_pipe(t_shell			*shell,
   status = 0;
   if (pipe->prev == NULL)
     {
-      /*
-      if (!strcmp(pipe->commands->str, "cat"))
-	{
-	  shell_change_tgrp(shell->pid.pid);
-	  waitpid(pipe->pid, &status, WNOHANG);
-	  shell_change_tgrp(shell->pid.pid);
-	  printf("lol\n");
-	}
-      else
-	{*/
-	  shell_change_tgrp(pipe->pid);
-	  waitpid(pipe->pid, &status, WUNTRACED);
-	  shell_change_tgrp(shell->pid.pid);
-	//}
+      waitpid(pipe->pid, &status, WUNTRACED);
+      shell_change_tgrp(shell->pid.pid);
       shell_pipe_close(pipe);
       if (WIFSTOPPED(status))
 	{
@@ -85,6 +75,21 @@ static void		shell_wait_pipe(t_shell			*shell,
   shell->last_return = shell_wait_status(status);
 }
 
+static void		shell_treat_pipe_exec_fils(t_shell	*shell,
+						   t_pipe	*pipe)
+{
+  if (pipe->prev == NULL || getpgid(getpid()) == getpgid(getppid()))
+    {
+      setpgrp();
+      shell_change_tgrp(getpid());
+    }
+  if (shell_dup(shell, pipe) == false)
+    shell_close(shell, EXIT_FAILURE);
+  if (pipe->next)
+    close(pipe->next->fd[FD_IN]);
+  shell_treat_pipe_commands(shell, pipe);
+}
+
 void			shell_treat_pipe_exec(t_shell		*shell,
 					      t_pipe		*pipe)
 {
@@ -99,20 +104,12 @@ void			shell_treat_pipe_exec(t_shell		*shell,
 	  shell_close(shell, EXIT_FAILURE);
 	}
       else if (pipe->pid == 0)
-	{
-	  if (pipe->prev == NULL || getpgid(getpid()) == getpgid(getppid()))
-	    {
-	      shell_change_tgrp(getpid());
-	      setpgrp();
-	    }
-	  shell_dup(shell, pipe);
-      	  if (pipe->next)
-	    close(pipe->next->fd[FD_IN]);
-	  shell_treat_pipe_commands(shell, pipe);
-	}
+	shell_treat_pipe_exec_fils(shell, pipe);
       else if (b_is_builtin(pipe->av[0]) != NOT_BUILTIN)
 	shell->last_return = b_exec(shell, pipe);
     }
+  else
+    shell->last_return = EXIT_FAILURE;
   shell_pipe_close(pipe);
   shell_end_pipe(shell, pipe);
 }

@@ -45,7 +45,12 @@ bool			utils_commands_to_tab(t_shell		*shell,
   i = 0;
   while (i < pipe->ac)
     {
-      pipe->av[i] = utils_get_var(shell, tmp);
+      if ((pipe->av[i] = utils_get_var(shell, tmp)) == NULL)
+	{
+	  free(pipe->av);
+	  pipe->av = NULL;
+	  return (false);
+	}
       tmp = tmp->next;
       i++;
     }
