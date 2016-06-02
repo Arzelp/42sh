@@ -94,5 +94,11 @@ int			b_echo(int			ac,
 int			b_yes(int			ac,
 			      char			**av,
 			      t_shell			*shell);
+int			b_whoami(int			ac,
+				 char			**av,
+				 t_shell		*shell);
+int			b_pwd(int			ac,
+			      char			**av,
+			      t_shell			*shell);
 
 extern t_builtin	g_builtin[];

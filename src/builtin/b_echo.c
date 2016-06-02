@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 25 23:18:31 2016 Frederic ODDOU
-** Last update Tue May 31 22:56:30 2016 Frederic ODDOU
+** Last update Thu Jun  2 13:05:56 2016 Frederic ODDOU
 */
 
 #include <stdlib.h>
@@ -15,7 +15,7 @@
 #include "builtin.h"
 #include "my.h"
 
-static t_echo_type    	g_echo_type[] =
+static t_echo_type	g_echo_type[] =
 {
     {"\a", 'a'},
     {"\b", 'b'},
@@ -30,7 +30,8 @@ static t_echo_type    	g_echo_type[] =
     {0, 0}
 };
 
-static long int		b_echo_calc(char *str, long int i)
+static long int		b_echo_calc(char 		*str,
+				    long int		i)
 {
   char			*nb;
   long int		tmp;
@@ -50,9 +51,9 @@ static long int		b_echo_calc(char *str, long int i)
     }
   if (str[tmp - 1] == 'x')
     printf("%c", base_converter(nb, 16));
-  else if (str[tmp - 1] == '0')
+  if (str[tmp - 1] == '0')
     printf("%c", base_converter(nb, 8));
-  else if (str[tmp - 1] == 'd')
+  if (str[tmp - 1] == 'd')
     printf("%c", base_converter(nb, 10));
   free(nb);
   return (i);
@@ -72,7 +73,8 @@ static char		*b_echo_get_elem_from_tab(char c)
   return (NULL);
 }
 
-static long int		b_echo_check_param(char *str, char param)
+static long int		b_echo_check_param(char			*str,
+					   char			param)
 {
   long int		i;
 
@@ -90,7 +92,7 @@ static long int		b_echo_check_param(char *str, char param)
   return (EXIT_FAILURE);
 }
 
-static void		b_echo_print(char *str, char *first_arg)
+static void		b_echo_print(char			*str)
 {
   long int		i;
   char			*type;
@@ -99,7 +101,6 @@ static void		b_echo_print(char *str, char *first_arg)
   while (str[i] != '\0')
     {
       if (str[i] == '\\' &&
-	  b_echo_check_param(first_arg, 'e') == EXIT_SUCCESS &&
 	  (type = b_echo_get_elem_from_tab(str[i + 1])) != NULL)
 	{
 	  if (str[i + 1] == 'x' || str[i + 1] == '0' || str[i + 1] == 'd')
@@ -124,7 +125,7 @@ int			b_echo(int			ac,
 {
   long int		i;
 
-  if (!shell->write)
+  if (shell->write)
     return (EXIT_SUCCESS);
   if (ac == 1)
     {
@@ -134,9 +135,13 @@ int			b_echo(int			ac,
   i = 1;
   while (av[i] != NULL)
     {
-      if ((i == 1 && av[i][0] != '-' ) || i != 1)
-	b_echo_print(av[i], av[1]);
-      if (av[i][0] != '-' && av[i + 1] != NULL)
+      if ((i == 1 && av[i][0] != '-' ) || i != 1 ||
+	  (av[i][0] == '-' &&
+	   b_echo_check_param(av[1], 'n') != EXIT_SUCCESS))
+	b_echo_print(av[i]);
+      if ((av[i][0] == '-' &&
+	   b_echo_check_param(av[1], 'n') != EXIT_SUCCESS) ||
+	  (av[i][0] != '-' && av[i + 1] != NULL))
 	printf(" ");
       i++;
     }

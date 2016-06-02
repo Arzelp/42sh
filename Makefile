@@ -86,6 +86,8 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_BUILTIN)b_history.c \
 		$(DIR_BUILTIN)b_set.c \
 		$(DIR_BUILTIN)b_fg.c \
+		$(DIR_BUILTIN)b_whoami.c \
+		$(DIR_BUILTIN)b_pwd.c \
 		$(DIR_BUILTIN)b_jobs.c \
 		$(DIR_BUILTIN)b_alias.c \
 		$(DIR_BUILTIN)b_sort.c \
