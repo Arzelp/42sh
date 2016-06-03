@@ -13,7 +13,7 @@
 #alias precmd date
 alias ne 'emacs -nw'
 alias gannat 'kill -11 0'
-set PS1='$> \033[31m[\u]\033[0m \033[32m\W\033[0m [\l] > '
+set PS1='$> \033[31m[\u]\033[0m \033[32m\W\033[0m [\l] [\t] > '
 alias ls 'ls --color=auto'
 alias la 'ls -la'
 alias ll 'ls -l'

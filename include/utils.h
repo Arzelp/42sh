@@ -135,6 +135,7 @@ t_past			*utils_history_add_right(t_past		*history,
 void			utils_history_delete_elem(t_past	*history);
 void			utils_history_delete_list(t_past	*history);
 t_past			*utils_history_go_back(t_past		*past);
+void			utils_history_delete_excedent(t_past	*history);
 
 /*
 ** Gestion des alias spéciaux

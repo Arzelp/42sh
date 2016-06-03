@@ -40,7 +40,9 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_SHELL)shell_treat_backquotes.c \
 		$(DIR_SHELL)shell_treat_glob.c \
 		$(DIR_SHELL)shell_prompt.c \
+		$(DIR_SHELL)shell_background.c \
 		$(DIR_SHELL)shell_prompt_func.c \
+		$(DIR_SHELL)shell_prompt_func2.c \
 		$(DIR_SHELL)shell_list.c \
 		$(DIR_SHELL)shell_script.c \
 		$(DIR_SHELL)shell_redirection.c \
@@ -49,12 +51,14 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_SHELL)shell_wait_status.c \
 		$(DIR_SHELL)shell_change_tgrp.c \
 		$(DIR_PARSER)parser_commands.c \
+		$(DIR_PARSER)parser_commands_double_quotes.c \
 		$(DIR_PARSER)parser_commands_comment.c \
 		$(DIR_PARSER)parser_commands_backslash.c \
 		$(DIR_PARSER)parser_control.c \
 		$(DIR_PARSER)parser_list.c \
 		$(DIR_PARSER)parser_pipe.c \
 		$(DIR_PARSER)parser_redi.c \
+		$(DIR_PARSER)parser_background.c \
 		$(DIR_PARSER)parser_check_separator.c \
 		$(DIR_UTILS)utils_commands.c \
 		$(DIR_UTILS)utils_special_alias.c \

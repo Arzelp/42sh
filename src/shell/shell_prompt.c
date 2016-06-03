@@ -24,14 +24,10 @@ static t_ps1		g_ps1[] =
     {"\\W", &shell_prompt_directory},
     {"\\l", &shell_prompt_nb_line},
     {"\\e", &shell_prompt_echap},
-    {"\\033", &shell_prompt_echap}
+    {"\\033", &shell_prompt_echap},
+    {"\\t", &shell_prompt_time},
+    {NULL, NULL},
   };
-
-void			shell_prompt_echap(t_shell		*shell)
-{
-  (void)shell;
-  printf("\e");
-}
 
 static t_ps1		*shell_prompt_find(char			*str)
 {

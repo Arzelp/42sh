@@ -121,5 +121,6 @@ bool			parser_commands(t_shell			*shell,
   shell->commands = utils_commands_go_back(shell->commands);
   shell->commands = parser_commands_comment(shell->commands);
   parser_commands_backslash(shell->commands);
+  parser_commands_double_quotes(shell->commands);
   return (true);
 }

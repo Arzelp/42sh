@@ -15,13 +15,10 @@
 
 static void		parser_commands_purge_str(char		*str)
 {
-  int			i;
-
-  i = 0;
-  while (str[i] != '\0')
+  while (*str != '\0')
     {
-      str[i] = str[i + 1];
-      i++;
+      *str = *(str + 1);
+      str = str + 1;
     }
 }
 
@@ -48,12 +45,26 @@ static void		parser_commands_purge(t_commands	*commands)
     }
 }
 
+static void		parser_commands_purge_normal(char	*str)
+{
+  if (str == NULL)
+    return ;
+  while (*str != '\0')
+    {
+      if (*str == '\\')
+	parser_commands_purge_str(str);
+      str = str + 1;
+    }
+}
+
 void			parser_commands_backslash(t_commands	*commands)
 {
   while (commands != NULL)
     {
       if (GET_TYPE(commands->index_delim) == D_DELIM)
 	parser_commands_purge(commands);
+      if (commands->index_delim == ID_WITHOUT)
+	parser_commands_purge_normal(commands->str);
       commands = commands->next;
     }
 }

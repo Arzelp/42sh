@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 25 23:18:31 2016 Frederic ODDOU
-** Last update Thu Jun  2 13:05:56 2016 Frederic ODDOU
+** Last update Fri Jun  3 22:32:49 2016 Frederic ODDOU
 */
 
 #include <stdlib.h>
@@ -17,13 +17,6 @@
 
 static t_echo_type	g_echo_type[] =
 {
-    {"\a", 'a'},
-    {"\b", 'b'},
-    {"\t", 't'},
-    {"\n", 'n'},
-    {"\v", 'v'},
-    {"\f", 'f'},
-    {"\r", 'r'},
     {"x", 'x'},
     {"d", 'd'},
     {"\0", '0'},
@@ -61,7 +54,7 @@ static long int		b_echo_calc(char 		*str,
 
 static char		*b_echo_get_elem_from_tab(char c)
 {
-  long int		i;
+  short			i;
 
   i = 0;
   while (g_echo_type[i].str != NULL)
@@ -125,7 +118,7 @@ int			b_echo(int			ac,
 {
   long int		i;
 
-  if (shell->write)
+  if (!shell->write)
     return (EXIT_SUCCESS);
   if (ac == 1)
     {

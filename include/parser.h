@@ -33,6 +33,12 @@ typedef struct		s_parser
   short			id;
 }			t_parser;
 
+typedef struct		s_quote_type
+{
+  char			*in;
+  char			*to;
+}			t_quote_type;
+
 bool			parser_commands(t_shell			*shell,
 					char			*str);
 bool			parser_control(t_shell			*shell,
@@ -43,5 +49,7 @@ bool			parser_pipe(t_shell			*shell);
 bool			parser_redi(t_list			*list);
 void			parser_commands_backslash(t_commands	*commands);
 t_commands		*parser_commands_comment(t_commands	*commands);
+bool			parser_background(t_shell		*shell);
+void		parser_commands_double_quotes(t_commands	*commands);
 
 extern t_parser		g_parser_delimit[];

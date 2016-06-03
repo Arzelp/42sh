@@ -35,5 +35,7 @@ bool			parser_control(t_shell			*shell,
   parser_list(shell);
   if (parser_pipe(shell) == false)
     return (false);
+  if (parser_background(shell) == false)
+    return (false);
   return (true);
 }

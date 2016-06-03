@@ -27,7 +27,7 @@
 
 #define MESS_SUSPENDED	"\r[%u]\t+ %d Suspended\t%s\n"
 
-#define HISTORY_LIMIT	100
+#define HISTORY_LIMIT	50
 
 #define LIMIT_BUF_QUOTE	10000000
 
@@ -60,6 +60,7 @@ typedef struct		s_list
   t_pipe		*pipe;
   short			type_separator;
   bool			treat;
+  bool			background;
   struct s_list		*next;
   struct s_list		*prev;
 }			t_list;
@@ -99,6 +100,7 @@ typedef struct		s_past
 {
   unsigned int		id;
   char			*str;
+  time_t		date;
   struct s_past		*next;
   struct s_past		*prev;
 }			t_past;
@@ -170,6 +172,8 @@ bool			shell_load_42shrc(t_shell		*shell);
 
 void			shell_change_tgrp(pid_t			pid);
 
+void			shell_background(t_shell		*shell);
+
 /*
 ** shell_treat_pipe.c
 */
@@ -177,6 +181,7 @@ void			shell_change_tgrp(pid_t			pid);
 pid_t			shell_treat_pipe_do(t_shell	*shell,
 					    t_pipe	*pipe);
 void			shell_treat_pipe_wait(t_shell	*shell,
+					      t_list	*list,
 					      t_pipe	*pipe,
 					      pid_t	pgid);
 
@@ -197,3 +202,4 @@ void			shell_prompt_ret_value(t_shell		*shell);
 void			shell_prompt_nb_line(t_shell		*shell);
 void			shell_prompt_directory(t_shell		*shell);
 void			shell_prompt_echap(t_shell		*shell);
+void			shell_prompt_time(t_shell		*shell);

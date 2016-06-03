@@ -32,7 +32,7 @@ bool			shell_list_treat(t_shell	*shell)
       if (list->treat == true)
 	{
 	  pgid = shell_treat_pipe_do(shell, list->pipe);
-	  shell_treat_pipe_wait(shell, list->pipe, pgid);
+	  shell_treat_pipe_wait(shell, list, list->pipe, pgid);
 	  if (shell->last_return != EXIT_SUCCESS)
 	    shell_list_desactive(list->next, ID_AND);
 	  else

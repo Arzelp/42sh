@@ -56,6 +56,7 @@ t_list			*utils_list_add_right(t_list		*list,
   new->type_separator = type_separator;
   new->treat = true;
   new->pipe = NULL;
+  new->background = false;
   if (list != NULL)
     {
       if (list->next != NULL)

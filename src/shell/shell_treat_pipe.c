@@ -98,6 +98,7 @@ pid_t			shell_treat_pipe_do(t_shell	*shell,
 }
 
 void			shell_treat_pipe_wait(t_shell	*shell,
+					      t_list	*list,
 					      t_pipe	*pipe,
 					      pid_t	pgid)
 {
@@ -107,9 +108,12 @@ void			shell_treat_pipe_wait(t_shell	*shell,
   shell_change_tgrp(pgid);
   while (pipe != NULL)
     {
-      waitpid(-pgid, &status, WUNTRACED);
+      if (list->background == true)
+	waitpid(-pgid, &status, WNOHANG | WUNTRACED);
+      else
+	waitpid(-pgid, &status, WUNTRACED);
       shell->last_return = shell_wait_status(status);
-      if (WIFSTOPPED(status))
+      if (WIFSTOPPED(status) || list->background == true)
 	{
 	  shell->jobs = utils_jobs_add_right(shell->jobs,
 					     strdup(pipe->av[0]),

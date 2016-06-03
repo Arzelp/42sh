@@ -119,6 +119,5 @@ bool			parser_pipe(t_shell			*shell)
 	}
       tmp = tmp->next;
     }
-  tmp = shell->list;
   return (true);
 }

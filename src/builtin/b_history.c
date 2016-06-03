@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "shell.h"
 #include "utils.h"
 
@@ -18,14 +19,17 @@ int			b_history(int			ac,
 				  t_shell		*shell)
 {
   t_past		*history;
+  struct tm		*now_time;
 
-  history = shell->history;
-  history = utils_history_go_back(history);
+  history = utils_history_go_back(shell->history);
   if (!shell->write)
     return (EXIT_SUCCESS);
   while (history != NULL)
     {
-      printf("%u\t%s\n", history->id, history->str);
+      printf("%u\t", history->id);
+      if ((now_time = localtime(&history->date)) != NULL)
+	printf("%02d:%02d\t", now_time->tm_hour, now_time->tm_min);
+      printf("%s\n", history->str);
       history = history->next;
     }
   (void)ac;
