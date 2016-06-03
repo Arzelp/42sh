@@ -20,7 +20,7 @@ static bool		shell_check_access(char		*str)
   if (access(str, X_OK) == 0)
     return (true);
   else if (errno == ENOTDIR)
-    printf("%s: N'est pas un dossier.\n", str);
+    fprintf(stderr, ERROR_NOTFOLDER, str);
   return (false);
 }
 

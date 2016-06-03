@@ -40,7 +40,7 @@ static t_commands	*shell_glob_find(t_commands		*first,
   if (glob(commands->str, 0, NULL, &globbuf) != 0)
     {
       *res = false;
-      fprintf(stderr, "%s: No match.\n", first->str);
+      fprintf(stderr, ERROR_NOMATCH, first->str);
       return (commands);
     }
   if (globbuf.gl_pathv == NULL)

@@ -32,13 +32,11 @@ static void		shell_treat_pipe_commands(t_shell	*shell,
       execve(pipe->path, pipe->av, shell->ae);
       if (errno == ENOEXEC)
 	{
-	  fprintf(stdout,
-		  "%s: Exec format error. Binary file not executable.\n",
-		  pipe->av[0]);
-  	  fprintf(stdout, "Binary file not executable.\n");
+	  fprintf(stdout, ERROR_FORMAT, pipe->av[0]);
+  	  fprintf(stdout, ERROR_NOEXEC);
 	}
       else
-	fprintf(stdout, "%s: Permission denied.\n", pipe->av[0]);
+	fprintf(stdout, ERROR_ALLOW, pipe->av[0]);
       shell->last_return = EXIT_FAILURE;
     }
   else
@@ -116,7 +114,7 @@ void			shell_treat_pipe_wait(t_shell	*shell,
 	  shell->jobs = utils_jobs_add_right(shell->jobs,
 					     strdup(pipe->av[0]),
 					     pipe->pid);
-	  printf("\r[%u]\t+ %d Suspended\t%s\n", shell->jobs->id,
+	  printf(MESS_SUSPENDED, shell->jobs->id,
 		 shell->jobs->pid, shell->jobs->name);
 	  shell->jobs = utils_jobs_go_back(shell->jobs);
 	}

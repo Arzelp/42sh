@@ -118,8 +118,7 @@ bool			shell_redirection(t_shell 		*shell,
       flags = O_RDONLY;
       if ((fd[FD_IN] = open(pipe->redi[RED_LEFT], flags)) == -1)
 	{
-	  fprintf(stdout,
-		  "%s: No such file or directory.\n", pipe->redi[RED_LEFT]);
+	  fprintf(stdout, ERROR_NOFILE, pipe->redi[RED_LEFT]);
 	  return (false);
 	}
     }

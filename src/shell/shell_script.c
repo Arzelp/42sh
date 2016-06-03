@@ -48,7 +48,7 @@ bool			shell_script(t_shell	*shell,
 
   if ((fd = open(av[1], O_RDONLY)) == -1)
     {
-      fprintf(stderr, "%s: Aucun fichier ou dossier de ce type.\n", av[1]);
+      fprintf(stderr, ERROR_NOSCRIPT, av[1]);
       return (false);
     }
   shell_script_get_av(shell, ac, av);

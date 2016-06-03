@@ -15,6 +15,17 @@
 
 #define ERROR_FUNCTION	"Error: %s function failled.\n"
 #define ERROR_NOTFOUND	"%s: Command not found.\n"
+#define ERROR_NOMATCH	"%s: No match.\n"
+#define ERROR_NOFILE	"%s: No such file or directory.\n"
+#define ERROR_NOTFOLDER	"%s: N'est pas un dossier.\n"
+
+#define ERROR_NOSCRIPT	"%s: Aucun fichier ou dossier de ce type.\n"
+
+#define ERROR_ALLOW	"%s: Permission denied.\n"
+#define ERROR_NOEXEC	"Binary file not executable.\n"
+#define ERROR_FORMAT	"%s: Exec format error. Binary file not executable.\n"
+
+#define MESS_SUSPENDED	"\r[%u]\t+ %d Suspended\t%s\n"
 
 #define HISTORY_LIMIT	100
 
