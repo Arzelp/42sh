@@ -1,11 +1,11 @@
 /*
 ** b_sort.c for sort in /home/josso/rendu/psu/PSU_2015_42sh
-** 
+**
 ** Made by Arthur Josso
 ** Login   <arthur.josso@epitech.eu>
-** 
+**
 ** Started on  Mon May 23 16:59:12 2016 Arthur Josso
-** Last update Wed May 25 18:59:23 2016 Arthur Josso
+** Last update Fri Jun  3 23:33:00 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -95,7 +95,6 @@ int	       	b_sort(int	ac,
   char 		*file;
   int		fd;
 
-  (void)shell;
   if (!shell->write)
     return (EXIT_SUCCESS);
   if ((tab.flag = get_flags(ac, av, &file)) == -1)

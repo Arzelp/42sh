@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Thu Jun  2 10:46:15 2016 Frederic ODDOU
-** Last update Thu Jun  2 10:47:39 2016 Frederic ODDOU
+** Last update Fri Jun  3 23:37:46 2016 Frederic ODDOU
 */
 
 #include <stdio.h>
@@ -23,11 +23,11 @@ int			b_pwd(int			ac,
   (void)av;
   if (getcwd(pwd, 4096) == NULL)
     {
-      if (!shell->write)
+      if (shell->write)
 	fprintf(stderr, ERROR_FUNCTION, "getcwd");
       return (EXIT_FAILURE);
     }
-  if (!shell->write)
+  if (shell->write)
     printf("%s\n", pwd);
   return (EXIT_SUCCESS);
 }

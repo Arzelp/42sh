@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Jun  3 22:01:00 2016 Frederic ODDOU
-** Last update Fri Jun  3 22:23:06 2016 Frederic ODDOU
+** Last update Fri Jun  3 23:46:22 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "parser.h"
 
 static t_quote_type	g_quotes_type[] =
-{
+  {
     {"\\a", "\a"},
     {"\\b", "\b"},
     {"\\t", "\t"},
@@ -23,7 +23,7 @@ static t_quote_type	g_quotes_type[] =
     {"\\f", "\f"},
     {"\\r", "\r"},
     {NULL, NULL}
-};
+  };
 
 static char		*parser_quotes_treat_find_tab(char	*str)
 {

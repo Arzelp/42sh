@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 21:53:36 2016 Frederic ODDOU
-** Last update Mon May 23 14:36:27 2016 oddou_f
+** Last update Fri Jun  3 23:44:35 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -19,6 +19,7 @@
 ** 2- On fait un controle des séparateurs
 ** 3- On sépare toutes les listes de commandes (&& || ;)
 ** 4- On sépare dans les listes toutes les pipes
+** 5- On vérifie que les background sont bien faites
 */
 
 bool			parser_control(t_shell			*shell,

@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 25 23:18:31 2016 Frederic ODDOU
-** Last update Fri Jun  3 22:32:49 2016 Frederic ODDOU
+** Last update Fri Jun  3 23:35:12 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -16,12 +16,12 @@
 #include "my.h"
 
 static t_echo_type	g_echo_type[] =
-{
+  {
     {"x", 'x'},
     {"d", 'd'},
     {"\0", '0'},
     {0, 0}
-};
+  };
 
 static long int		b_echo_calc(char 		*str,
 				    long int		i)

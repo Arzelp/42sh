@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 09:37:29 2016 Frederic ODDOU
-** Last update Mon May 16 21:12:15 2016 oddou_f
+** Last update Fri Jun  3 23:59:13 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -58,8 +58,8 @@ static char		*shell_redirection_gnl(char		*red_in)
   concat[0] = '\0';
   str = NULL;
   shell_redirection_prompt();
-  while ((str = get_next_line(STDIN_FILENO, &next, &size)) != NULL
-	 && strcmp(red_in, str))
+  while ((str = get_next_line(STDIN_FILENO, &next, &size)) != NULL &&
+	 strcmp(red_in, str))
     {
       if ((concat = shell_redirection_realloc(concat, str)) == NULL)
 	return (NULL);

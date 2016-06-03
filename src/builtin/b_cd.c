@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Thu May  5 15:27:56 2016 Frederic ODDOU
-** Last update Sun May 08 23:46:15 2016 oddou_f
+** Last update Fri Jun  3 23:04:41 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -42,6 +42,8 @@ static int		b_cd_goto(char			*directory,
 {
   char			oldpwd[4096];
 
+  if (directory == NULL)
+    return (EXIT_FAILURE);
   if (getcwd(oldpwd, 4096) == NULL)
     strcpy(oldpwd, "/");
   if (chdir(directory) == -1)

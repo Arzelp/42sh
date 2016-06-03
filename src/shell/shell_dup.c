@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 10:24:30 2016 Frederic ODDOU
-** Last update Fri May 13 19:27:56 2016 oddou_f
+** Last update Fri Jun  3 23:54:35 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -16,7 +16,7 @@
 static bool		shell_dup_redirection(t_shell		*shell,
 					      t_pipe		*pipe)
 {
-  int		fd[2];
+  int			fd[2];
 
   fd[FD_IN] = 0;
   fd[FD_OUT] = 0;

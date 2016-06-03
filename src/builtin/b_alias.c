@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 18 12:44:31 2016 Frederic ODDOU
-** Last update Mon May 23 15:44:46 2016 oddou_f
+** Last update Fri Jun  3 23:03:19 2016 oddou_f
 */
 
 #include <unistd.h>
@@ -74,7 +74,6 @@ int			b_alias(int				ac,
 				char				**av,
 				t_shell				*shell)
 {
-  (void)ac;
   if (ac > 2)
     return (b_alias_treat(av, shell));
   else

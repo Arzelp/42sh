@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 11 19:27:03 2016 Frederic ODDOU
-** Last update Mon May 16 21:05:25 2016 oddou_f
+** Last update Sat Jun  4 00:00:04 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -24,13 +24,14 @@ static t_commands	*shell_fork_pere(t_pipe			*mypipe,
   char			*str;
   int			size;
   char			*next;
+  unsigned int		len;
 
   size = 0;
   if ((next = malloc(sizeof(char))) == NULL)
     return (NULL);
   next[0] = '\0';
   str = NULL;
-  int len = 0;
+  len = 0;
   while ((str = get_next_line(fd[0], &next, &size)) != NULL)
     {
       len += strlen(str);

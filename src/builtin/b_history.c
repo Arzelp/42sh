@@ -21,9 +21,9 @@ int			b_history(int			ac,
   t_past		*history;
   struct tm		*now_time;
 
-  history = utils_history_go_back(shell->history);
   if (!shell->write)
     return (EXIT_SUCCESS);
+  history = utils_history_go_back(shell->history);
   while (history != NULL)
     {
       printf("%u\t", history->id);
