@@ -112,16 +112,18 @@ void			shell_treat_pipe_wait(t_shell	*shell,
 	waitpid(-pgid, &status, WNOHANG | WUNTRACED);
       else
 	waitpid(-pgid, &status, WUNTRACED);
-      shell->last_return = shell_wait_status(status);
       if (WIFSTOPPED(status) || list->background == true)
 	{
 	  shell->jobs = utils_jobs_add_right(shell->jobs,
 					     strdup(pipe->av[0]),
 					     pipe->pid);
-	  printf(MESS_SUSPENDED, shell->jobs->id,
-		 shell->jobs->pid, shell->jobs->name);
-	  shell->jobs = utils_jobs_go_back(shell->jobs);
+	  if (shell->jobs != NULL)
+	    {
+	      printf(MESS_SUSPENDED, shell->jobs->id,
+		     shell->jobs->pid, shell->jobs->name);
+	    }
 	}
+      shell->last_return = shell_wait_status(status);
       pipe = pipe->next;
     }
   shell_change_tgrp(shell->pid.pgid);

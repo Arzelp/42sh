@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Jun  3 18:08:34 2016 Frederic ODDOU
-** Last update Fri Jun  3 18:16:37 2016 Frederic ODDOU
+** Last update Sat Jun  4 00:27:54 2016 Frederic ODDOU
 */
 
 #include <sys/wait.h>
@@ -17,6 +17,7 @@
 void			shell_background(t_shell	*shell)
 {
   t_jobs		*jobs;
+  t_jobs		*tmp;
   int			status;
 
   jobs = shell->jobs;
@@ -25,10 +26,15 @@ void			shell_background(t_shell	*shell)
       status = 0;
       if (waitpid(jobs->pid, &status, WNOHANG))
 	{
+	  tmp = jobs;
 	  printf("[%d]\t+ Done\t%s\n", jobs->id, jobs->name);
           shell->last_return = shell_wait_status(status);
-	  utils_jobs_delete_elem(shell, jobs);
+	  jobs = jobs->next;
+	  if (tmp == shell->jobs)
+	    shell->jobs = shell->jobs->next;
+	  utils_jobs_delete_elem(shell, tmp);
 	}
-      jobs = jobs->next;
+      if (jobs != NULL)
+	jobs = jobs->next;
     }
 }

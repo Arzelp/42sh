@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "shell.h"
+#include "utils.h"
 
 int			b_jobs(int			ac,
 			       char			**av,
@@ -20,7 +21,7 @@ int			b_jobs(int			ac,
 
   if (!shell->write)
     return (EXIT_SUCCESS);
-  jobs = shell->jobs;
+  jobs = utils_jobs_go_back(shell->jobs);
   while (jobs != NULL)
     {
       printf("[%u]\t%s\n", jobs->id, jobs->name);

@@ -59,7 +59,6 @@ t_jobs			*utils_jobs_add_right(t_jobs		*jobs,
 {
   t_jobs		*new;
 
-  jobs = utils_jobs_go_end(jobs);
   if ((new = malloc(sizeof(*new))) == NULL)
     return (NULL);
   new->prev = jobs;

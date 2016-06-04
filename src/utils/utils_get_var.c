@@ -108,7 +108,7 @@ char			*utils_get_var(t_shell			*shell,
     return (NULL);
   if (strstr(commands->str, "$"))
     commands->str = utils_parse_var(shell, commands->str, commands);
-  if (!strncmp(commands->str, "~", 1))
+  if (commands->str != NULL && !strncmp(commands->str, "~", 1))
     return (utils_get_homepath(commands));
   return (commands->str);
 }

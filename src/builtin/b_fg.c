@@ -44,7 +44,7 @@ int			b_fg(int			ac,
   t_jobs		*jobs;
   unsigned int		id;
 
-  jobs = shell->jobs;
+  jobs = utils_jobs_go_back(shell->jobs);
   if (ac > 1)
     {
       id = my_atoi(av[1]);

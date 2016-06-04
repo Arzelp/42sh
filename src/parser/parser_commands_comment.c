@@ -30,6 +30,7 @@ t_commands		*parser_commands_comment(t_commands	*commands)
 	  utils_commands_delete_list(tmp);
 	  if (tmp == commands)
 	    return (NULL);
+	  return (commands);
 	}
       tmp = tmp->next;
     }
