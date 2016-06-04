@@ -1,11 +1,11 @@
 /*
 ** tab.c for tab in lib/getch/src/rd/
 **
-** Made by John Doe
+** Made by Frederic ODDOU
 ** Login   <login_x@epitech.eu>
 **
-** Started on  Tue May 24 23:20:11 2016 John Doe
-** Last update Wed May 25 00:08:02 2016 John Doe
+** Started on  Tue May 24 23:20:11 2016 Frederic ODDOU
+** Last update Sat Jun  4 18:11:23 2016 Frederic ODDOU
 */
 
 #include <string.h>

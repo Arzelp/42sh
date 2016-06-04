@@ -112,7 +112,8 @@ RM	=	rm -f
 CFLAGS	+=	-Wextra \
 		-Wall \
 		-Werror \
-		-I$(DIR_INC) -I$(CH_INC) -g
+		-O3 \
+		-I$(DIR_INC) -I$(CH_INC)
 
 LDFLAGS	=	-L ./lib/my/ \
 		-l my \

@@ -43,7 +43,7 @@ LIB	=
 FLAG	=	-Wall \
 		-Wextra \
 		-Werror \
-		-I$(DIRINC) -g
+		-I$(DIRINC)
 
 NAME	=	libmy.a
 

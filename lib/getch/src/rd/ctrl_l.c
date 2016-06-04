@@ -1,11 +1,11 @@
 /*
 ** ctrl_l.c for ctrl_l in /lib/getch/src/rd/
 **
-** Made by John Doe
+** Made by Frederic ODDOU
 ** Login   <login_x@epitech.eu>
 **
-** Started on  Wed May 25 14:26:23 2016 John Doe
-** Last update Wed May 25 14:28:55 2016 John Doe
+** Started on  Wed May 25 14:26:23 2016 Frederic ODDOU
+** Last update Sat Jun  4 18:10:50 2016 Frederic ODDOU
 */
 
 #include <stdio.h>

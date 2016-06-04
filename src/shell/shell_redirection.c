@@ -85,7 +85,12 @@ static int		shell_redirection_two_left(t_shell	*shell,
       fprintf(stderr, ERROR_FUNCTION, "pipe");
       shell_close(shell, EXIT_FAILURE);
     }
-  write(p[1], concat, strlen(concat));
+  if (write(p[1], concat, strlen(concat)) == -1)
+    {
+      close(p[1]);
+      fprintf(stderr, ERROR_FUNCTION, "write");
+      shell_close(shell, EXIT_FAILURE);
+    }
   close(p[1]);
   if (dup2(p[0], 0) == -1)
     {

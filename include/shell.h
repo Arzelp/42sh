@@ -13,6 +13,8 @@
 #include <stdbool.h>
 #include "enum.h"
 
+#define NAME_SHELL	"FredouSH"
+
 #define ERROR_FUNCTION	"Error: %s function failled.\n"
 #define ERROR_NOTFOUND	"%s: Command not found.\n"
 #define ERROR_NOMATCH	"%s: No match.\n"
@@ -26,6 +28,7 @@
 #define ERROR_FORMAT	"%s: Exec format error. Binary file not executable.\n"
 
 #define MESS_SUSPENDED	"\r[%u]\t+ %d Suspended\t%s\n"
+#define MESS_CTRLD	"Use \"exit\" to leave %s.\n"
 
 #define HISTORY_LIMIT	50
 

@@ -47,21 +47,45 @@ void			shell_step(t_shell			*shell,
     }
 }
 
-bool		shell_get_commands(t_shell *shell)
+bool		shell_get_commands_rd(t_shell			*shell,
+				      const char		*line)
 {
-  const char	*line;
   char		*str;
 
+  str = NULL;
+  utils_special_alias_execute(shell, "postcmd");
+  shell_background(shell);
+  if ((str = strdup(line)) == NULL)
+    return (false);
+  if (strlen(str) > 0)
+    shell->history = utils_history_add_right(shell->history, strdup(line));
+  shell_step(shell, str);
+  return (true);
+}
+
+bool		shell_get_commands(t_shell			*shell)
+{
+  const char	*line;
+
   shell_prompt(shell);
-  while ((line = rd_line(STDOUT_FILENO, g_keys)) != NULL)
+  while (42)
     {
-      utils_special_alias_execute(shell, "postcmd");
-      shell_background(shell);
-      if ((str = strdup(line)) == NULL)
-	return (false);
-      if (strlen(str) > 0)
-	shell->history = utils_history_add_right(shell->history, strdup(line));
-      shell_step(shell, str);
+      if ((line = rd_line(STDOUT_FILENO, g_keys)) != NULL)
+	{
+	  if (shell_get_commands_rd(shell, line) == false)
+	    {
+	      rd_free();
+	      return (false);
+	    }
+	}
+      else if (utils_locales_find_elem("ignoreeof", shell->locales) != NULL)
+	printf(MESS_CTRLD, NAME_SHELL);
+      else
+	{
+	  printf("exit\n");
+	  rd_free();
+	  return (true);
+	}
       shell_prompt(shell);
     }
   rd_free();

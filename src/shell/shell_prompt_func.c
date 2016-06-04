@@ -1,11 +1,11 @@
 /*
 ** shell_prompt_func.c for prompt func in /src/shell/
 **
-** Made by John Doe
+** Made by Frederic ODDOU
 ** Login   <login_x@epitech.eu>
 **
-** Started on  Tue May 24 13:37:39 2016 John Doe
-** Last update Tue May 24 23:51:06 2016 John Doe
+** Started on  Tue May 24 13:37:39 2016 Frederic ODDOU
+** Last update Sat Jun  4 18:12:44 2016 Frederic ODDOU
 */
 
 #include <stdlib.h>
@@ -42,7 +42,7 @@ void			shell_prompt_ret_value(t_shell		*shell)
 void			shell_prompt_version(t_shell		*shell)
 {
   (void)shell;
-  printf("FreddouSH");
+  printf(NAME_SHELL);
 }
 
 void			shell_prompt_user(t_shell		*shell)

@@ -5,7 +5,7 @@
 ** Login   <alies_a@epitech.net>
 **
 ** Started on  Fri May 13 11:51:08 2016 alies_a
-** Last update Wed May 25 14:36:26 2016 John Doe
+** Last update Sat Jun  4 18:11:52 2016 Frederic ODDOU
 */
 
 #pragma once

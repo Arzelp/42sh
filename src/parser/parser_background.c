@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Jun  3 17:23:05 2016 Frederic ODDOU
-** Last update Sat Jun  4 01:25:18 2016 Frederic ODDOU
+** Last update Sat Jun  4 16:46:17 2016 Frederic ODDOU
 */
 
 #include <stdlib.h>
@@ -16,32 +16,45 @@
 
 static bool		parser_background_find(t_pipe		*pipe,
 					       t_list		*list,
-					       t_shell		*shell)
+					       t_shell		*shell);
+
+static bool		parser_background_commands(t_pipe	*pipe,
+						   t_list	*list,
+						   t_shell	*shell)
 {
   t_commands		*commands;
 
+  commands = pipe->commands;
+  while (commands != NULL)
+    {
+      if (commands->index_delim == ID_BACKGROUND)
+	{
+	  if (pipe->next ||
+	      (commands->prev == NULL && commands->next == NULL))
+	    {
+	      fprintf(stdout, "%s\n", ERR_NULL);
+	      return (false);
+	    }
+	  return (true);
+	  list->background = true;
+	  if (pipe->commands == commands)
+	    pipe->commands = commands->next;
+	  utils_commands_delete_elem(shell, commands);
+	  return (parser_background_find(pipe, list, shell));
+	}
+      commands = commands->next;
+    }
+  return (true);
+}
+
+static bool		parser_background_find(t_pipe		*pipe,
+					       t_list		*list,
+					       t_shell		*shell)
+{
   while (pipe != NULL)
     {
-      commands = pipe->commands;
-      while (commands != NULL)
-	{
-	  if (commands->index_delim == ID_BACKGROUND)
-	    {
-	      if (pipe->next ||
-		  (commands->prev == NULL && commands->next == NULL))
-		{
-		  fprintf(stdout, "%s\n", ERR_NULL);
-		  return (false);
-		}
-	      return (true);
-	      list->background = true;
-	      if (pipe->commands == commands)
-		pipe->commands = commands->next;
-	      utils_commands_delete_elem(shell, commands);
-	      return (parser_background_find(pipe, list, shell));
-	    }
-	  commands = commands->next;
-	}
+      if (parser_background_commands(pipe, list, shell) == false)
+	return (false);
       pipe = pipe->next;
     }
   return (true);

@@ -5,7 +5,7 @@
 ## Login   <alies_a@epitech.net>
 ##
 ## Started on  Mon May  9 15:35:25 2016 alies_a
-## Last update Wed May 25 14:45:02 2016 John Doe
+## Last update Sat Jun  4 18:12:28 2016 Frederic ODDOU
 ##
 
 ECHO		=	/bin/echo -e

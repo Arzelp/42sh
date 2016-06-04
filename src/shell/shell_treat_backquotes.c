@@ -34,8 +34,7 @@ static t_commands	*shell_fork_pere(t_pipe			*mypipe,
   len = 0;
   while ((str = get_next_line(fd[0], &next, &size)) != NULL)
     {
-      len += strlen(str);
-      if (len >= LIMIT_BUF_QUOTE)
+      if ((len = len + strlen(str)) >= LIMIT_BUF_QUOTE)
 	{
 	  free(next);
 	  close(fd[0]);
