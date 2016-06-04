@@ -51,6 +51,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_SHELL)shell_wait_status.c \
 		$(DIR_SHELL)shell_change_tgrp.c \
 		$(DIR_PARSER)parser_commands.c \
+		$(DIR_PARSER)parser_commands_history.c \
 		$(DIR_PARSER)parser_commands_double_quotes.c \
 		$(DIR_PARSER)parser_commands_comment.c \
 		$(DIR_PARSER)parser_commands_backslash.c \
@@ -71,6 +72,7 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_UTILS)utils_jobs.c \
 		$(DIR_UTILS)utils_history.c \
 		$(DIR_UTILS)utils_get_var.c \
+		$(DIR_UTILS)utils_get_history.c \
 		$(DIR_UTILS)utils_parse_var.c \
 		$(DIR_UTILS)utils_tab_fusion.c \
 		$(DIR_UTILS)utils_get_homepath.c \

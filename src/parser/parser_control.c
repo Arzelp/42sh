@@ -25,7 +25,7 @@
 bool			parser_control(t_shell			*shell,
 				       char			*str)
 {
-  if (parser_commands(shell, str) == false ||
+  if (parser_commands(shell, str, true) == false ||
       parser_check_separator(shell) == false)
     {
       shell->commands = utils_commands_go_back(shell->commands);

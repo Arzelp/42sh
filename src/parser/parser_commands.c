@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed Apr 27 10:32:16 2016 Frederic ODDOU
-** Last update Mon May 23 14:36:40 2016 oddou_f
+** Last update Sat Jun  4 15:28:37 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -95,8 +95,20 @@ static bool		parser_not_without(t_shell		*shell,
   return (true);
 }
 
+static void		parser_commands_after(t_shell		*shell,
+					      bool		history)
+{
+  shell->commands = utils_commands_go_back(shell->commands);
+  shell->commands = parser_commands_comment(shell->commands);
+  parser_commands_backslash(shell->commands);
+  parser_commands_double_quotes(shell->commands);
+  if (history == true)
+    parser_commands_history(shell, shell->commands);
+}
+
 bool			parser_commands(t_shell			*shell,
-					char			*str)
+					char			*str,
+					bool			history)
 {
   int			i;
   int			deb;
@@ -118,9 +130,6 @@ bool			parser_commands(t_shell			*shell,
 	  parser_not_without(shell, str, &i, id_delimit) == false)
 	return (false);
     }
-  shell->commands = utils_commands_go_back(shell->commands);
-  shell->commands = parser_commands_comment(shell->commands);
-  parser_commands_backslash(shell->commands);
-  parser_commands_double_quotes(shell->commands);
+  parser_commands_after(shell, history);
   return (true);
 }

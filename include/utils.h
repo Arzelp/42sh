@@ -154,3 +154,6 @@ char			*utils_get_var_find(t_shell		*shell,
 					    char		*find);
 char			*utils_get_acolade(char			*find);
 int			utils_get_acolade_count(char		*find);
+
+char			*utils_get_history(t_shell		*shell,
+					   char			*str);
