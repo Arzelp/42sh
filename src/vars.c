@@ -83,7 +83,7 @@ t_parser		g_parser_delimit[] =
     {"'", "'", D_DELIM, ID_SIMPLE_QUOTE},
     {"`", "`", D_DELIM, ID_BACK_QUOTE},
     {"(", ")", D_DELIM, ID_PARENTHESE},
-    {">&", "", D_GET, ID_REDIRECTION},
+    {">&", "", D_NORMAL, ID_REDIRECTION},
     {">>", "", D_GET, ID_DOUBLE_RIGHT},
     {">", "", D_GET, ID_RIGHT},
     {"<<", "", D_GET, ID_DOUBLE_LEFT},

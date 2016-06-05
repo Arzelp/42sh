@@ -23,7 +23,8 @@ void			shell_pipe_close(t_pipe			*pipe)
   pipe->fd[FD_IN] = STDIN_FILENO;
 }
 
-void			shell_pipe_open(t_pipe			*mypipe)
+void			shell_pipe_open(t_shell			*shell,
+					t_pipe			*mypipe)
 {
   int			fd[2];
 
@@ -32,7 +33,7 @@ void			shell_pipe_open(t_pipe			*mypipe)
       if ((pipe(fd)) == -1)
 	{
 	  fprintf(stderr, ERROR_FUNCTION, "pipe");
-	  return ;
+	  shell_close(shell, EXIT_FAILURE);
 	}
       mypipe->next->fd[FD_IN] = fd[0];
       mypipe->fd[FD_OUT] = fd[1];

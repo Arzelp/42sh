@@ -120,6 +120,7 @@ typedef struct		s_shell
   char			**path;
   t_commands		*commands;
   t_list		*list;
+  t_pipe		*pipe;
   t_alias		*alias;
   t_jobs		*jobs;
   t_past		*history;
@@ -193,7 +194,8 @@ void			shell_treat_pipe_wait(t_shell	*shell,
 */
 
 void			shell_pipe_close(t_pipe			*pipe);
-void			shell_pipe_open(t_pipe			*mypipe);
+void			shell_pipe_open(t_shell			*shell,
+					t_pipe			*mypipe);
 
 /*
 ** shell_prompt_func.c

@@ -21,6 +21,7 @@ int			b_exec(t_shell			*shell,
   id = NOT_BUILTIN;
   if ((id = b_is_builtin(pipe->av[0])) != NOT_BUILTIN)
     {
+      shell->pipe = pipe;
       if (g_builtin[id].func != NULL)
 	return ((g_builtin[id].func)(pipe->ac, pipe->av, shell));
     }

@@ -61,6 +61,9 @@ int			b_exit(int			ac,
 	return (EXIT_FAILURE);
       ret = my_atoi(av[1]);
     }
-  shell->exit_active = true;
+  if (shell->pipe->next == NULL)
+    shell->exit_active = true;
+  else if (shell->pipe->prev != NULL)
+    shell_close(shell, ret);
   return (ret);
 }

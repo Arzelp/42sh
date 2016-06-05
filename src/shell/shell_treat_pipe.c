@@ -84,7 +84,7 @@ pid_t			shell_treat_pipe_do(t_shell	*shell,
   pgid = 0;
   while (pipe != NULL)
     {
-      shell_pipe_open(pipe);
+      shell_pipe_open(shell, pipe);
       if (pipe->commands->index_delim == ID_PARENTHESE)
         shell->last_return = shell_treat_parenthese(shell, pipe);
       else if (utils_commands_to_tab(shell, pipe) == true)

@@ -88,6 +88,7 @@ bool		shell_init(t_shell		*shell,
   shell->write = false;
   shell->alias = NULL;
   shell->jobs = NULL;
+  shell->pipe = NULL;
   shell->exit_active = false;
   shell->history = NULL;
   shell_init_path(shell);
