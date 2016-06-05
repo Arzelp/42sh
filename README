@@ -1,49 +1,45 @@
-Parsing :
-- Espaces
-- Tabulations
-- Magic quotes
-- Quotes et simple quotes
-- Parenthèses
-- Séparateurs : ";" "&&" "||"
-- Pipes
-- Rédirection ">" ">>" "<" "<<" "i>&j" ">&j"
+Description
+  42sh is a shell based on TCSH
 
-Builtins :
-- env
-- setenv [Name] [Value]
-- unsetenv [Name...]
-- history
-- "!!" "!-n" "!n" "!command" "!command:s/string/replace"
-- which [Name...]
-- cd [directory]
-- echo
-- exit [n]
-- jobs & fg [job_id]
+Builtins
+    echo [-params] {string1} {string2} ...
+    setenv {variable name} {varialbe content}
+    unsetenv {variable name}
+    env
+    where {binary}
+    whoami
+    cd {directory | option}
+    which {command}
+    set {command}
+    unset {variable}
+    alias {alias name} {command}
+    history
+    jobs
+    fd {job id}
+    export {variable name}
+    sort [OPTION]... [FILE]
+    yes {string}
+    exit {return value}
+    pwd
 
-Options :
-- Création de regex avec les *
-- Prompt personnalisable (user /)
-- Modificateur avec ~
-- Variables locales et modificateur $
-- Déplacement flèche gauche / droite
-- Fleche haute / bas -> historique
-- Tab -> auto indentation
+Bonus
+    Auto-complétion / déplacement flèche
+    .42shrc
+    Convertisseur lib lapin > ncurses
 
-Configuration :
-- Langue (FR/EN)
-- Nombre de rédirection droite / gauche
-- Pipe après redirection ou non
-- Nombre de pipe maximum
+Other
+    Separator ;, || and &&
+    Multiple pipes
+    Redirections (< / << / > / >>)
+    Parenthesis
+    Environment variable
+    ~ with users
+    Magic quotes (``)
+    Globbing (*)
+    Background (&)
+    PS1 with \u, \v, $?, \w, \l, \t
+    Scripting
+    Local alias with cwdcmd / postcmd / precmd / ignoreeof
+    History with !! !-x !x !command
 
-.42shrc
-- Alias
-- Environnement
-
-Supplément chantilly :
-- Manuel man & web
-- Adaptation du 42sh en php
-
-
-http://hautrive.free.fr/linux/page-shell-linux.html
-
-/bin/kill -11 0 
+You can see the manual in bonus
