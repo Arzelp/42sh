@@ -76,6 +76,27 @@ static pid_t		shell_treat_commands(t_shell	*shell,
   return (pgid);
 }
 
+static void		shell_treat_pipe_suspend(t_shell	*shell,
+						 t_list		*list,
+						 t_pipe		*pipe,
+						 int		status)
+{
+  if (WIFSTOPPED(status) || list->background == true)
+    {
+      shell->jobs = utils_jobs_add_right(shell->jobs,
+					 strdup(pipe->av[0]),
+					 pipe->pid);
+      if (shell->jobs != NULL)
+	{
+	  if (list->background == true)
+	    printf("[%d] %d\n", shell->jobs->id, shell->jobs->pid);
+	  else
+	    printf(MESS_SUSPENDED, shell->jobs->id,
+		   shell->jobs->pid, shell->jobs->name);
+	}
+    }
+}
+
 pid_t			shell_treat_pipe_do(t_shell	*shell,
 					    t_pipe	*pipe)
 {
@@ -104,26 +125,16 @@ void			shell_treat_pipe_wait(t_shell	*shell,
 {
   int			status;
 
-  status = 0;
   shell_change_tgrp(pgid);
   while (pipe != NULL)
     {
+      status = 0;
       if (list->background == true)
 	waitpid(-pgid, &status, WNOHANG | WUNTRACED);
       else
 	waitpid(-pgid, &status, WUNTRACED);
-      if (WIFSTOPPED(status) || list->background == true)
-	{
-	  shell->jobs = utils_jobs_add_right(shell->jobs,
-					     strdup(pipe->av[0]),
-					     pipe->pid);
-	  if (shell->jobs != NULL)
-	    {
-	      printf(MESS_SUSPENDED, shell->jobs->id,
-		     shell->jobs->pid, shell->jobs->name);
-	    }
-	}
       shell->last_return = shell_wait_status(status);
+      shell_treat_pipe_suspend(shell, list, pipe, status);
       pipe = pipe->next;
     }
   shell_change_tgrp(shell->pid.pgid);

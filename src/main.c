@@ -5,12 +5,11 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 10:57:32 2016 Frederic ODDOU
-** Last update Mon May 23 15:12:47 2016 oddou_f
+** Last update Sun Jun  5 17:28:45 2016 oddou_f
 */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "my.h"
 #include "shell.h"
 
 int		main(int ac, char **av, char **ae)

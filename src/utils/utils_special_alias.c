@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Sun May 29 22:32:00 2016 Frederic ODDOU
-** Last update Tue May 31 17:58:16 2016 Frederic ODDOU
+** Last update Sun Jun  5 17:51:12 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -14,12 +14,12 @@
 #include "utils.h"
 
 static char		*g_special_alias[] =
-{
-  "cwdcmd",
-  "precmd",
-  "postcmd",
-  NULL
-};
+  {
+    "cwdcmd",
+    "precmd",
+    "postcmd",
+    NULL
+  };
 
 static short		utils_special_alias_find(char		*name)
 {

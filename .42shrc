@@ -8,11 +8,11 @@
 #echo -e "\033[0;34m/*                               */\033[00m"
 #echo -e "\033[0;34m/* * * * * * * * * * * * * * * * */\033[00m\n"
 
+set PS1='$> \033[31m[\u]\033[0m \033[32m\W\033[0m [\l] [\t] > '
 #alias cwdcmd ls
 #alias postcmd pwd
 #alias precmd date
 alias ne 'emacs -nw'
-set PS1='$> \033[31m[\u]\033[0m \033[32m\W\033[0m [\l] [\t] > '
 alias ls 'ls --color=auto'
 alias la 'ls -la'
 alias ll 'ls -l'

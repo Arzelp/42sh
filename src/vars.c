@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Tue Apr 26 22:19:57 2016 Frederic ODDOU
-** Last update Mon May 23 16:59:27 2016 Arthur Josso
+** Last update Sun Jun  5 17:28:20 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -17,7 +17,7 @@
 t_sig_mess		g_sig_mess[] =
   {
     {SIGHUP, "Hangup"},
-    {SIGINT, "Interrupt"},
+    {SIGINT, ""},
     {SIGQUIT, "Quit"},
     {SIGILL, "Illegal instruction"},
     {SIGTRAP, "Trace trap"},
@@ -56,15 +56,16 @@ t_builtin		g_builtin[] =
     {"cd", b_cd},
     {"exit", b_exit},
     {"which", b_which},
+    {"where", b_where},
     {"env", b_env},
     {"export", b_export},
     {"setenv", b_setenv},
     {"unsetenv", b_unsetenv},
-    {"echo", NULL},
     {"history", b_history},
     {"jobs", b_jobs},
     {"fg", b_fg},
     {"set", b_set},
+    {"unset", b_unset},
     {"builtins", b_builtins},
     {"alias", b_alias},
     {"sort", b_sort},

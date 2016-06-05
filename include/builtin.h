@@ -22,6 +22,7 @@
 #define NO_PERMIT	"%s: Permission denied.\n"
 #define SYNTAX_EXP	"%s: Expression Syntax.\n"
 #define IS_BUILTIN	"%s: shell built-in command.\n"
+#define IS_BUILTIN_W	"%s is a shell built-in\n"
 
 typedef struct		s_builtin
 {
@@ -100,5 +101,11 @@ int			b_whoami(int			ac,
 int			b_pwd(int			ac,
 			      char			**av,
 			      t_shell			*shell);
+int			b_unset(int			ac,
+				char			**av,
+				t_shell			*shell);
+int			b_where(int			ac,
+				char			**av,
+				t_shell			*shell);
 
 extern t_builtin	g_builtin[];

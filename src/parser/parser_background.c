@@ -5,7 +5,7 @@
 ** Login   <oddou_f@frederic.oddou@epitech.eu>
 **
 ** Started on  Fri Jun  3 17:23:05 2016 Frederic ODDOU
-** Last update Sat Jun  4 16:46:17 2016 Frederic ODDOU
+** Last update Sun Jun  5 18:12:19 2016 Frederic ODDOU
 */
 
 #include <stdlib.h>
@@ -35,7 +35,6 @@ static bool		parser_background_commands(t_pipe	*pipe,
 	      fprintf(stdout, "%s\n", ERR_NULL);
 	      return (false);
 	    }
-	  return (true);
 	  list->background = true;
 	  if (pipe->commands == commands)
 	    pipe->commands = commands->next;

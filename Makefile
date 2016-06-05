@@ -85,12 +85,14 @@ SRC 	=	$(DIR_SRC)main.c \
 		$(DIR_BUILTIN)b_setenv.c \
 		$(DIR_BUILTIN)b_unsetenv.c \
 		$(DIR_BUILTIN)b_which.c \
+		$(DIR_BUILTIN)b_where.c \
 		$(DIR_BUILTIN)b_exit.c \
 		$(DIR_BUILTIN)b_cd.c \
 		$(DIR_BUILTIN)b_yes.c \
 		$(DIR_BUILTIN)b_export.c \
 		$(DIR_BUILTIN)b_history.c \
 		$(DIR_BUILTIN)b_set.c \
+		$(DIR_BUILTIN)b_unset.c \
 		$(DIR_BUILTIN)b_fg.c \
 		$(DIR_BUILTIN)b_whoami.c \
 		$(DIR_BUILTIN)b_pwd.c \
@@ -118,7 +120,7 @@ CFLAGS	+=	-Wextra \
 LDFLAGS	=	-L ./lib/my/ \
 		-l my \
 		-L $(CH_PATH) \
-		-l getch \
+		-l getch
 
 NAME	=	42sh
 

@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Wed May 18 22:40:13 2016 Frederic ODDOU
-** Last update Thu May 19 12:54:57 2016 oddou_f
+** Last update Sun Jun  5 17:51:28 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -20,7 +20,7 @@ static char		**utils_alias_change(t_alias		*alias,
   int			len;
 
   len = my_tab_len(&av[my_tab_len(alias->av_origin)])
-      + my_tab_len(alias->av_to);
+    + my_tab_len(alias->av_to);
   if ((new = malloc(sizeof(char *) * (len + 2))) == NULL)
     return (av);
   new[0] = NULL;
@@ -37,7 +37,7 @@ static char		**utils_alias_change_force(t_alias	*alias,
   int			len;
 
   len = my_tab_len(&av[my_tab_len(alias->av_origin)])
-      + my_tab_len(alias->av_to);
+    + my_tab_len(alias->av_to);
   if ((new = malloc(sizeof(char *) * (len + 2))) == NULL)
     return (av);
   new[0] = NULL;

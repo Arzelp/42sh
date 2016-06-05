@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May  9 21:32:58 2016 Frederic ODDOU
-** Last update Wed May 11 14:03:53 2016 oddou_f
+** Last update Sun Jun  5 17:50:24 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -70,8 +70,8 @@ static char		*utils_parser_var_return_val(t_shell	*shell,
   free(val);
   if (!strncmp(&str[*i], "$?", 2))
     *i += 1;
-else if (!strncmp(&str[*i], "${?}", 4))
-  *i += 3;
+  else if (!strncmp(&str[*i], "${?}", 4))
+    *i += 3;
   return (new);
 }
 
@@ -87,7 +87,7 @@ static char		*utils_parse_var(t_shell		*shell,
   while (str[i] != '\0')
     {
       if (!strncmp(&str[i], "$?", 2) || !strncmp(&str[i], "${?}", 4))
-      new = utils_parser_var_return_val(shell, str, new, &i);
+	new = utils_parser_var_return_val(shell, str, new, &i);
       else if (str[i] == '$')
 	new = utils_parser_var_get_var(shell, str, new, &i);
       else

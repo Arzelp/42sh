@@ -5,7 +5,7 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Mon May 23 15:35:37 2016 Frederic ODDOU
-** Last update Mon May 23 15:44:25 2016 oddou_f
+** Last update Sun Jun  5 17:35:51 2016 oddou_f
 */
 
 #include <stdlib.h>
@@ -16,7 +16,7 @@
 #include "builtin.h"
 
 static int		b_export_treat(char			**av,
-				      t_shell			*shell)
+				       t_shell			*shell)
 {
   char			*reponse[2];
   char			*av_set[4];
@@ -38,8 +38,8 @@ static int		b_export_treat(char			**av,
 }
 
 int			b_export(int				ac,
-				char				**av,
-				t_shell				*shell)
+				 char				**av,
+				 t_shell			*shell)
 {
   (void)ac;
   if (utils_if_fusion(&av[1]) == true)

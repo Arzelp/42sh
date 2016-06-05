@@ -25,7 +25,7 @@ static bool		shell_check_access(char		*str)
 }
 
 static char		*shell_find_program(t_shell	*shell,
-					   char		*name)
+					    char	*name)
 {
   int			i;
   int			len;
@@ -33,8 +33,7 @@ static char		*shell_find_program(t_shell	*shell,
 
   i = 0;
   len = strlen(name);
-  if ((str = malloc(sizeof(char) * (len + 2))) == NULL)
-    return (NULL);
+  str = NULL;
   while (shell->path[i] != NULL)
     {
       len = strlen(name) + strlen(shell->path[i]) + 2;
@@ -50,7 +49,8 @@ static char		*shell_find_program(t_shell	*shell,
 	return (str);
       i++;
     }
-  free(str);
+  if (str != NULL)
+    free(str);
   return (NULL);
 }
 
