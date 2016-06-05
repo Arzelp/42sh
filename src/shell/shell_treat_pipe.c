@@ -81,6 +81,8 @@ static void		shell_treat_pipe_suspend(t_shell	*shell,
 						 t_pipe		*pipe,
 						 int		status)
 {
+  if (pipe != NULL || pipe->av == NULL || pipe->av[0] == NULL)
+    return ;
   if (WIFSTOPPED(status) || list->background == true)
     {
       shell->jobs = utils_jobs_add_right(shell->jobs,
