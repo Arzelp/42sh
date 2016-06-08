@@ -1,0 +1,359 @@
+<html>
+  <head>
+    <title>42sh manual</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta name="author" content="Gannat Antoine" />
+    <link rel="icon" href="" />
+
+    <link type="text/css" rel="stylesheet" href="style/style.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="materialize/js/init.js"></script>
+  </head>
+  <body id="body">
+    <div class="container row">
+      <div style="font-family:monospace;" class="bord col l12 s12 m12 black">
+        <h2 class="white-text">Description</h2>
+        <div>
+          <p style="margin-left:5%;" class="white-text">42sh is a shell based on TCSH</p>
+        </div>
+        <h2 class="white-text">Summary</h2>
+        <div style="margin-left:5%;">
+          <h3 class="white-text">Builtins</h3>
+            <ul>
+              <li><a href="#echo">echo</a></li>
+              <li><a href="#setenv">setenv</a></li>
+              <li><a href="#unsetenv">unsetenv</a></li>
+              <li><a href="#env">env</a></li>
+              <li><a href="#whoami">whoami</a></li>
+              <li><a href="#cd">cd</a></li>
+              <li><a href="#which">which</a></li>
+              <li><a href="#set">set</a></li>
+              <li><a href="#unset">unset</a></li>
+              <li><a href="#alias">alias</a></li>
+              <li><a href="#history">history</a></li>
+              <li><a href="#jobs">jobs</a></li>
+              <li><a href="#fg">fg</a></li>
+              <li><a href="#export">export</a></li>
+              <li><a href="#sort">sort</a></li>
+              <li><a href="#yes">yes</a></li>
+              <li><a href="#exit">exit</a></li>
+              <li><a href="#pwd">pwd</a></li>
+              <li><a href="#where">where</a></li>
+            </ul>
+          <h3 class="white-text">Bonus</h3>
+          <ul>
+            <li><a>Auto-complétion / déplacement flèche</a></li>
+            <li><a>.42shrc</a></li>
+            <li><a>Convertisseur lib lapin > ncurses</a></li>
+          </ul>
+          <h3 class="white-text">Other</h3>
+          <ul>
+            <li><a href="#or_and">|| and &&</a></li>
+            <li><a href="#multi_pipe">Multiple pipes</a></li>
+            <li><a href="#redirection">Redirections</a></li>
+            <li><a href="#parenthesis">Parenthesis</a></li>
+            <li><a href="#env_var">Environment variable</a></li>
+            <li><a href="#~">~</a></li>
+            <li><a href="#magic_quotes">Magic quotes</a></li>
+            <li><a href="#globbing">Globbing</a></li>
+            <li><a href="#background">Background (&)</a></li>
+            <li><a href="#PS1">PS1</a></li>
+            <li><a href="#scripting">Scripting</a></li>
+            <li><a href="#local_alias">Local alias</a></li>
+            <li><a href="#historique">History</a></li>
+          </ul>
+        </div>
+        <hr class="z-depth-3">
+        <h3 class="white-text">Builtins prototypes</h3>
+        <div class="sub_elem">
+          <h4 id="echo"><u>Echo</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Display a line of text</p>
+            <p>Usage : echo [-params] {string1} {string2} ...
+            </br></br>
+            Parameters :</br>
+              -n :    do not output the trailing newline</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="setenv"><u>Setenv</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Insert or modify an environment variable</p>
+            <p>Usage : setenv {variable name} {varialbe content}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="unsetenv"><u>Unsetenv</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Delete an environment variable</p>
+            <p>Usage : unsetenv {variable name}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="env"><u>env</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Display all environment variables</p>
+            <p>Usage : env</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="where"><u>where</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Print the location of a binary</p>
+            <p>Usage : where {binary}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="whoami"><u>whoami</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Print effective userid</p>
+            <p>Usage : whoami</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="cd"><u>cd</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Change the working directory</p>
+            <p>Usage : cd {directory | option}</br></br>
+              option :</br>
+                - : Changes to the previous working directory
+            </p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="which"><u>which</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Shows the full path of (shell) commands.</p>
+            <p>Usage : which {command}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="set"><u>set</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Set or unset options and positional parameters</p>
+            <p>Usage : set {command}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="unset"><u>unset</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Unset local variable</p>
+            <p>Usage : unset {variable}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="alias"><u>alias</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Define or display aliases</p>
+            <p>Usage : alias {alias name} {command}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="history"><u>history</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Display the history</p>
+            <p>Usage : history</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="jobs"><u>jobs</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Display status of jobs in the current session</p>
+            <p>Usage : jobs</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="fg"><u>fg</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Run job in the foreground</p>
+            <p>Usage : fd {job id}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="export"><u>export</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Set the export attribute for variables</p>
+            <p>Usage : export {variable name}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="sort"><u>sort</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>
+              Usage: sort [OPTION]... [FILE]</br></br>
+
+              With no FILE, read standard input.</br></br>
+
+              Ordering options:</br>
+                -f,	fold lower case to upper case characters</br>
+                -i,	consider only printable characters</br>
+                -n,	compare according to string numerical value</br>
+                -r,	reverse the result of comparisons</br>
+            </p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="yes"><u>yes</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Display a string repeatedly until killed</p>
+            <p>Usage : yes {string}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="exit"><u>Exit</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Cause normal process termination</p>
+            <p>Usage : exit {return value}</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="pwd"><u>PWD</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Print name of current/working directory</p>
+            <p>Usage : pwd</p>
+          </div>
+        </div>
+      </br><h3 class="white-text">Other prototypes</h3></br>
+        <div class="sub_elem">
+          <h4 id="or_and"><u>|| and &&</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>OR and AND</p>
+            <p>Exemple : echo "Folder" && ls || pwd </p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="multi_pipe"><u>Multiples pipes</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Exemple : ls | cat -e | wc -l</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="redirection"><u>Redirection</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Type : > >> < << </p>
+            <p>Exemple : ls > file </p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="parenthesis"><u>Parenthesis</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Exemple :  (ls && ls ; ls | wc -c) | cat -e</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="env_var"><u>Environment variable</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Exemple : echo $PATH, echo $?, echo ${PATH}, MyPath:${PATH} on $pwd</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="redirection"><u>~</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Home directory of a user</p>
+            <p>Exemple : ~ => home user, ~root => home root</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="magic_quotes"><u>Magic quotes</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Exemple : yes `ls`</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="globbing"><u>Globbing</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Exemple : echo *.c, it will print all file that finish by '.c'</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="background"><u>Background</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Execute a command in background</p>
+            <p>Exemple : yes "run in background" &</p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="PS1"><u>PS1</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Custom prompt string</p>
+            <p>Option : </br>
+              \u, \v, $?, \w, \l, \t</p>
+            <p>Exemple : set PS1='$> \033[31m[\u]\033[0m \033[32m\W\033[0m [\l] [\t] ></br>
+                That give : $>[username] directory [nb_line] [time] ></p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="scripting"><u>Scripting</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Custom executable file</p>
+            <p>Exemple :</br></br>
+              #!42sh</br>
+              echo "curent directory : " `pwd`</br>
+              echo "Param 1 is  : " $1</br>
+            </p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="local_alias"><u>Local alias</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Exemple :</br>
+              alias cwdcmd ls => execute ls at every change of directory</br>
+              alias postcmd pwd => execute pwd after every command</br>
+              alias precmd date => Print the date before the prompt</br>
+              set ignoreeof => ignore CTRL-D
+            </p>
+          </div>
+        </div>
+        </br><hr class="z-depth-3" style="width:80%;"></br>
+        <div class="sub_elem">
+          <h4 id="historique"><u>History</u></h4>
+          <div class="sub_elem bord bord_content">
+            <p>Show and interact with command history</p></br>
+            <p>Option : </br>
+              !! : Execute last command</br>
+              !x : Execute the command number x in history</br>
+              !command : Execute the last command that start with 'command'</br>
+              !-x : Execute the last x command, (!-1 for last, ect ...)</br>
+            </p>
+            <p>Exemple : !ls, !-1, !2, !!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

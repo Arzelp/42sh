@@ -13,6 +13,8 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
+#define strlen		my_strlen
+
 #define READ_SIZE	(4096)
 #define DOUBLE_SIZE	(10)
 
@@ -42,3 +44,4 @@ int		base_converter(char		*nb,
 			       int		base);
 char		*my_str_realloc(char		*s1,
 				char		*s2);
+int		my_strlen(const char *str);

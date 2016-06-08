@@ -5,13 +5,16 @@
 ** Login oddou_f <frederic.oddou@epitech.eu>
 **
 ** Started on  Sat Apr 16 11:25:39 2016 Frederic ODDOU
-** Last update Mon May 23 15:12:33 2016 oddou_f
+** Last update Wed Jun  8 11:44:31 2016 oddou_f
 */
 
 #pragma once
 
 #include <stdbool.h>
 #include "enum.h"
+#include "my.h"
+
+#define strlen		my_strlen
 
 #define NAME_SHELL	"FredouSH"
 
